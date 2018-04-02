@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <Mvx.MvxListView
+        android:id="@+id/reminder_list"
+        android:scrollbars="vertical"
+        android:padding="30dp"
+        android:choiceMode="singleChoice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:layout_alignParentTop="true"
+        local:MvxItemTemplate="@layout/reminder_list_item"
+        local:MvxBind="ItemsSource Reminders; ItemClick SelectItemCommand;" />
+    <Button
+        android:id="@+id/AddButton"
+        android:text="+"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        local:MvxBind="Click AddCommand"/>
+</RelativeLayout>

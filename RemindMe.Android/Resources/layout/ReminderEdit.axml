@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/reminderTitleLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/reminderTitleInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Title" />
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reminderTitleInput"
+            android:id="@+id/reminderTitle"
+            android:textSize="20dp"
+            local:MvxBind="Text SelectedReminder.Title, Mode=TwoWay" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/reminderCommentLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reminderTitleLinearLayout">
+        <TextView
+            android:id="@+id/reminderCommentInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Comment" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reminderCommentInput"
+            android:id="@+id/reminderComment"
+            android:textSize="20dp"
+            local:MvxBind="Text SelectedReminder.Comment, Mode=TwoWay" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/reminderDateLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reminderCommentLinearLayout">
+        <TextView
+            android:id="@+id/reminderDateInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Date" />
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reminderDateInput"
+            android:id="@+id/reminderDatePickerEditText"
+            android:textSize="20dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/reminderTimeLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reminderDateLinearLayout">
+        <TextView
+            android:id="@+id/reminderTimeInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Time" />
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reminderTimeInput"
+            android:id="@+id/reminderTimePickerEditText"
+            android:textSize="20dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/saveButtonLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reminderTimeLinearLayout">
+        <Button
+            android:id="@+id/saveButton"
+            android:text="Save"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="30dp"
+            local:MvxBind="Click SaveCommand" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/deleteButtonLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/saveButtonLinearLayout">
+        <Button
+            android:id="@+id/deleteButton"
+            android:text="Delete"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="30dp"
+            local:MvxBind="Click DeleteCommand; Visibility Visibility(IsUpdateMode)" />
+    </RelativeLayout>
+</RelativeLayout>

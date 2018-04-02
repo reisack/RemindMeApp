@@ -3,7 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Android", "RemindMe.Android\RemindMe.Android.csproj", "{304433C9-9557-47A7-A8FE-E4F099DA72FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Core", "RemindMe.Core\RemindMe.Core.csproj", "{FDB2B685-954D-44EF-AE81-1673276C7E14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Help", "Help", "{D2230E6D-DE20-4375-82AC-F4053B6A290A}"
+	ProjectSection(SolutionItems) = preProject
+		Database.txt = Database.txt
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304433C9-9557-47A7-A8FE-E4F099DA72FA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
