@@ -10,15 +10,24 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Platform;
+using RemindMe.Core.Interfaces;
 
 namespace RemindMe.Android
 {
-    [Service]
+    [Service(Label = "RemindMe Intent Service")]
     public class IntentService : Service
     {
         const int timerCallingDelay = 10000;
 
+        private IReminderDataService _reminderDataService;
+
         private Timer _timer { get; set; }
+
+        public IntentService()
+        {
+            _reminderDataService = Mvx.Resolve<IReminderDataService>();
+        }
 
 
         public override IBinder OnBind(Intent intent)
@@ -35,26 +44,33 @@ namespace RemindMe.Android
             return StartCommandResult.Sticky;
         }
 
-        private void HandleTimerCallBack(object state)
+        private async void HandleTimerCallBack(object state)
         {
-            // Instantiate the builder and set notification elements
-            Notification.Builder builder = new Notification.Builder(this);
+            var reminders = await _reminderDataService.GetRemindersToNotify();
 
-            builder
-                .SetContentTitle("Mon titre - via service")
-                .SetContentText("Hello world ! Via service !")
-                .SetSmallIcon(Resource.Drawable.notification_icon)
-                .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
+            foreach (var reminder in reminders)
+            {
+                // Instantiate the builder and set notification elements
+                Notification.Builder builder = new Notification.Builder(this);
 
-            // Build the notification
-            Notification notification = builder.Build();
+                builder
+                    .SetContentTitle(reminder.Title)
+                    .SetContentText(reminder.Comment)
+                    .SetSmallIcon(Resource.Drawable.notification_icon)
+                    .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
 
-            // Get the notification manager
-            NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+                // Build the notification
+                Notification notification = builder.Build();
 
-            // Publish the notification
-            int notificationId = 0;
-            notificationManager.Notify(notificationId, notification);
+                // Get the notification manager
+                NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+
+                // Publish the notification
+                int notificationId = 0;
+                notificationManager.Notify(notificationId, notification);
+            }
+
+            await _reminderDataService.SetToNotified(reminders);
         }
     }
 }

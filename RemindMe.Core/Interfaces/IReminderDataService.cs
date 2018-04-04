@@ -12,5 +12,7 @@ namespace RemindMe.Core.Interfaces
         Task<IEnumerable<Reminder>> GetAll();
         Task AddOrUpdate(Reminder reminder);
         Task Delete(long id);
+        Task<IEnumerable<Reminder>> GetRemindersToNotify();
+        Task SetToNotified(IEnumerable<Reminder> reminders);
     }
 }

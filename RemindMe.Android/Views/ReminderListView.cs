@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Views;
+using RemindMe.Android.Helpers;
 using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
@@ -20,6 +21,12 @@ namespace RemindMe.Android.Views
         protected override void OnViewModelSet()
         {
             SetContentView(Resource.Layout.ReminderList);
+
+            if (!ServicesHelper.IsServiceRunning(this, typeof(IntentService)))
+            {
+                Intent intentService = new Intent(this, typeof(IntentService));
+                StartService(intentService);
+            }
         }
     }
 }

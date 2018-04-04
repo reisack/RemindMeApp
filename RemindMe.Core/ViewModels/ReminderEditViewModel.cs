@@ -75,7 +75,8 @@ namespace RemindMe.Core.ViewModels
             if (_reminderId.HasValue && _reminderId.Value > 0)
             {
                 SelectedReminder = await _reminderDataService.Get(_reminderId.Value);
-                ReminderDay = SelectedReminder.Date;
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(SelectedReminder.Date);
+                ReminderDay = dateTimeOffset.UtcDateTime;
                 ReminderTime = SelectedReminder.Date.ToString("HH:mm");
             }
             else
@@ -126,9 +127,12 @@ namespace RemindMe.Core.ViewModels
                             {
                                 if (int.TryParse(timeElements[1], out minute))
                                 {
-                                    DateTime newDate = new DateTime(day.Year, day.Month, day.Day, hour, minute, 0);
+                                    DateTime newDate = new DateTime(day.Year, day.Month, day.Day, hour, minute, 0, DateTimeKind.Local);
+                                    newDate = newDate.ToUniversalTime();
 
-                                    _selectedReminder.Date = newDate;
+                                    TimeSpan span = DateTime.UtcNow - newDate;
+
+                                    _selectedReminder.Date = Convert.ToInt64(span.TotalSeconds);
 
                                     _reminderDataService.AddOrUpdate(_selectedReminder);
                                 }

@@ -12,6 +12,7 @@ namespace RemindMe.Core.Models
 
         public string Title { get; set; }
         public string Comment { get; set; }
-        public DateTime Date { get; set; }
+        public long Date { get; set; }
+        public int AlreadyNotified { get; set; }
     }
 }

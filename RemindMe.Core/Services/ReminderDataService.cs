@@ -18,6 +18,7 @@ namespace RemindMe.Core.Services
 
         public async Task AddOrUpdate(Reminder reminder)
         {
+            reminder.AlreadyNotified = 0;
             await _reminderRepository.AddOrUpdate(reminder);
         }
 
@@ -34,6 +35,16 @@ namespace RemindMe.Core.Services
         public async Task<IEnumerable<Reminder>> GetAll()
         {
             return await _reminderRepository.GetAll();
+        }
+
+        public async Task<IEnumerable<Reminder>> GetRemindersToNotify()
+        {
+            return await _reminderRepository.GetRemindersToNotify();
+        }
+
+        public async Task SetToNotified(IEnumerable<Reminder> reminders)
+        {
+            await _reminderRepository.SetToNotified(reminders);
         }
     }
 }
