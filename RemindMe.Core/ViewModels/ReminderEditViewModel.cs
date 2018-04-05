@@ -127,12 +127,11 @@ namespace RemindMe.Core.ViewModels
                             {
                                 if (int.TryParse(timeElements[1], out minute))
                                 {
-                                    DateTime newDate = new DateTime(day.Year, day.Month, day.Day, hour, minute, 0, DateTimeKind.Local);
+                                    DateTime newDate = new DateTime(day.Year, day.Month + 1, day.Day, hour, minute, 0, DateTimeKind.Local);
                                     newDate = newDate.ToUniversalTime();
 
-                                    TimeSpan span = DateTime.UtcNow - newDate;
-
-                                    _selectedReminder.Date = Convert.ToInt64(span.TotalSeconds);
+                                    long unixDateTime = ((DateTimeOffset)newDate).ToUnixTimeSeconds();
+                                    _selectedReminder.Date = unixDateTime;
 
                                     _reminderDataService.AddOrUpdate(_selectedReminder);
                                 }
