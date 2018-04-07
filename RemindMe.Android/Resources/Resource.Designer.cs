@@ -4056,8 +4056,8 @@ namespace RemindMe.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0900ae
-			public const int AddButton = 2131296430;
+			// aapt resource value: 0x7f0900b0
+			public const int AddButton = 2131296432;
 			
 			// aapt resource value: 0x7f09009c
 			public const int CommentTextView = 2131296412;
@@ -4206,11 +4206,11 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f090049
 			public const int default_activity_button = 2131296329;
 			
-			// aapt resource value: 0x7f0900ac
-			public const int deleteButton = 2131296428;
+			// aapt resource value: 0x7f0900ae
+			public const int deleteButton = 2131296430;
 			
-			// aapt resource value: 0x7f0900ab
-			public const int deleteButtonLinearLayout = 2131296427;
+			// aapt resource value: 0x7f0900ad
+			public const int deleteButtonLinearLayout = 2131296429;
 			
 			// aapt resource value: 0x7f09007a
 			public const int design_bottom_sheet = 2131296378;
@@ -4308,8 +4308,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09004a
 			public const int list_item = 2131296330;
 			
-			// aapt resource value: 0x7f0900b0
-			public const int masked = 2131296432;
+			// aapt resource value: 0x7f0900b2
+			public const int masked = 2131296434;
 			
 			// aapt resource value: 0x7f090089
 			public const int media_actions = 2131296393;
@@ -4380,14 +4380,20 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0900a5
 			public const int reminderDatePickerEditText = 2131296421;
 			
-			// aapt resource value: 0x7f0900a7
-			public const int reminderTimeInput = 2131296423;
-			
 			// aapt resource value: 0x7f0900a6
-			public const int reminderTimeLinearLayout = 2131296422;
+			public const int reminderDatePickerEditTextReadableValue = 2131296422;
 			
 			// aapt resource value: 0x7f0900a8
-			public const int reminderTimePickerEditText = 2131296424;
+			public const int reminderTimeInput = 2131296424;
+			
+			// aapt resource value: 0x7f0900a7
+			public const int reminderTimeLinearLayout = 2131296423;
+			
+			// aapt resource value: 0x7f0900a9
+			public const int reminderTimePickerEditText = 2131296425;
+			
+			// aapt resource value: 0x7f0900aa
+			public const int reminderTimePickerEditTextReadableValue = 2131296426;
 			
 			// aapt resource value: 0x7f09009f
 			public const int reminderTitle = 2131296415;
@@ -4398,8 +4404,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09009d
 			public const int reminderTitleLinearLayout = 2131296413;
 			
-			// aapt resource value: 0x7f0900ad
-			public const int reminder_list = 2131296429;
+			// aapt resource value: 0x7f0900af
+			public const int reminder_list = 2131296431;
 			
 			// aapt resource value: 0x7f090037
 			public const int right = 2131296311;
@@ -4410,11 +4416,11 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09008d
 			public const int right_side = 2131296397;
 			
-			// aapt resource value: 0x7f0900aa
-			public const int saveButton = 2131296426;
+			// aapt resource value: 0x7f0900ac
+			public const int saveButton = 2131296428;
 			
-			// aapt resource value: 0x7f0900a9
-			public const int saveButtonLinearLayout = 2131296425;
+			// aapt resource value: 0x7f0900ab
+			public const int saveButtonLinearLayout = 2131296427;
 			
 			// aapt resource value: 0x7f09001c
 			public const int screen = 2131296284;
@@ -4578,8 +4584,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900af
-			public const int visible = 2131296431;
+			// aapt resource value: 0x7f0900b1
+			public const int visible = 2131296433;
 			
 			// aapt resource value: 0x7f090029
 			public const int withText = 2131296297;

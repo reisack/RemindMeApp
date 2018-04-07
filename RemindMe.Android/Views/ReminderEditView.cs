@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Views;
+using RemindMe.Core.Converters;
 using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
@@ -20,7 +21,9 @@ namespace RemindMe.Android.Views
     public class ReminderEditView : MvxActivity, DatePickerDialog.IOnDateSetListener, TimePickerDialog.IOnTimeSetListener
     {
         private EditText _reminderDatePickerText;
+        private EditText _reminderDatePickerEditTextReadableValue;
         private EditText _reminderTimePickerText;
+        private EditText _reminderTimePickerEditTextReadableValue;
 
         protected override void OnViewModelSet()
         {
@@ -38,19 +41,30 @@ namespace RemindMe.Android.Views
 
         public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
         {
-            _reminderDatePickerText.Text = new DateTime(year, month, dayOfMonth).ToString();
+            DateTime selectedDate = new DateTime(year, month + 1, dayOfMonth);
+            _reminderDatePickerText.Text = selectedDate.ToString();
+            _reminderDatePickerEditTextReadableValue.Text = ReadableDateConverter.Convert(selectedDate);
         }
 
         public void OnTimeSet(TimePicker view, int hourOfDay, int minute)
         {
             _reminderTimePickerText.Text = string.Format("{0}:{1}", hourOfDay.ToString("00"), minute.ToString("00"));
+            _reminderTimePickerEditTextReadableValue.Text = ReadableTimeConverter.Convert(hourOfDay, minute);
         }
 
         private void SetDatePickerText()
         {
             _reminderDatePickerText = this.FindViewById<EditText>(Resource.Id.reminderDatePickerEditText);
-            _reminderDatePickerText.Focusable = false;
-            _reminderDatePickerText.Click += delegate
+            _reminderDatePickerEditTextReadableValue = this.FindViewById<EditText>(Resource.Id.reminderDatePickerEditTextReadableValue);
+
+            if (!string.IsNullOrEmpty(_reminderDatePickerText.Text))
+            {
+                var reminderDate = Convert.ToDateTime(_reminderDatePickerText.Text);
+                _reminderDatePickerEditTextReadableValue.Text = ReadableDateConverter.Convert(reminderDate);
+            }
+
+            _reminderDatePickerEditTextReadableValue.Focusable = false;
+            _reminderDatePickerEditTextReadableValue.Click += delegate
             {
                 var reminderDate = DateTime.Now;
 
@@ -68,16 +82,35 @@ namespace RemindMe.Android.Views
         private void SetTimePickerText()
         {
             _reminderTimePickerText = this.FindViewById<EditText>(Resource.Id.reminderTimePickerEditText);
-            _reminderTimePickerText.Focusable = false;
-            _reminderTimePickerText.Click += delegate
+            _reminderTimePickerEditTextReadableValue = this.FindViewById<EditText>(Resource.Id.reminderTimePickerEditTextReadableValue);
+
+            int hours = DateTime.Now.Hour;
+            int minutes = DateTime.Now.Minute;
+            string reminderTime = "";
+
+            if (!string.IsNullOrEmpty(_reminderTimePickerText.Text))
             {
-                int hours = DateTime.Now.Hour;
-                int minutes = DateTime.Now.Minute;
-                string reminderTime = "";
+                reminderTime = _reminderTimePickerText.Text;
+                var timeElements = reminderTime.Split(':');
+                if (timeElements.Length == 2)
+                {
+                    int.TryParse(timeElements[0], out hours);
+                    int.TryParse(timeElements[1], out minutes);
+                }
+            }
+
+            _reminderTimePickerEditTextReadableValue.Text = ReadableTimeConverter.Convert(hours, minutes);
+
+            _reminderTimePickerEditTextReadableValue.Focusable = false;
+            _reminderTimePickerEditTextReadableValue.Click += delegate
+            {
+                hours = DateTime.Now.Hour;
+                minutes = DateTime.Now.Minute;
+                reminderTime = "";
 
                 if (!string.IsNullOrEmpty(_reminderTimePickerText.Text))
                 {
-                    reminderTime = _reminderDatePickerText.Text;
+                    reminderTime = _reminderTimePickerText.Text;
                     var timeElements = reminderTime.Split(':');
                     if (timeElements.Length == 2)
                     {
