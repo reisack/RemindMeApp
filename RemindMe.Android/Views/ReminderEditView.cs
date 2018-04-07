@@ -94,12 +94,15 @@ namespace RemindMe.Android.Views
                 var timeElements = reminderTime.Split(':');
                 if (timeElements.Length == 2)
                 {
-                    int.TryParse(timeElements[0], out hours);
-                    int.TryParse(timeElements[1], out minutes);
+                    if (int.TryParse(timeElements[0], out hours))
+                    {
+                        if (int.TryParse(timeElements[1], out minutes))
+                        {
+                            _reminderTimePickerEditTextReadableValue.Text = ReadableTimeConverter.Convert(hours, minutes);
+                        }
+                    }
                 }
             }
-
-            _reminderTimePickerEditTextReadableValue.Text = ReadableTimeConverter.Convert(hours, minutes);
 
             _reminderTimePickerEditTextReadableValue.Focusable = false;
             _reminderTimePickerEditTextReadableValue.Click += delegate
