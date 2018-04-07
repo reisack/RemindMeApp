@@ -20,6 +20,13 @@
             android:textSize="17dp"
             local:MvxBind="Text Title" />
         <TextView
+            android:id="@+id/TimeLeftTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="17dp"
+            local:MvxBind="Text Date" />
+        <TextView
             android:id="@+id/CommentTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
