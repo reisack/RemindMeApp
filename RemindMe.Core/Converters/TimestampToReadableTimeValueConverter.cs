@@ -1,15 +1,22 @@
-﻿using System;
+﻿using MvvmCross.Platform.Converters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
 namespace RemindMe.Core.Converters
 {
-    public class ReadableTimeConverter
+    public class TimestampToReadableTimeValueConverter : MvxValueConverter<long, string>
     {
-        public static string Convert(int hours, int minutes)
+        protected override string Convert(long value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (CultureInfo.CurrentCulture.Name == "en-US")
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(value);
+            DateTime date = dateTimeOffset.LocalDateTime;
+
+            int hours = date.Hour;
+            int minutes = date.Minute;
+
+            if (culture.Name == "en-US")
             {
                 string amOrPm = "am";
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -122,7 +123,9 @@ namespace RemindMe.Android.Views
                     }
                 }
 
-                TimePickerDialog dialog = new TimePickerDialog(this, this, hours, minutes, true);
+                bool is24HourView = (CultureInfo.CurrentCulture.Name == "fr-FR");
+
+                TimePickerDialog dialog = new TimePickerDialog(this, this, hours, minutes, is24HourView);
                 dialog.SetTitle("Time selection");
                 dialog.Show();
             };

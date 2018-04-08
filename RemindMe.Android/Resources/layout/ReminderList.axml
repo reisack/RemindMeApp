@@ -27,5 +27,5 @@
         android:textSize="30dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        local:MvxBind="Click AddCommand"/>
+        local:MvxBind="Click AddCommand" />
 </RelativeLayout>

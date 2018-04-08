@@ -10,6 +10,7 @@ using RemindMe.Core.Services;
 using RemindMe.Core.Tools;
 using System;
 using System.Resources;
+using System.Globalization;
 
 namespace RemindMe.Core
 {
@@ -18,6 +19,8 @@ namespace RemindMe.Core
         public override void Initialize()
         {
             base.Initialize();
+
+            InitCultureInfo();
 
             CreatableTypes()
                 .EndingWith("Repository")
@@ -33,6 +36,13 @@ namespace RemindMe.Core
                 (new ResxTextProvider(Strings.ResourceManager));
 
             RegisterAppStart(new AppStart());
+        }
+
+        private void InitCultureInfo()
+        {
+            var cultureInfo = new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
     }
 }
