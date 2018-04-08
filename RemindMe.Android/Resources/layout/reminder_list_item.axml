@@ -30,12 +30,20 @@
             local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
     </RelativeLayout>
     <TextView
+        android:id="@+id/TimeleftTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time left"
+        android:textSize="17dp"
+        android:layout_below="@id/TitleLinearLayout"
+        local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
+    <TextView
         android:id="@+id/TitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="17dp"
-        android:layout_below="@id/TitleLinearLayout"
+        android:layout_below="@id/TimeleftTextView"
         local:MvxBind="Text Title" />
     <TextView
         android:id="@+id/CommentTextView"
