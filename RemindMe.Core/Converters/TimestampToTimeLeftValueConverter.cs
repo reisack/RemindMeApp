@@ -15,45 +15,46 @@ namespace RemindMe.Core.Converters
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(value);
             DateTime date = dateTimeOffset.LocalDateTime;
-
-            if (date < DateTime.Now)
-            {
-                return "Past event";
-            }
+            bool pastEvent = (date < DateTime.Now);
 
             TimeSpan span = date - DateTime.Now;
 
             int timeNumber;
             string timeUnit;
 
-            if (span.Days >= 365)
+            int absDays = Math.Abs(span.Days);
+            int absHours = Math.Abs(span.Hours);
+            int absMinutes = Math.Abs(span.Minutes);
+            int absSeconds = Math.Abs(span.Seconds);
+
+            if (absDays > 365)
             {
-                timeNumber = (int)(span.Days / NB_DAYS_IN_YEAR);
+                timeNumber = (int)(absDays / NB_DAYS_IN_YEAR);
                 timeUnit = "year";
             }
-            else if (span.Days >= 30)
+            else if (absDays > 30)
             {
-                timeNumber = (int)(span.Days / NB_DAYS_IN_MONTH);
+                timeNumber = (int)(absDays / NB_DAYS_IN_MONTH);
                 timeUnit = "month";
             }
-            else if (span.Days >= 1)
+            else if (absDays >= 1)
             {
-                timeNumber = span.Days;
+                timeNumber = absDays;
                 timeUnit = "day";
             }
-            else if (span.Hours >= 1)
+            else if (absHours >= 1)
             {
-                timeNumber = span.Hours;
+                timeNumber = absHours;
                 timeUnit = "hour";
             }
-            else if (span.Minutes >= 1)
+            else if (absMinutes >= 1)
             {
-                timeNumber = span.Minutes;
+                timeNumber = absMinutes;
                 timeUnit = "minute";
             }
             else
             {
-                timeNumber = span.Seconds;
+                timeNumber = absSeconds;
                 timeUnit = "second";
             }
 
@@ -64,11 +65,25 @@ namespace RemindMe.Core.Converters
 
             if (culture.Name == "en-US")
             {
-                return string.Format("{0} {1} left", timeNumber, timeUnit);
+                if (pastEvent)
+                {
+                    return string.Format("{0} {1} ago", timeNumber, timeUnit);
+                }
+                else
+                {
+                    return string.Format("{0} {1} left", timeNumber, timeUnit);
+                }
             }
             else
             {
-                return string.Format("Dans {0} {1}", timeNumber, timeUnit);
+                if (pastEvent)
+                {
+                    return string.Format("Il y a {0} {1}", timeNumber, timeUnit);
+                }
+                else
+                {
+                    return string.Format("Dans {0} {1}", timeNumber, timeUnit);
+                }
             }
         }
     }
