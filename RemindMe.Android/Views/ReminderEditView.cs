@@ -26,6 +26,26 @@ namespace RemindMe.Android.Views
         private EditText _reminderTimePickerText;
         private EditText _reminderTimePickerEditTextReadableValue;
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            // https://forums.xamarin.com/discussion/5198/how-do-i-create-an-options-menu
+            // https://developer.android.com/guide/topics/ui/menus.html
+            MenuInflater.Inflate(Resource.Layout.menu_edit, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.edit_back:
+                    OnBackPressed();
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
         protected override void OnViewModelSet()
         {
             SetContentView(Resource.Layout.ReminderEdit);
