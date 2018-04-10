@@ -40,6 +40,16 @@ namespace RemindMe.Core.Repositories
             });
         }
 
+        public async Task DeletePast()
+        {
+            await Task.Run(() =>
+            {
+                var db = DatabaseConnection.Instance.GetConnection();
+                string query = @"DELETE FROM Reminder WHERE Date < strftime('%s','now')";
+                db.Execute(query);
+            });
+        }
+
         public async Task<Reminder> Get(long id)
         {
             var db = DatabaseConnection.Instance.GetConnection();

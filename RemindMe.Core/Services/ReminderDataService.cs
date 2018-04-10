@@ -27,6 +27,11 @@ namespace RemindMe.Core.Services
             await _reminderRepository.Delete(id);
         }
 
+        public async Task DeletePast()
+        {
+            await _reminderRepository.DeletePast();
+        }
+
         public async Task<Reminder> Get(long id)
         {
             return await _reminderRepository.Get(id);

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
 using RemindMe.Android.Helpers;
 using RemindMe.Core.ViewModels;
 
@@ -31,7 +32,12 @@ namespace RemindMe.Android.Views
             switch (item.ItemId)
             {
                 case Resource.Id.remove_past:
-                    // TODO
+                    var vm = this.ViewModel as ReminderListViewModel;
+                    if (vm != null)
+                    {
+                        vm.DeletePastReminders();
+                        vm.ReloadDataCommand.Execute();
+                    }
                     break;
             }
             return base.OnOptionsItemSelected(item);

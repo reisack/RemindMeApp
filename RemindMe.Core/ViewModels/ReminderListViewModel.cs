@@ -53,6 +53,11 @@ namespace RemindMe.Core.ViewModels
             ReloadDataCommand.Execute();
         }
 
+        public async void DeletePastReminders()
+        {
+            await _reminderDataService.DeletePast();
+        }
+
         public MvxCommand ReloadDataCommand
         {
             get
