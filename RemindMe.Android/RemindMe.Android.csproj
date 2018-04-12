@@ -158,6 +158,7 @@
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="Events\BootReceiver.cs" />
+    <Compile Include="Events\RestartIntentServiceReceiver.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IntentService.cs" />

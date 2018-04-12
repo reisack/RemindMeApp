@@ -44,6 +44,23 @@ namespace RemindMe.Android
             return StartCommandResult.StickyCompatibility;
         }
 
+        public override void OnTaskRemoved(Intent rootIntent)
+        {
+            base.OnTaskRemoved(rootIntent);
+            SendBroadcast(new Intent("REK.RemindMe.Android.RESTART_INTENT_SERVICE"));
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (_timer != null)
+            {
+                _timer.Dispose();
+            }
+            SendBroadcast(new Intent("REK.RemindMe.Android.RESTART_INTENT_SERVICE"));
+        }
+
         private async void HandleTimerCallBack(object state)
         {
             var reminders = await _reminderDataService.GetRemindersToNotify();
