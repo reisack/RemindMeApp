@@ -98,7 +98,7 @@ namespace RemindMe.Core.ViewModels
                 {
                     if (_reminderId.HasValue)
                     {
-                        bool dialogResponse = await _dialogService.ShowConfirmAsync("Message test", "Title test", "Yes", "No");
+                        bool dialogResponse = await _dialogService.ShowConfirmAsync("This will delete the reminder, do you want to continue ?", "Delete reminder", "Yes", "No");
                         if (dialogResponse)
                         {
                             await _reminderDataService.Delete(_reminderId.Value);

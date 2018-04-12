@@ -14,6 +14,7 @@ namespace RemindMe.Core.ViewModels
     public class ReminderListViewModel : BaseViewModel, IReminderListViewModel
     {
         private readonly IReminderDataService _reminderDataService;
+        private readonly IDialogService _dialogService;
 
         private ObservableCollection<Reminder> _reminders;
 
@@ -27,9 +28,10 @@ namespace RemindMe.Core.ViewModels
             }
         }
 
-        public ReminderListViewModel(IMvxMessenger messenger, IReminderDataService reminderDataService) : base(messenger)
+        public ReminderListViewModel(IMvxMessenger messenger, IReminderDataService reminderDataService, IDialogService dialogService) : base(messenger)
         {
             _reminderDataService = reminderDataService;
+            _dialogService = dialogService;
         }
 
         public override async void Start()
@@ -56,6 +58,22 @@ namespace RemindMe.Core.ViewModels
         public async void DeletePastReminders()
         {
             await _reminderDataService.DeletePast();
+        }
+
+        public MvxCommand DeletePastRemindersCommand
+        {
+            get
+            {
+                return new MvxCommand(async () =>
+                {
+                    bool dialogResponse = await _dialogService.ShowConfirmAsync("This will delete all past reminders, do you want to continue ?", "Delete all past reminders", "Yes", "No");
+                    if (dialogResponse)
+                    {
+                        await _reminderDataService.DeletePast();
+                        ReloadDataCommand.Execute();
+                    }
+                });
+            }
         }
 
         public MvxCommand ReloadDataCommand

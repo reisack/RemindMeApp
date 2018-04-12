@@ -41,7 +41,7 @@ namespace RemindMe.Android
             var startTime = DateTime.UtcNow;
             _timer = new Timer(HandleTimerCallBack, startTime, 0, timerCallingDelay);
 
-            return StartCommandResult.Sticky;
+            return StartCommandResult.StickyCompatibility;
         }
 
         private async void HandleTimerCallBack(object state)
