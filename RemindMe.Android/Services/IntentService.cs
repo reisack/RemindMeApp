@@ -41,18 +41,12 @@ namespace RemindMe.Android
             var startTime = DateTime.UtcNow;
             _timer = new Timer(HandleTimerCallBack, startTime, 0, timerCallingDelay);
 
-            return StartCommandResult.StickyCompatibility;
+            return StartCommandResult.Sticky;
         }
 
         public override void OnTaskRemoved(Intent rootIntent)
         {
             base.OnTaskRemoved(rootIntent);
-            SendBroadcast(new Intent("REK.RemindMe.Android.RESTART_INTENT_SERVICE"));
-        }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
             if (_timer != null)
             {

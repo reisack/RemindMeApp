@@ -19,8 +19,9 @@ namespace RemindMe.Android.Events
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            if (!ServicesHelper.IsServiceRunning(context, typeof(IntentService)))
+            if (ServicesHelper.IsServiceRunning(context, typeof(IntentService)))
             {
+                context.StopService(new Intent(context, typeof(IntentService)));
                 Intent intentService = new Intent(context, typeof(IntentService));
                 context.StartService(intentService);
             }
