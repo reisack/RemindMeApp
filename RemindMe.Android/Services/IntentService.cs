@@ -20,7 +20,7 @@ namespace RemindMe.Android
     [Service(Label = "RemindMe Intent Service")]
     public class IntentService : Service
     {
-        const int timerCallingDelay = 10000;
+        const int timerCallingDelay = 60000;
 
         private IReminderDataService _reminderDataService;
         private ReminderDaemonDataService _reminderDaemonDataService;
@@ -44,7 +44,8 @@ namespace RemindMe.Android
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
             var startTime = DateTime.UtcNow;
-            _timer = new Timer(HandleTimerCallBack, startTime, 0, timerCallingDelay);
+            var dueTimeInSeconds = (startTime.Second == 0) ? 0 : 60 - startTime.Second;
+            _timer = new Timer(HandleTimerCallBack, startTime, (dueTimeInSeconds + 1) * 1000, timerCallingDelay);
 
             return StartCommandResult.Sticky;
         }
