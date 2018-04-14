@@ -11,7 +11,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Platform;
+using RemindMe.Android.Services;
 using RemindMe.Core.Interfaces;
+using RemindMe.Core.Models;
 
 namespace RemindMe.Android
 {
@@ -21,14 +23,17 @@ namespace RemindMe.Android
         const int timerCallingDelay = 10000;
 
         private IReminderDataService _reminderDataService;
+        private ReminderDaemonDataService _reminderDaemonDataService;
 
         private Timer _timer { get; set; }
 
         public IntentService()
         {
-            _reminderDataService = Mvx.Resolve<IReminderDataService>();
+            if (!Mvx.TryResolve<IReminderDataService>(out _reminderDataService))
+            {
+                _reminderDaemonDataService = new ReminderDaemonDataService();
+            }
         }
-
 
         public override IBinder OnBind(Intent intent)
         {
@@ -52,12 +57,19 @@ namespace RemindMe.Android
             {
                 _timer.Dispose();
             }
-            SendBroadcast(new Intent("REK.RemindMe.Android.RESTART_INTENT_SERVICE"));
         }
 
         private async void HandleTimerCallBack(object state)
         {
-            var reminders = await _reminderDataService.GetRemindersToNotify();
+            IEnumerable<Reminder> reminders;
+            if (_reminderDataService != null)
+            {
+                reminders = await _reminderDataService.GetRemindersToNotify();
+            }
+            else
+            {
+                reminders = await _reminderDaemonDataService.GetRemindersToNotify();
+            }
 
             foreach (var reminder in reminders)
             {
@@ -81,7 +93,14 @@ namespace RemindMe.Android
                 notificationManager.Notify(notificationId, notification);
             }
 
-            await _reminderDataService.SetToNotified(reminders);
+            if (_reminderDataService != null)
+            {
+                await _reminderDataService.SetToNotified(reminders);
+            }
+            else
+            {
+                await _reminderDaemonDataService.SetToNotified(reminders);
+            }
         }
     }
 }

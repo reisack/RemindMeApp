@@ -158,12 +158,12 @@
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="Events\BootReceiver.cs" />
-    <Compile Include="Events\RestartIntentServiceReceiver.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IntentService.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ReminderDaemonDataService.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\ReminderEditView.cs" />

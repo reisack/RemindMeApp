@@ -13,7 +13,7 @@ using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android
 {
-    [BroadcastReceiver(Enabled = true, Exported = true, DirectBootAware = true)]
+    [BroadcastReceiver(Enabled = true)]
     [IntentFilter(new [] { Intent.ActionBootCompleted, Intent.ActionLockedBootCompleted, "android.intent.action.QUICKBOOT_POWERON", "com.htc.intent.action.QUICKBOOT_POWERON" })]
     public class BootReceiver : BroadcastReceiver
     {
