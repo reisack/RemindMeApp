@@ -61,9 +61,22 @@ namespace RemindMe.Core.Repositories
         {
             var db = DatabaseConnection.Instance.GetConnection();
 
-            string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified 
-                             FROM Reminder 
-                             ORDER BY Date ASC, Title ASC";
+            string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified, Ordinal FROM
+                             (
+                                SELECT Id, Title, Comment, Date, AlreadyNotified, 0 AS Ordinal
+                                FROM Reminder 
+                                WHERE Date >= strftime('%s','now')
+                                ORDER BY Date ASC, Title ASC
+                             ) AS T1
+                             UNION
+                             SELECT Id, Title, Comment, Date, AlreadyNotified, Ordinal FROM
+                             (
+                                SELECT Id, Title, Comment, Date, AlreadyNotified, 1 AS Ordinal
+                                FROM Reminder 
+                                WHERE Date < strftime('%s','now')
+                                ORDER BY Date ASC, Title ASC
+                             ) AS T2 
+                             ORDER BY Ordinal";
 
             return await Task.FromResult<IEnumerable<Reminder>>(db.Query<Reminder>(query));
         }

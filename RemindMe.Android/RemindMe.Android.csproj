@@ -157,6 +157,8 @@
   <ItemGroup>
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
+    <Compile Include="Converters\IntToInvertedVisibilityValueConverter.cs" />
+    <Compile Include="Converters\IntToVisibilityValueConverter.cs" />
     <Compile Include="Events\BootReceiver.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
     <Compile Include="Services\DialogService.cs" />

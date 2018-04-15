@@ -3,54 +3,126 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp">
     <RelativeLayout
-        android:id="@+id/TitleLinearLayout"
-        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:id="@+id/DateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
-            android:text="Date"
-            android:textSize="17dp"
-            local:MvxBind="Text Date, Converter=TimestampToReadableDate" />
-        <TextView
-            android:id="@+id/TimeTextView"
+        local:MvxBind="Visibility AlreadyNotified, Converter=IntToVisibility">
+        <RelativeLayout
+            android:id="@+id/TitleLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time"
+            android:layout_gravity="left"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/DateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:text="Date"
+                android:textSize="17dp"
+                local:MvxBind="Text Date, Converter=TimestampToReadableDate" />
+            <TextView
+                android:id="@+id/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/TimeleftTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time left"
             android:textSize="17dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
+            android:layout_below="@id/TitleLinearLayout"
+            local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
+        <TextView
+            android:id="@+id/TitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_below="@id/TimeleftTextView"
+            local:MvxBind="Text Title" />
+        <TextView
+            android:id="@+id/CommentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/TitleTextView"
+            local:MvxBind="Text Comment, Converter=ShortenedComment" />
     </RelativeLayout>
-    <TextView
-        android:id="@+id/TimeleftTextView"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Time left"
-        android:textSize="17dp"
-        android:layout_below="@id/TitleLinearLayout"
-        local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
-    <TextView
-        android:id="@+id/TitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="17dp"
-        android:layout_below="@id/TimeleftTextView"
-        local:MvxBind="Text Title" />
-    <TextView
-        android:id="@+id/CommentTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Comment"
-        android:textSize="15dp"
-        android:layout_below="@id/TitleTextView"
-        local:MvxBind="Text Comment, Converter=ShortenedComment" />
+        android:background="@color/pastRemindersBg"
+        android:layout_marginBottom="5dp"
+        local:MvxBind="Visibility AlreadyNotified, Converter=IntToInvertedVisibility">
+        <RelativeLayout
+            android:id="@+id/TitleLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/DateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:text="Date"
+                android:textStyle="italic"
+                android:textSize="17dp"
+                local:MvxBind="Text Date, Converter=TimestampToReadableDate" />
+            <TextView
+                android:id="@+id/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textStyle="italic"
+                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/TimeleftTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time left"
+            android:textStyle="italic"
+            android:textSize="17dp"
+            android:layout_below="@id/TitleLinearLayout"
+            local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
+        <TextView
+            android:id="@+id/TitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="17dp"
+            android:textStyle="bold|italic"
+            android:layout_below="@id/TimeleftTextView"
+            local:MvxBind="Text Title" />
+        <TextView
+            android:id="@+id/CommentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:textStyle="italic"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/TitleTextView"
+            local:MvxBind="Text Comment, Converter=ShortenedComment" />
+    </RelativeLayout>
 </RelativeLayout>

@@ -3,7 +3,8 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
     <RelativeLayout
         android:id="@+id/reminderTitleLinearLayout"
         android:layout_width="match_parent"
@@ -62,8 +63,8 @@
             android:id="@+id/reminderDatePickerEditText"
             android:textSize="20dp"
             android:visibility="gone"
-            local:MvxBind="Text ReminderDay, Mode=TwoWay"/>
-      <EditText
+            local:MvxBind="Text ReminderDay, Mode=TwoWay" />
+        <EditText
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,12 +92,13 @@
             android:textSize="20dp"
             android:visibility="gone"
             local:MvxBind="Text ReminderTime, Mode=TwoWay" />
-      <EditText
+        <EditText
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderTimePickerEditText"
             android:id="@+id/reminderTimePickerEditTextReadableValue"
+            android:layout_marginBottom="30dp"
             android:textSize="20dp" />
     </RelativeLayout>
     <RelativeLayout
@@ -107,8 +109,9 @@
         <Button
             android:id="@+id/saveButton"
             android:text="Save"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:background="@color/createAndSave"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textSize="30dp"
@@ -122,8 +125,9 @@
         <Button
             android:id="@+id/deleteButton"
             android:text="Delete"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:background="@color/alert"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textSize="30dp"
