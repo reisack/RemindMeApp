@@ -16,6 +16,7 @@ namespace RemindMe.Android
     [Activity(
         MainLauncher = true, 
         Label = "@string/app_name",
+        Theme = "@style/AppTheme",
         NoHistory = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait)]

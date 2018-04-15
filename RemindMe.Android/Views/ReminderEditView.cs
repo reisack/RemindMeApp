@@ -18,7 +18,7 @@ using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Edit", MainLauncher = true)]
+    [Activity(Label = "Edit", MainLauncher = true, Theme = "@style/AppTheme")]
     public class ReminderEditView : MvxActivity, DatePickerDialog.IOnDateSetListener, TimePickerDialog.IOnTimeSetListener
     {
         private EditText _reminderDatePickerText;

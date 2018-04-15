@@ -2979,44 +2979,44 @@ namespace RemindMe.Android
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0d0046
-			public const int abc_background_cache_hint_selector_material_dark = 2131558470;
+			// aapt resource value: 0x7f0d004e
+			public const int abc_background_cache_hint_selector_material_dark = 2131558478;
 			
-			// aapt resource value: 0x7f0d0047
-			public const int abc_background_cache_hint_selector_material_light = 2131558471;
+			// aapt resource value: 0x7f0d004f
+			public const int abc_background_cache_hint_selector_material_light = 2131558479;
 			
-			// aapt resource value: 0x7f0d0048
-			public const int abc_btn_colored_borderless_text_material = 2131558472;
+			// aapt resource value: 0x7f0d0050
+			public const int abc_btn_colored_borderless_text_material = 2131558480;
 			
-			// aapt resource value: 0x7f0d0049
-			public const int abc_btn_colored_text_material = 2131558473;
+			// aapt resource value: 0x7f0d0051
+			public const int abc_btn_colored_text_material = 2131558481;
 			
-			// aapt resource value: 0x7f0d004a
-			public const int abc_color_highlight_material = 2131558474;
+			// aapt resource value: 0x7f0d0052
+			public const int abc_color_highlight_material = 2131558482;
 			
-			// aapt resource value: 0x7f0d004b
-			public const int abc_hint_foreground_material_dark = 2131558475;
+			// aapt resource value: 0x7f0d0053
+			public const int abc_hint_foreground_material_dark = 2131558483;
 			
-			// aapt resource value: 0x7f0d004c
-			public const int abc_hint_foreground_material_light = 2131558476;
+			// aapt resource value: 0x7f0d0054
+			public const int abc_hint_foreground_material_light = 2131558484;
 			
 			// aapt resource value: 0x7f0d0001
 			public const int abc_input_method_navigation_guard = 2131558401;
 			
-			// aapt resource value: 0x7f0d004d
-			public const int abc_primary_text_disable_only_material_dark = 2131558477;
+			// aapt resource value: 0x7f0d0055
+			public const int abc_primary_text_disable_only_material_dark = 2131558485;
 			
-			// aapt resource value: 0x7f0d004e
-			public const int abc_primary_text_disable_only_material_light = 2131558478;
+			// aapt resource value: 0x7f0d0056
+			public const int abc_primary_text_disable_only_material_light = 2131558486;
 			
-			// aapt resource value: 0x7f0d004f
-			public const int abc_primary_text_material_dark = 2131558479;
+			// aapt resource value: 0x7f0d0057
+			public const int abc_primary_text_material_dark = 2131558487;
 			
-			// aapt resource value: 0x7f0d0050
-			public const int abc_primary_text_material_light = 2131558480;
+			// aapt resource value: 0x7f0d0058
+			public const int abc_primary_text_material_light = 2131558488;
 			
-			// aapt resource value: 0x7f0d0051
-			public const int abc_search_url_text = 2131558481;
+			// aapt resource value: 0x7f0d0059
+			public const int abc_search_url_text = 2131558489;
 			
 			// aapt resource value: 0x7f0d0002
 			public const int abc_search_url_text_normal = 2131558402;
@@ -3027,38 +3027,41 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0d0004
 			public const int abc_search_url_text_selected = 2131558404;
 			
-			// aapt resource value: 0x7f0d0052
-			public const int abc_secondary_text_material_dark = 2131558482;
-			
-			// aapt resource value: 0x7f0d0053
-			public const int abc_secondary_text_material_light = 2131558483;
-			
-			// aapt resource value: 0x7f0d0054
-			public const int abc_tint_btn_checkable = 2131558484;
-			
-			// aapt resource value: 0x7f0d0055
-			public const int abc_tint_default = 2131558485;
-			
-			// aapt resource value: 0x7f0d0056
-			public const int abc_tint_edittext = 2131558486;
-			
-			// aapt resource value: 0x7f0d0057
-			public const int abc_tint_seek_thumb = 2131558487;
-			
-			// aapt resource value: 0x7f0d0058
-			public const int abc_tint_spinner = 2131558488;
-			
-			// aapt resource value: 0x7f0d0059
-			public const int abc_tint_switch_thumb = 2131558489;
-			
 			// aapt resource value: 0x7f0d005a
-			public const int abc_tint_switch_track = 2131558490;
+			public const int abc_secondary_text_material_dark = 2131558490;
+			
+			// aapt resource value: 0x7f0d005b
+			public const int abc_secondary_text_material_light = 2131558491;
+			
+			// aapt resource value: 0x7f0d005c
+			public const int abc_tint_btn_checkable = 2131558492;
+			
+			// aapt resource value: 0x7f0d005d
+			public const int abc_tint_default = 2131558493;
+			
+			// aapt resource value: 0x7f0d005e
+			public const int abc_tint_edittext = 2131558494;
+			
+			// aapt resource value: 0x7f0d005f
+			public const int abc_tint_seek_thumb = 2131558495;
+			
+			// aapt resource value: 0x7f0d0060
+			public const int abc_tint_spinner = 2131558496;
+			
+			// aapt resource value: 0x7f0d0061
+			public const int abc_tint_switch_thumb = 2131558497;
+			
+			// aapt resource value: 0x7f0d0062
+			public const int abc_tint_switch_track = 2131558498;
 			
 			// aapt resource value: 0x7f0d0005
 			public const int accent_material_dark = 2131558405;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int accent_material_light = 2131558406;
+			
+			// aapt resource value: 0x7f0d004b
+			public const int alert = 2131558475;
 			
 			// aapt resource value: 0x7f0d0007
 			public const int background_floating_material_dark = 2131558407;
@@ -3071,6 +3074,9 @@ namespace RemindMe.Android
 			
 			// aapt resource value: 0x7f0d000a
 			public const int background_material_light = 2131558410;
+			
+			// aapt resource value: 0x7f0d0047
+			public const int black = 2131558471;
 			
 			// aapt resource value: 0x7f0d000b
 			public const int bright_foreground_disabled_material_dark = 2131558411;
@@ -3096,11 +3102,14 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0d0012
 			public const int button_material_light = 2131558418;
 			
+			// aapt resource value: 0x7f0d004a
+			public const int createAndSave = 2131558474;
+			
 			// aapt resource value: 0x7f0d003b
 			public const int design_bottom_navigation_shadow_color = 2131558459;
 			
-			// aapt resource value: 0x7f0d005b
-			public const int design_error = 2131558491;
+			// aapt resource value: 0x7f0d0063
+			public const int design_error = 2131558499;
 			
 			// aapt resource value: 0x7f0d003c
 			public const int design_fab_shadow_end_color = 2131558460;
@@ -3132,8 +3141,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0d0045
 			public const int design_textinput_error_color_light = 2131558469;
 			
-			// aapt resource value: 0x7f0d005c
-			public const int design_tint_password_toggle = 2131558492;
+			// aapt resource value: 0x7f0d0064
+			public const int design_tint_password_toggle = 2131558500;
 			
 			// aapt resource value: 0x7f0d0013
 			public const int dim_foreground_disabled_material_dark = 2131558419;
@@ -3204,6 +3213,18 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0d0028
 			public const int notification_material_background_media_default_color = 2131558440;
 			
+			// aapt resource value: 0x7f0d004c
+			public const int pastRemindersBg = 2131558476;
+			
+			// aapt resource value: 0x7f0d004d
+			public const int pastRemindersText = 2131558477;
+			
+			// aapt resource value: 0x7f0d0048
+			public const int primaryDark = 2131558472;
+			
+			// aapt resource value: 0x7f0d0049
+			public const int primaryLight = 2131558473;
+			
 			// aapt resource value: 0x7f0d0029
 			public const int primary_dark_material_dark = 2131558441;
 			
@@ -3252,17 +3273,20 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0d0038
 			public const int switch_thumb_disabled_material_light = 2131558456;
 			
-			// aapt resource value: 0x7f0d005d
-			public const int switch_thumb_material_dark = 2131558493;
+			// aapt resource value: 0x7f0d0065
+			public const int switch_thumb_material_dark = 2131558501;
 			
-			// aapt resource value: 0x7f0d005e
-			public const int switch_thumb_material_light = 2131558494;
+			// aapt resource value: 0x7f0d0066
+			public const int switch_thumb_material_light = 2131558502;
 			
 			// aapt resource value: 0x7f0d0039
 			public const int switch_thumb_normal_material_dark = 2131558457;
 			
 			// aapt resource value: 0x7f0d003a
 			public const int switch_thumb_normal_material_light = 2131558458;
+			
+			// aapt resource value: 0x7f0d0046
+			public const int white = 2131558470;
 			
 			static Color()
 			{
@@ -5044,6 +5068,9 @@ namespace RemindMe.Android
 			
 			// aapt resource value: 0x7f0b0161
 			public const int Animation_Design_BottomSheetDialog = 2131427681;
+			
+			// aapt resource value: 0x7f0b017a
+			public const int AppTheme = 2131427706;
 			
 			// aapt resource value: 0x7f0b00a3
 			public const int Base_AlertDialog_AppCompat = 2131427491;

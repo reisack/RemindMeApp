@@ -15,7 +15,7 @@ using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Main", MainLauncher = false)]
+    [Activity(Label = "Main", MainLauncher = false, Theme = "@style/AppTheme")]
     public class MainView : MvxActivity
     {
         protected override void OnViewModelSet()

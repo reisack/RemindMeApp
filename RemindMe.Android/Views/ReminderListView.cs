@@ -17,7 +17,7 @@ using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Reminders list", MainLauncher = true)]
+    [Activity(Label = "Reminders list", MainLauncher = true, Theme = "@style/AppTheme")]
     public class ReminderListView : MvxActivity
     {
         public override bool OnCreateOptionsMenu(IMenu menu)
