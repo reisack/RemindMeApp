@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -15,7 +16,9 @@ using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Main", MainLauncher = false, Theme = "@style/AppTheme")]
+    [Activity(Label = "Main", MainLauncher = false, Theme = "@style/AppTheme",
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
+        ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainView : MvxActivity
     {
         protected override void OnViewModelSet()

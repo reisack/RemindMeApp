@@ -18,7 +18,7 @@ namespace RemindMe.Android
         Label = "@string/app_name",
         Theme = "@style/AppTheme",
         NoHistory = true,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxSplashScreenActivity
     {

@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -17,7 +18,9 @@ using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Reminders list", MainLauncher = true, Theme = "@style/AppTheme")]
+    [Activity(Label = "Reminders list", MainLauncher = true, Theme = "@style/AppTheme",
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
+        ScreenOrientation = ScreenOrientation.Portrait)]
     public class ReminderListView : MvxActivity
     {
         public override bool OnCreateOptionsMenu(IMenu menu)
