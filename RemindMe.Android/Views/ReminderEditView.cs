@@ -19,7 +19,7 @@ using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Edit", MainLauncher = true, Theme = "@style/AppTheme",
+    [Activity(Label = "Edit", MainLauncher = false, Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class ReminderEditView : MvxActivity, DatePickerDialog.IOnDateSetListener, TimePickerDialog.IOnTimeSetListener

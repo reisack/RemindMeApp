@@ -16,7 +16,7 @@ namespace RemindMe.Android
     [Activity(
         MainLauncher = true, 
         Label = "@string/app_name",
-        Theme = "@style/AppTheme",
+        Theme = "@style/TransparentTheme",
         NoHistory = true,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
