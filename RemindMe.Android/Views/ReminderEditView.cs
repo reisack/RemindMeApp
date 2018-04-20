@@ -30,6 +30,24 @@ namespace RemindMe.Android.Views
         private EditText _reminderTimePickerText;
         private EditText _reminderTimePickerEditTextReadableValue;
 
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var vm = this.ViewModel as ReminderEditViewModel;
+            if (vm != null)
+            {
+                if (vm.IsUpdateMode)
+                {
+                    Title = "Update reminder";
+                }
+                else
+                {
+                    Title = "Create reminder";
+                }
+            }
+            
+            return base.OnCreateView(parent, name, context, attrs);
+        }
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             // https://forums.xamarin.com/discussion/5198/how-do-i-create-an-options-menu
