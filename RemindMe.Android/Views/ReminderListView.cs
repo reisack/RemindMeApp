@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using RemindMe.Android.Helpers;
@@ -21,7 +22,7 @@ namespace RemindMe.Android.Views
     [Activity(Label = "Reminders list", MainLauncher = false, Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class ReminderListView : MvxActivity
+    public class ReminderListView : MvxAppCompatActivity
     {
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using RemindMe.Core.Converters;
 using RemindMe.Core.ViewModels;
@@ -22,7 +23,7 @@ namespace RemindMe.Android.Views
     [Activity(Label = "Edit", MainLauncher = false, Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
-    public class ReminderEditView : MvxActivity, DatePickerDialog.IOnDateSetListener, TimePickerDialog.IOnTimeSetListener
+    public class ReminderEditView : MvxAppCompatActivity, DatePickerDialog.IOnDateSetListener, TimePickerDialog.IOnTimeSetListener
     {
         private EditText _reminderDatePickerText;
         private EditText _reminderDatePickerEditTextReadableValue;
