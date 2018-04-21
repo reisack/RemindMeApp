@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using RemindMe.Core.Events;
 
 namespace RemindMe.Core.ViewModels
 {
@@ -24,7 +25,11 @@ namespace RemindMe.Core.ViewModels
 
         private DateTime? _reminderDay;
         private string _reminderTime;
-        
+
+        public event EventHandler<ReminderEventArgs> OnReminderCreated;
+        public event EventHandler<ReminderEventArgs> OnReminderUpdated;
+        public event EventHandler<ReminderEventArgs> OnReminderDeleted;
+
 
         public bool IsUpdateMode
         {
@@ -117,6 +122,7 @@ namespace RemindMe.Core.ViewModels
                         if (dialogResponse)
                         {
                             await _reminderDataService.Delete(_reminderId.Value);
+                            OnReminderDeleted?.Invoke(this, new ReminderEventArgs(_selectedReminder));
                             Close(this);
                         }
                     }
@@ -128,11 +134,21 @@ namespace RemindMe.Core.ViewModels
         {
             get
             {
-                return new MvxCommand(() =>
+                return new MvxCommand(async () =>
                 {
                     if (Validate())
                     {
-                        _reminderDataService.AddOrUpdate(_selectedReminder);
+                        await _reminderDataService.AddOrUpdate(_selectedReminder);
+
+                        if (IsUpdateMode)
+                        {
+                            OnReminderUpdated?.Invoke(this, new ReminderEventArgs(_selectedReminder));
+                        }
+                        else
+                        {
+                            OnReminderCreated?.Invoke(this, new ReminderEventArgs(_selectedReminder));
+                        }
+
                         Close(this);
                     }
                 });

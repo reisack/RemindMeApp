@@ -18,6 +18,8 @@ namespace RemindMe.Core.ViewModels
 
         private ObservableCollection<Reminder> _reminders;
 
+        public event EventHandler OnDeletePastReminders;
+
         public ObservableCollection<Reminder> Reminders
         {
             get { return _reminders; }
@@ -70,6 +72,7 @@ namespace RemindMe.Core.ViewModels
                     if (dialogResponse)
                     {
                         await _reminderDataService.DeletePast();
+                        OnDeletePastReminders?.Invoke(this, new EventArgs());
                         ReloadDataCommand.Execute();
                     }
                 });

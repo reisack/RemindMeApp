@@ -57,5 +57,33 @@ namespace RemindMe.Android.Views
                 StartService(intentService);
             }
         }
+
+        protected override void OnResume()
+        {
+            var vm = this.ViewModel as ReminderListViewModel;
+            if (vm != null)
+            {
+                vm.OnDeletePastReminders += OnDeletePastReminders; ;
+            }
+
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            var vm = this.ViewModel as ReminderListViewModel;
+            if (vm != null)
+            {
+                vm.OnDeletePastReminders -= OnDeletePastReminders;
+            }
+
+            base.OnPause();
+        }
+
+        private void OnDeletePastReminders(object sender, EventArgs e)
+        {
+            var toast = Toast.MakeText(this, "Past reminders succesfully deleted", ToastLength.Short);
+            toast.Show();
+        }
     }
 }

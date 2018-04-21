@@ -83,6 +83,50 @@ namespace RemindMe.Android.Views
             vvmBinding.Apply();
         }
 
+        protected override void OnResume()
+        {
+            var vm = this.ViewModel as ReminderEditViewModel;
+            if (vm != null)
+            {
+                vm.OnReminderCreated += OnReminderCreated;
+                vm.OnReminderUpdated += OnReminderUpdated;
+                vm.OnReminderDeleted += OnReminderDeleted;
+            }
+
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            var vm = this.ViewModel as ReminderEditViewModel;
+            if (vm != null)
+            {
+                vm.OnReminderCreated -= OnReminderCreated;
+                vm.OnReminderUpdated -= OnReminderUpdated;
+                vm.OnReminderDeleted -= OnReminderDeleted;
+            }
+
+            base.OnPause();
+        }
+
+        private void OnReminderCreated(object sender, Core.Events.ReminderEventArgs e)
+        {
+            var toast = Toast.MakeText(this, "Reminder succesfully created", ToastLength.Short);
+            toast.Show();
+        }
+
+        private void OnReminderUpdated(object sender, Core.Events.ReminderEventArgs e)
+        {
+            var toast = Toast.MakeText(this, "Reminder succesfully updated", ToastLength.Short);
+            toast.Show();
+        }
+
+        private void OnReminderDeleted(object sender, Core.Events.ReminderEventArgs e)
+        {
+            var toast = Toast.MakeText(this, "Reminder succesfully deleted", ToastLength.Short);
+            toast.Show();
+        }
+
         public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
         {
             DateTime selectedDate = new DateTime(year, month + 1, dayOfMonth);
