@@ -17,16 +17,14 @@
         android:layout_alignParentTop="true"
         local:MvxItemTemplate="@layout/reminder_list_item"
         local:MvxBind="ItemsSource Reminders; ItemClick SelectItemCommand;" />
-    <Button
+    <ImageButton
         android:id="@+id/AddButton"
-        android:text="+"
-        android:textColor="@color/white"
         android:background="@drawable/green_round_button"
+        android:src="@drawable/create_icon"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:textSize="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         local:MvxBind="Click AddCommand" />
