@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Time left"
+            android:textColor="@color/primaryDark"
             android:textSize="17dp"
             android:layout_below="@id/TitleLinearLayout"
             local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
