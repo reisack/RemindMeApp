@@ -4086,8 +4086,8 @@ namespace RemindMe.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0900b5
-			public const int AddButton = 2131296437;
+			// aapt resource value: 0x7f0900b6
+			public const int AddButton = 2131296438;
 			
 			// aapt resource value: 0x7f0900a1
 			public const int CommentTextView = 2131296417;
@@ -4245,11 +4245,11 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f090049
 			public const int default_activity_button = 2131296329;
 			
-			// aapt resource value: 0x7f0900b3
-			public const int deleteButton = 2131296435;
+			// aapt resource value: 0x7f0900b4
+			public const int deleteButton = 2131296436;
 			
-			// aapt resource value: 0x7f0900b2
-			public const int deleteButtonLinearLayout = 2131296434;
+			// aapt resource value: 0x7f0900b3
+			public const int deleteButtonLinearLayout = 2131296435;
 			
 			// aapt resource value: 0x7f09007a
 			public const int design_bottom_sheet = 2131296378;
@@ -4286,6 +4286,9 @@ namespace RemindMe.Android
 			
 			// aapt resource value: 0x7f09002d
 			public const int enterAlwaysCollapsed = 2131296301;
+			
+			// aapt resource value: 0x7f0900b1
+			public const int errorLabel = 2131296433;
 			
 			// aapt resource value: 0x7f09002e
 			public const int exitUntilCollapsed = 2131296302;
@@ -4350,8 +4353,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09004a
 			public const int list_item = 2131296330;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int masked = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int masked = 2131296440;
 			
 			// aapt resource value: 0x7f09008b
 			public const int media_actions = 2131296395;
@@ -4446,8 +4449,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0900a2
 			public const int reminderTitleLinearLayout = 2131296418;
 			
-			// aapt resource value: 0x7f0900b4
-			public const int reminder_list = 2131296436;
+			// aapt resource value: 0x7f0900b5
+			public const int reminder_list = 2131296437;
 			
 			// aapt resource value: 0x7f090084
 			public const int remove_past = 2131296388;
@@ -4461,8 +4464,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09008f
 			public const int right_side = 2131296399;
 			
-			// aapt resource value: 0x7f0900b1
-			public const int saveButton = 2131296433;
+			// aapt resource value: 0x7f0900b2
+			public const int saveButton = 2131296434;
 			
 			// aapt resource value: 0x7f0900b0
 			public const int saveButtonLinearLayout = 2131296432;
@@ -4629,8 +4632,8 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int visible = 2131296438;
+			// aapt resource value: 0x7f0900b7
+			public const int visible = 2131296439;
 			
 			// aapt resource value: 0x7f090029
 			public const int withText = 2131296297;

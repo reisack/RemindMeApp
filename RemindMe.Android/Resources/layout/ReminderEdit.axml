@@ -5,7 +5,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <RelativeLayout
         android:id="@+id/reminderTitleLinearLayout"
         android:layout_width="match_parent"
@@ -24,7 +26,7 @@
             android:id="@+id/reminderTitle"
             android:textSize="20dp"
             android:maxLength="50"
-            local:MvxBind="Text SelectedReminder.Title, Mode=TwoWay" />
+            local:MvxBind="Text SelectedReminder.Title, Mode=TwoWay; Error Errors['Title']" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/reminderCommentLinearLayout"
@@ -74,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderDatePickerEditText"
             android:id="@+id/reminderDatePickerEditTextReadableValue"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            local:MvxBind="Error Errors['ReminderDay']"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/reminderTimeLinearLayout"
@@ -103,13 +106,23 @@
             android:layout_below="@id/reminderTimePickerEditText"
             android:id="@+id/reminderTimePickerEditTextReadableValue"
             android:layout_marginBottom="30dp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            local:MvxBind="Error Errors['ReminderTime']"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/saveButtonLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/reminderTimeLinearLayout">
+      <TextView
+            android:id="@+id/errorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/alert"
+            local:MvxBind="Text Errors['MinimumDate']; Error Errors['MinimumDate']" />
         <Button
             android:id="@+id/saveButton"
             android:text="Save"
@@ -118,6 +131,7 @@
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_below="@id/errorLabel"
             android:textSize="30dp"
             local:MvxBind="Click SaveCommand" />
     </RelativeLayout>

@@ -1,7 +1,9 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
+using MvvmValidation;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
+using RemindMe.Core.Extensions;
 using RemindMe.Core.Tools;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,8 @@ namespace RemindMe.Core.ViewModels
         private readonly IReminderDataService _reminderDataService;
         private readonly IDialogService _dialogService;
 
+        private ObservableDictionary<string, string> _errors;
+
         private long? _reminderId;
         private Reminder _selectedReminder;
 
@@ -25,6 +29,16 @@ namespace RemindMe.Core.ViewModels
         public bool IsUpdateMode
         {
             get { return (_reminderId.HasValue && _reminderId.Value > 0); }
+        }
+
+        public ObservableDictionary<string, string> Errors
+        {
+            get { return _errors; }
+            set
+            {
+                _errors = value;
+                RaisePropertyChanged(() => Errors);
+            }
         }
 
         public Reminder SelectedReminder
@@ -62,6 +76,7 @@ namespace RemindMe.Core.ViewModels
             _reminderId = null;
             _reminderDataService = reminderDataService;
             _dialogService = dialogService;
+            _errors = new ObservableDictionary<string, string>();
         }
 
         public override async void Start()
@@ -115,33 +130,58 @@ namespace RemindMe.Core.ViewModels
             {
                 return new MvxCommand(() =>
                 {
-                    if (_reminderDay.HasValue && !string.IsNullOrEmpty(_reminderTime))
+                    if (Validate())
                     {
-                        var day = _reminderDay.Value;
+                        _reminderDataService.AddOrUpdate(_selectedReminder);
+                        Close(this);
+                    }
+                });
+            }
+        }
 
-                        var timeElements = _reminderTime.Split(':');
-                        if (timeElements.Length >= 2)
+        private bool Validate()
+        {
+            ValidationHelper validator = new ValidationHelper();
+
+            validator.AddRequiredRule(() => ReminderDay, "Date is required");
+            validator.AddRequiredRule(() => ReminderTime, "Time is required");
+            validator.AddRequiredRule(() => SelectedReminder.Title, "Title is required");
+
+            validator.AddRule("MinimumDate", () =>
+            {
+                bool condition = true;
+
+                if (_reminderDay.HasValue && !string.IsNullOrEmpty(_reminderTime))
+                {
+                    var day = _reminderDay.Value;
+
+                    var timeElements = _reminderTime.Split(':');
+                    if (timeElements.Length >= 2)
+                    {
+                        int hour = -1, minute = -1;
+                        if (int.TryParse(timeElements[0], out hour))
                         {
-                            int hour = -1, minute = -1;
-                            if (int.TryParse(timeElements[0], out hour))
+                            if (int.TryParse(timeElements[1], out minute))
                             {
-                                if (int.TryParse(timeElements[1], out minute))
-                                {
-                                    DateTime newDate = new DateTime(day.Year, day.Month, day.Day, hour, minute, 0, DateTimeKind.Local);
-                                    newDate = newDate.ToUniversalTime();
+                                DateTime newDate = new DateTime(day.Year, day.Month, day.Day, hour, minute, 0, DateTimeKind.Local);
+                                newDate = newDate.ToUniversalTime();
 
-                                    long unixDateTime = ((DateTimeOffset)newDate).ToUnixTimeSeconds();
-                                    _selectedReminder.Date = unixDateTime;
+                                long unixDateTime = ((DateTimeOffset)newDate).ToUnixTimeSeconds();
+                                _selectedReminder.Date = unixDateTime;
 
-                                    _reminderDataService.AddOrUpdate(_selectedReminder);
-                                }
+                                condition = _selectedReminder.Date > ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
                             }
                         }
                     }
+                }
 
-                    Close(this);
-                });
-            }
+                return RuleResult.Assert(condition, "Date and time must not be past ");
+            });
+
+            var result = validator.ValidateAll();
+            Errors = result.AsObservableDictionary();
+
+            return result.IsValid;
         }
     }
 }

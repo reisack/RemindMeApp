@@ -95,6 +95,9 @@
     <Reference Include="MvvmCross.Plugins.Visibility.Droid, Version=5.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.5.6.3\lib\MonoAndroid\MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="MvvmValidation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=113792d2053ac461, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmValidation.3.1.0\lib\netstandard1.0\MvvmValidation.dll</HintPath>
+    </Reference>
     <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\netstandard1.1\SQLite-net.dll</HintPath>
     </Reference>
@@ -160,6 +163,7 @@
     <Compile Include="Converters\IntToInvertedVisibilityValueConverter.cs" />
     <Compile Include="Converters\IntToVisibilityValueConverter.cs" />
     <Compile Include="Events\BootReceiver.cs" />
+    <Compile Include="Extensions\DatePickerExtensions.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IntentService.cs" />

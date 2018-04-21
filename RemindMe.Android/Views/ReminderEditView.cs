@@ -17,6 +17,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using RemindMe.Core.Converters;
 using RemindMe.Core.ViewModels;
+using RemindMe.Android.Extensions;
 
 namespace RemindMe.Android.Views
 {
@@ -118,6 +119,7 @@ namespace RemindMe.Android.Views
 
                 DatePickerDialog dialog = new DatePickerDialog(this, this, reminderDate.Year, reminderDate.Month - 1, reminderDate.Day);
                 dialog.SetTitle("Date selection");
+                dialog.DatePicker.SetMinDate(DateTime.Now);
                 dialog.Show();
             };
         }
