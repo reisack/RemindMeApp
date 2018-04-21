@@ -36,8 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Comment"
-            android:maxLength="500" />
+            android:text="Comment" />
         <EditText
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
@@ -45,6 +44,8 @@
             android:layout_below="@id/reminderCommentInput"
             android:id="@+id/reminderComment"
             android:textSize="20dp"
+            android:maxLength="500"
+            android:maxLines="10"
             local:MvxBind="Text SelectedReminder.Comment, Mode=TwoWay" />
     </RelativeLayout>
     <RelativeLayout
