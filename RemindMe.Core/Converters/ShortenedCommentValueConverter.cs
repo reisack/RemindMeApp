@@ -8,7 +8,7 @@ namespace RemindMe.Core.Converters
 {
     public class ShortenedCommentValueConverter : MvxValueConverter<string, string>
     {
-        private const int MESSAGE_LENGTH = 30;
+        private const int MESSAGE_LENGTH = 100;
 
         protected override string Convert(string value, Type targetType, object parameter, CultureInfo culture)
         {
