@@ -37,7 +37,11 @@ namespace RemindMe.Core
         private void InitCultureInfo()
         {
             CultureInfo cultureInfo = null;
-            if (!CultureInfo.CurrentCulture.Name.Contains("fr"))
+            if (CultureInfo.CurrentCulture.Name.Contains("fr"))
+            {
+                cultureInfo = new CultureInfo("fr-FR");
+            }
+            else
             {
                 cultureInfo = new CultureInfo("en-US");
             }
