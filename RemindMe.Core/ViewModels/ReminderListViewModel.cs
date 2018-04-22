@@ -2,6 +2,7 @@
 using MvvmCross.Plugins.Messenger;
 using RemindMe.Core.Extensions;
 using RemindMe.Core.Interfaces;
+using RemindMe.Core.Localization;
 using RemindMe.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace RemindMe.Core.ViewModels
             {
                 return new MvxCommand(async () =>
                 {
-                    bool dialogResponse = await _dialogService.ShowConfirmAsync("This will delete all past reminders, do you want to continue ?", "Delete all past reminders", "Yes", "No");
+                    bool dialogResponse = await _dialogService.ShowConfirmAsync(LocalizationManager.GetString("delete_past_reminders_confirm_message"), LocalizationManager.GetString("delete_past_reminders_confirm_title"), LocalizationManager.GetString("yes"), LocalizationManager.GetString("no"));
                     if (dialogResponse)
                     {
                         await _reminderDataService.DeletePast();

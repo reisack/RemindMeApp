@@ -38,11 +38,11 @@ namespace RemindMe.Android.Views
             {
                 if (vm.IsUpdateMode)
                 {
-                    Title = "Update reminder";
+                    Title = GetString(Resource.String.update_reminder);
                 }
                 else
                 {
-                    Title = "Create reminder";
+                    Title = GetString(Resource.String.create_reminder);
                 }
             }
             
@@ -111,19 +111,19 @@ namespace RemindMe.Android.Views
 
         private void OnReminderCreated(object sender, Core.Events.ReminderEventArgs e)
         {
-            var toast = Toast.MakeText(this, "Reminder succesfully created", ToastLength.Short);
+            var toast = Toast.MakeText(this, GetString(Resource.String.reminder_created_toast), ToastLength.Short);
             toast.Show();
         }
 
         private void OnReminderUpdated(object sender, Core.Events.ReminderEventArgs e)
         {
-            var toast = Toast.MakeText(this, "Reminder succesfully updated", ToastLength.Short);
+            var toast = Toast.MakeText(this, GetString(Resource.String.reminder_updated_toast), ToastLength.Short);
             toast.Show();
         }
 
         private void OnReminderDeleted(object sender, Core.Events.ReminderEventArgs e)
         {
-            var toast = Toast.MakeText(this, "Reminder succesfully deleted", ToastLength.Short);
+            var toast = Toast.MakeText(this, GetString(Resource.String.reminder_deleted_toast), ToastLength.Short);
             toast.Show();
         }
 
@@ -162,7 +162,7 @@ namespace RemindMe.Android.Views
                 }
 
                 DatePickerDialog dialog = new DatePickerDialog(this, this, reminderDate.Year, reminderDate.Month - 1, reminderDate.Day);
-                dialog.SetTitle("Date selection");
+                dialog.SetTitle(GetString(Resource.String.date_selection));
                 dialog.DatePicker.SetMinDate(DateTime.Now);
                 dialog.Show();
             };
@@ -211,10 +211,10 @@ namespace RemindMe.Android.Views
                     }
                 }
 
-                bool is24HourView = (CultureInfo.CurrentCulture.Name == "fr-FR");
+                bool is24HourView = (CultureInfo.CurrentCulture.Name.Contains("fr"));
 
                 TimePickerDialog dialog = new TimePickerDialog(this, this, hours, minutes, is24HourView);
-                dialog.SetTitle("Time selection");
+                dialog.SetTitle(GetString(Resource.String.time_selection));
                 dialog.Show();
             };
         }

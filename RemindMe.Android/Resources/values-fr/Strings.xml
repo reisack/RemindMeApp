@@ -1,0 +1,19 @@
+<resources>
+  <string name="app_name">RemindMe</string>
+  <string name="create_reminder">Ajouter un rappel</string>
+  <string name="delete">Supprimer</string>
+  <string name="reminders_list">Liste des rappels</string>
+  <string name="reminder_comment_label_form">Commentaire</string>
+  <string name="reminder_created_toast">Rappel ajouté avec succès</string>
+  <string name="reminder_date_label_form">Date *</string>
+  <string name="reminder_deleted_toast">Rappel supprimé avec succès</string>
+  <string name="reminder_time_label_form">Heure *</string>
+  <string name="reminder_title_label_form">Titre *</string>
+  <string name="reminder_updated_toast">Rappel mis à jour avec succès</string>
+  <string name="remove_past_reminders_item">Supprimer les anciens rappels</string>
+  <string name="save">Sauvegarder</string>
+  <string name="update_reminder">Modifier le rappel</string>
+  <string name="date_selection">Sélection de la date</string>
+  <string name="time_selection">Sélection de l\'heure</string>
+  <string name="past_reminders_deleted_toast">Les anciens rappels ont été supprimés avec succès</string>
+</resources>

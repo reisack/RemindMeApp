@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Platform.Converters;
+using RemindMe.Core.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -30,32 +31,32 @@ namespace RemindMe.Core.Converters
             if (absDays > 365)
             {
                 timeNumber = (int)(absDays / NB_DAYS_IN_YEAR);
-                timeUnit = "year";
+                timeUnit = LocalizationManager.GetString("year");
             }
             else if (absDays > 30)
             {
                 timeNumber = (int)(absDays / NB_DAYS_IN_MONTH);
-                timeUnit = "month";
+                timeUnit = LocalizationManager.GetString("month");
             }
             else if (absDays >= 1)
             {
                 timeNumber = absDays;
-                timeUnit = "day";
+                timeUnit = LocalizationManager.GetString("day");
             }
             else if (absHours >= 1)
             {
                 timeNumber = absHours;
-                timeUnit = "hour";
+                timeUnit = LocalizationManager.GetString("hour");
             }
             else if (absMinutes >= 1)
             {
                 timeNumber = absMinutes;
-                timeUnit = "minute";
+                timeUnit = LocalizationManager.GetString("minute");
             }
             else
             {
                 timeNumber = absSeconds;
-                timeUnit = "second";
+                timeUnit = LocalizationManager.GetString("second");
             }
 
             if (timeNumber > 1 && !timeUnit.EndsWith("s"))
@@ -63,27 +64,13 @@ namespace RemindMe.Core.Converters
                 timeUnit += "s";
             }
 
-            if (culture.Name == "en-US")
+            if (pastEvent)
             {
-                if (pastEvent)
-                {
-                    return string.Format("{0} {1} ago", timeNumber, timeUnit);
-                }
-                else
-                {
-                    return string.Format("{0} {1} left", timeNumber, timeUnit);
-                }
+                return string.Format(LocalizationManager.GetString("time_past"), timeNumber, timeUnit);
             }
             else
             {
-                if (pastEvent)
-                {
-                    return string.Format("Il y a {0} {1}", timeNumber, timeUnit);
-                }
-                else
-                {
-                    return string.Format("Dans {0} {1}", timeNumber, timeUnit);
-                }
+                return string.Format(LocalizationManager.GetString("time_future"), timeNumber, timeUnit);
             }
         }
     }

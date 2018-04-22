@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">RemindMe</string>
+  <string name="create_reminder">Create reminder</string>
+  <string name="delete">Delete</string>
+  <string name="reminders_list">Reminders list</string>
+  <string name="reminder_comment_label_form">Comment</string>
+  <string name="reminder_created_toast">Reminder successfully created</string>
+  <string name="reminder_date_label_form">Date *</string>
+  <string name="reminder_deleted_toast">Reminder successfully deleted</string>
+  <string name="reminder_time_label_form">Time *</string>
+  <string name="reminder_title_label_form">Title *</string>
+  <string name="reminder_updated_toast">Reminder successfully updated</string>
+  <string name="remove_past_reminders_item">Remove past reminders</string>
+  <string name="save">Save</string>
+  <string name="update_reminder">Update reminder</string>
+  <string name="date_selection">Date selection</string>
+  <string name="time_selection">Time selection</string>
+  <string name="past_reminders_deleted_toast">Past reminders succesfully deleted</string>
 </resources>

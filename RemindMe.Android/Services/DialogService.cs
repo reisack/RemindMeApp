@@ -34,8 +34,6 @@ namespace RemindMe.Android.Services
             var tcs = new TaskCompletionSource<bool>();
 
             var builder = new AlertDialog.Builder(CurrentActivity);
-            //builder.SetIconAttribute
-            //    (Android.Resource.Attribute.AlertDialogIcon);
             builder.SetTitle(title);
             builder.SetMessage(message);
             builder.SetPositiveButton(yesButton, (senderAlert, args) =>
@@ -56,8 +54,6 @@ namespace RemindMe.Android.Services
             Application.SynchronizationContext.Post(ignored =>
             {
                 var builder = new AlertDialog.Builder(CurrentActivity);
-                //builder.SetIconAttribute
-                //    (Android.Resource.Attribute.AlertDialogIcon);
                 builder.SetTitle(title);
                 builder.SetMessage(message);
                 builder.SetPositiveButton(okButton, delegate { });

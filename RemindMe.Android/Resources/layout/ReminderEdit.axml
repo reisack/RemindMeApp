@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Title *" />
+            android:text="@string/reminder_title_label_form" />
         <EditText
             android:inputType="text"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Comment" />
+            android:text="@string/reminder_comment_label_form" />
         <EditText
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Date *" />
+            android:text="@string/reminder_date_label_form" />
         <EditText
             android:inputType="text"
             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Time *" />
+            android:text="@string/reminder_time_label_form" />
         <EditText
             android:inputType="text"
             android:layout_width="match_parent"
@@ -125,7 +125,7 @@
             local:MvxBind="Text Errors['MinimumDate']; Error Errors['MinimumDate']" />
         <Button
             android:id="@+id/saveButton"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="@color/white"
             android:background="@color/createAndSave"
             android:layout_marginBottom="20dp"
@@ -142,7 +142,7 @@
         android:layout_below="@id/saveButtonLinearLayout">
         <Button
             android:id="@+id/deleteButton"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="@color/white"
             android:background="@color/alert"
             android:layout_marginBottom="20dp"

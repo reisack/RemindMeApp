@@ -117,7 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="List" xml:space="preserve">
-    <value>Liste</value>
+  <data name="date_time_not_past_error" xml:space="preserve">
+    <value>La date selectionnée est déjà passée</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>jour</value>
+  </data>
+  <data name="delete_past_reminders_confirm_message" xml:space="preserve">
+    <value>Cette action supprimera tous les anciens rappels, souhaitez-vous continuer ?</value>
+  </data>
+  <data name="delete_past_reminders_confirm_title" xml:space="preserve">
+    <value>Supprimer les anciens rappels</value>
+  </data>
+  <data name="delete_reminder_confirm_message" xml:space="preserve">
+    <value>Cette action supprimera le rappel, souhaitez-vous continuer ?</value>
+  </data>
+  <data name="delete_reminder_confirm_title" xml:space="preserve">
+    <value>Supprimer le rappel</value>
+  </data>
+  <data name="hour" xml:space="preserve">
+    <value>heure</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="month" xml:space="preserve">
+    <value>mois</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="reminder_date_required" xml:space="preserve">
+    <value>La date est obligatoire</value>
+  </data>
+  <data name="reminder_time_required" xml:space="preserve">
+    <value>L'heure est obligatoire</value>
+  </data>
+  <data name="reminder_title_required" xml:space="preserve">
+    <value>Le titre est obligatoire</value>
+  </data>
+  <data name="second" xml:space="preserve">
+    <value>seconde</value>
+  </data>
+  <data name="time_future" xml:space="preserve">
+    <value>Dans {0} {1}</value>
+  </data>
+  <data name="time_past" xml:space="preserve">
+    <value>Il y a {0} {1}</value>
+  </data>
+  <data name="year" xml:space="preserve">
+    <value>an</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Oui</value>
   </data>
 </root>

@@ -5,7 +5,6 @@ using MvvmCross.Platform.IoC;
 using MvvmCross.Plugins.Messenger;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Repositories;
-using RemindMe.Core.Localization;
 using RemindMe.Core.Services;
 using RemindMe.Core.Tools;
 using System;
@@ -31,18 +30,21 @@ namespace RemindMe.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-
-            Mvx.RegisterSingleton<IMvxTextProvider>
-                (new ResxTextProvider(Strings.ResourceManager));
-
+            
             RegisterAppStart(new AppStart());
         }
 
         private void InitCultureInfo()
         {
-            var cultureInfo = new CultureInfo("en-US");
+            CultureInfo cultureInfo = null;
+            if (!CultureInfo.CurrentCulture.Name.Contains("fr"))
+            {
+                cultureInfo = new CultureInfo("en-US");
+            }
+
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
+
     }
 }

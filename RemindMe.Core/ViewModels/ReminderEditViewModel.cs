@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using RemindMe.Core.Events;
+using RemindMe.Core.Localization;
 
 namespace RemindMe.Core.ViewModels
 {
@@ -118,7 +119,7 @@ namespace RemindMe.Core.ViewModels
                 {
                     if (_reminderId.HasValue)
                     {
-                        bool dialogResponse = await _dialogService.ShowConfirmAsync("This will delete the reminder, do you want to continue ?", "Delete reminder", "Yes", "No");
+                        bool dialogResponse = await _dialogService.ShowConfirmAsync(LocalizationManager.GetString("delete_reminder_confirm_message"), LocalizationManager.GetString("delete_reminder_confirm_title"), LocalizationManager.GetString("yes"), LocalizationManager.GetString("no"));
                         if (dialogResponse)
                         {
                             await _reminderDataService.Delete(_reminderId.Value);
@@ -159,9 +160,9 @@ namespace RemindMe.Core.ViewModels
         {
             ValidationHelper validator = new ValidationHelper();
 
-            validator.AddRequiredRule(() => ReminderDay, "Date is required");
-            validator.AddRequiredRule(() => ReminderTime, "Time is required");
-            validator.AddRequiredRule(() => SelectedReminder.Title, "Title is required");
+            validator.AddRequiredRule(() => ReminderDay, LocalizationManager.GetString("reminder_date_required"));
+            validator.AddRequiredRule(() => ReminderTime, LocalizationManager.GetString("reminder_time_required"));
+            validator.AddRequiredRule(() => SelectedReminder.Title, LocalizationManager.GetString("reminder_title_required"));
 
             validator.AddRule("MinimumDate", () =>
             {
@@ -191,7 +192,7 @@ namespace RemindMe.Core.ViewModels
                     }
                 }
 
-                return RuleResult.Assert(condition, "Date and time must not be past ");
+                return RuleResult.Assert(condition, LocalizationManager.GetString("date_time_not_past_error"));
             });
 
             var result = validator.ValidateAll();

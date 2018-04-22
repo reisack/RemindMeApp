@@ -8,6 +8,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -24,6 +25,12 @@ namespace RemindMe.Android.Views
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class ReminderListView : MvxAppCompatActivity
     {
+        public override View OnCreateView(string name, Context context, IAttributeSet attrs)
+        {
+            Title = GetString(Resource.String.reminders_list);
+            return base.OnCreateView(name, context, attrs);
+        }
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             // https://forums.xamarin.com/discussion/5198/how-do-i-create-an-options-menu
@@ -82,7 +89,7 @@ namespace RemindMe.Android.Views
 
         private void OnDeletePastReminders(object sender, EventArgs e)
         {
-            var toast = Toast.MakeText(this, "Past reminders succesfully deleted", ToastLength.Short);
+            var toast = Toast.MakeText(this, GetString(Resource.String.past_reminders_deleted_toast), ToastLength.Short);
             toast.Show();
         }
     }

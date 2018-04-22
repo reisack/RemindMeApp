@@ -5032,8 +5032,20 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0a0023
 			public const int character_counter_pattern = 2131361827;
 			
+			// aapt resource value: 0x7f0a002a
+			public const int create_reminder = 2131361834;
+			
+			// aapt resource value: 0x7f0a0037
+			public const int date_selection = 2131361847;
+			
+			// aapt resource value: 0x7f0a002b
+			public const int delete = 2131361835;
+			
 			// aapt resource value: 0x7f0a0024
 			public const int password_toggle_content_description = 2131361828;
+			
+			// aapt resource value: 0x7f0a0039
+			public const int past_reminders_deleted_toast = 2131361849;
 			
 			// aapt resource value: 0x7f0a0025
 			public const int path_password_eye = 2131361829;
@@ -5047,11 +5059,47 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0a0028
 			public const int path_password_strike_through = 2131361832;
 			
+			// aapt resource value: 0x7f0a002d
+			public const int reminder_comment_label_form = 2131361837;
+			
+			// aapt resource value: 0x7f0a002e
+			public const int reminder_created_toast = 2131361838;
+			
+			// aapt resource value: 0x7f0a002f
+			public const int reminder_date_label_form = 2131361839;
+			
+			// aapt resource value: 0x7f0a0030
+			public const int reminder_deleted_toast = 2131361840;
+			
+			// aapt resource value: 0x7f0a0031
+			public const int reminder_time_label_form = 2131361841;
+			
+			// aapt resource value: 0x7f0a0032
+			public const int reminder_title_label_form = 2131361842;
+			
+			// aapt resource value: 0x7f0a0033
+			public const int reminder_updated_toast = 2131361843;
+			
+			// aapt resource value: 0x7f0a002c
+			public const int reminders_list = 2131361836;
+			
+			// aapt resource value: 0x7f0a0034
+			public const int remove_past_reminders_item = 2131361844;
+			
+			// aapt resource value: 0x7f0a0035
+			public const int save = 2131361845;
+			
 			// aapt resource value: 0x7f0a0013
 			public const int search_menu_title = 2131361811;
 			
 			// aapt resource value: 0x7f0a0014
 			public const int status_bar_notification_info_overflow = 2131361812;
+			
+			// aapt resource value: 0x7f0a0038
+			public const int time_selection = 2131361848;
+			
+			// aapt resource value: 0x7f0a0036
+			public const int update_reminder = 2131361846;
 			
 			static String()
 			{
