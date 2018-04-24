@@ -90,8 +90,11 @@ namespace RemindMe.Android
                 NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
 
                 // Publish the notification
-                int notificationId = 0;
-                notificationManager.Notify(notificationId, notification);
+                if (notificationManager != null && notification != null)
+                {
+                    int notificationId = 0;
+                    notificationManager.Notify(notificationId, notification);
+                }
             }
 
             if (_reminderDataService != null)

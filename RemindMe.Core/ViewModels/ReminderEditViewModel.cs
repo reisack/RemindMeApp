@@ -117,7 +117,7 @@ namespace RemindMe.Core.ViewModels
             {
                 return new MvxCommand(async () =>
                 {
-                    if (_reminderId.HasValue)
+                    if (_reminderId.HasValue && _reminderId.Value > 0)
                     {
                         bool dialogResponse = await _dialogService.ShowConfirmAsync(LocalizationManager.GetString("delete_reminder_confirm_message"), LocalizationManager.GetString("delete_reminder_confirm_title"), LocalizationManager.GetString("yes"), LocalizationManager.GetString("no"));
                         if (dialogResponse)

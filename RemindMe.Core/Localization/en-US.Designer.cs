@@ -79,7 +79,7 @@ namespace RemindMe.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will delete all past reminders, do you want to proceed ?.
+        ///   Looks up a localized string similar to Are you sure you want to delete all past reminders ?.
         /// </summary>
         internal static string delete_past_reminders_confirm_message {
             get {
@@ -97,7 +97,7 @@ namespace RemindMe.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will delete the reminder, do you want to proceed ?.
+        ///   Looks up a localized string similar to Are you sure you want to delete this reminder ?.
         /// </summary>
         internal static string delete_reminder_confirm_message {
             get {
