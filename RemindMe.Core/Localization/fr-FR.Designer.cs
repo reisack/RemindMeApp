@@ -61,7 +61,7 @@ namespace RemindMe.Core.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La date selectionnée est déjà passée.
+        ///   Looks up a localized string similar to La date selectionnée est déjà passée .
         /// </summary>
         internal static string date_time_not_past_error {
             get {
