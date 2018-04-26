@@ -18,6 +18,7 @@ using MvvmCross.Droid.Views;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Platform.Logging;
 
 namespace RemindMe.Android
 {
@@ -27,6 +28,8 @@ namespace RemindMe.Android
         {
             
         }
+
+        protected override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.None;
 
         protected override IMvxApplication CreateApp()
         {
