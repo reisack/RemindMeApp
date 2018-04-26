@@ -1,6 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Localization;
-using MvvmCross.Plugins.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,11 +9,9 @@ namespace RemindMe.Core.ViewModels
 {
     public class BaseViewModel : MvxViewModel, IDisposable
     {
-        protected IMvxMessenger Messenger;
-
-        public BaseViewModel(IMvxMessenger messenger)
+        public BaseViewModel()
         {
-            Messenger = messenger;
+            
         }
 
         public IMvxLanguageBinder TextSource =>
@@ -39,7 +36,7 @@ namespace RemindMe.Core.ViewModels
 
         public void Dispose()
         {
-            Messenger = null;
+            
         }
     }
 }

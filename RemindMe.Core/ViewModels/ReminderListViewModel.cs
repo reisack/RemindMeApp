@@ -1,5 +1,4 @@
 ﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Plugins.Messenger;
 using RemindMe.Core.Extensions;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Localization;
@@ -31,7 +30,7 @@ namespace RemindMe.Core.ViewModels
             }
         }
 
-        public ReminderListViewModel(IMvxMessenger messenger, IReminderDataService reminderDataService, IDialogService dialogService) : base(messenger)
+        public ReminderListViewModel(IReminderDataService reminderDataService, IDialogService dialogService) : base()
         {
             _reminderDataService = reminderDataService;
             _dialogService = dialogService;

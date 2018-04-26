@@ -2,7 +2,6 @@
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Plugins.Messenger;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
