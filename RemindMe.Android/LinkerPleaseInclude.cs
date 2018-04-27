@@ -16,6 +16,9 @@ using RemindMe.Core.Models;
 
 namespace RemindMe.Android
 {
+    // This is a dummy class to force MvvmCross link (Linker issue)
+    // Application crashes everywhere without it, in release mode
+    // This is just read by the linker, it's not instancied or whatever
     public class LinkerPleaseInclude
     {
         public void Include(Button button)
