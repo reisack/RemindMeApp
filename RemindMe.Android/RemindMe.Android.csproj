@@ -59,6 +59,7 @@
     <AndroidSupportedAbis />
     <AndroidLinkSkip>
     </AndroidLinkSkip>
+    <EnableProguard>true</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android.Export" />
