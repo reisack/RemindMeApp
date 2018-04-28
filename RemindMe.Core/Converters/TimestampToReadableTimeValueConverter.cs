@@ -35,7 +35,7 @@ namespace RemindMe.Core.Converters
                     amOrPm = "pm";
                 }
 
-                return string.Format("{0}:{1}{2}", hours, minutes.ToString("00"), amOrPm);
+                return string.Format("{0}:{1} {2}", hours, minutes.ToString("00"), amOrPm);
             }
             else
             {

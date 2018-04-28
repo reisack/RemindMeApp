@@ -3,20 +3,20 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp">
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         local:MvxBind="Visibility AlreadyNotified, Converter=IntToVisibility">
         <RelativeLayout
             android:id="@+id/TitleLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/DateTextView"
                 android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:text="Time"
                 android:textSize="17dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
         </RelativeLayout>
         <TextView
@@ -43,6 +43,7 @@
             android:textColor="@color/primaryDark"
             android:textSize="17dp"
             android:layout_below="@id/TitleLinearLayout"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
         <TextView
             android:id="@+id/TitleTextView"
@@ -52,6 +53,7 @@
             android:textSize="17dp"
             android:textStyle="bold"
             android:layout_below="@id/TimeleftTextView"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Title" />
         <TextView
             android:id="@+id/CommentTextView"
@@ -61,6 +63,7 @@
             android:textSize="15dp"
             android:layout_marginBottom="5dp"
             android:layout_below="@id/TitleTextView"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Comment, Converter=ShortenedComment" />
     </RelativeLayout>
     <RelativeLayout
@@ -68,15 +71,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/pastRemindersBg"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         local:MvxBind="Visibility AlreadyNotified, Converter=IntToInvertedVisibility">
         <RelativeLayout
             android:id="@+id/TitleLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/DateTextView"
                 android:layout_width="match_parent"
@@ -94,7 +97,7 @@
                 android:textStyle="italic"
                 android:textSize="17dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 local:MvxBind="Text Date, Converter=TimestampToReadableTime" />
         </RelativeLayout>
         <TextView
@@ -105,6 +108,7 @@
             android:textStyle="italic"
             android:textSize="17dp"
             android:layout_below="@id/TitleLinearLayout"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Date, Converter=TimestampToTimeLeft" />
         <TextView
             android:id="@+id/TitleTextView"
@@ -114,6 +118,7 @@
             android:textSize="17dp"
             android:textStyle="bold|italic"
             android:layout_below="@id/TimeleftTextView"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Title" />
         <TextView
             android:id="@+id/CommentTextView"
@@ -124,6 +129,7 @@
             android:textSize="15dp"
             android:layout_marginBottom="5dp"
             android:layout_below="@id/TitleTextView"
+            android:layout_marginLeft="5dp"
             local:MvxBind="Text Comment, Converter=ShortenedComment" />
     </RelativeLayout>
 </RelativeLayout>
