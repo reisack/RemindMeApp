@@ -13,22 +13,33 @@ using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android
 {
-    [BroadcastReceiver(Enabled = true)]
+    [BroadcastReceiver(Enabled = true, Exported = true, DirectBootAware = true, Permission = "android.permission.RECEIVE_BOOT_COMPLETED")]
     [IntentFilter(new [] { Intent.ActionBootCompleted, Intent.ActionLockedBootCompleted, "android.intent.action.QUICKBOOT_POWERON", "com.htc.intent.action.QUICKBOOT_POWERON" })]
     public class BootReceiver : BroadcastReceiver
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            if (intent.Action == Intent.ActionBootCompleted 
-                || intent.Action == Intent.ActionLockedBootCompleted
-                || intent.Action == "android.intent.action.QUICKBOOT_POWERON"
-                || intent.Action == "com.htc.intent.action.QUICKBOOT_POWERON")
+            try
             {
-                if (!ServicesHelper.IsServiceRunning(context, typeof(IntentService)))
+                if (intent != null && context != null)
                 {
-                    Intent intentService = new Intent(context, typeof(IntentService));
-                    context.StartService(intentService);
+                    if (intent.Action == Intent.ActionBootCompleted
+                    || intent.Action == Intent.ActionLockedBootCompleted
+                    || intent.Action == "android.intent.action.QUICKBOOT_POWERON"
+                    || intent.Action == "com.htc.intent.action.QUICKBOOT_POWERON")
+                    {
+                        if (!ServicesHelper.IsServiceRunning(context, typeof(IntentService)))
+                        {
+                            Intent intentService = new Intent(context, typeof(IntentService));
+                            context.StartService(intentService);
+                        }
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                // Sometimes, start intent service result in crashing
+                // We don't do anything here, we just want to avoid app crashing
             }
         }
     }

@@ -17,7 +17,7 @@ using RemindMe.Core.Models;
 
 namespace RemindMe.Android
 {
-    [Service(Label = "RemindMe Intent Service")]
+    [Service(Label = "RemindMeIntentService", Enabled = true, Exported = true)]
     public class IntentService : Service
     {
         const int timerCallingDelay = 60000;
@@ -43,9 +43,11 @@ namespace RemindMe.Android
         [return: GeneratedEnum]
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
+            // We want to start the timer on second 0 (callback must be executed at the beginning of each minute)
+            // We wait one minute more to avoid app crashes on android reboot
             var startTime = DateTime.UtcNow;
             var dueTimeInSeconds = (startTime.Second == 0) ? 0 : 60 - startTime.Second;
-            _timer = new Timer(HandleTimerCallBack, startTime, (dueTimeInSeconds + 1) * 1000, timerCallingDelay);
+            _timer = new Timer(HandleTimerCallBack, startTime, ((dueTimeInSeconds + 1) * 1000) + 60000, timerCallingDelay);
 
             return StartCommandResult.Sticky;
         }
@@ -62,48 +64,57 @@ namespace RemindMe.Android
 
         private async void HandleTimerCallBack(object state)
         {
-            IEnumerable<Reminder> reminders;
-            if (_reminderDataService != null)
+            try
             {
-                reminders = await _reminderDataService.GetRemindersToNotify();
-            }
-            else
-            {
-                reminders = await _reminderDaemonDataService.GetRemindersToNotify();
-            }
-
-            foreach (var reminder in reminders)
-            {
-                // Instantiate the builder and set notification elements
-                Notification.Builder builder = new Notification.Builder(this);
-
-                builder
-                    .SetContentTitle(reminder.Title)
-                    .SetContentText(reminder.Comment)
-                    .SetSmallIcon(Resource.Drawable.notification_icon)
-                    .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
-
-                // Build the notification
-                Notification notification = builder.Build();
-
-                // Get the notification manager
-                NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
-
-                // Publish the notification
-                if (notificationManager != null && notification != null)
+                IEnumerable<Reminder> reminders;
+                if (_reminderDataService != null)
                 {
-                    int notificationId = 0;
-                    notificationManager.Notify(notificationId, notification);
+                    reminders = await _reminderDataService.GetRemindersToNotify();
+                }
+                else
+                {
+                    reminders = await _reminderDaemonDataService.GetRemindersToNotify();
+                }
+
+                foreach (var reminder in reminders)
+                {
+                    // Instantiate the builder and set notification elements
+                    Notification.Builder builder = new Notification.Builder(this);
+
+                    builder
+                        .SetContentTitle(reminder.Title)
+                        .SetContentText(reminder.Comment)
+                        .SetSmallIcon(Resource.Drawable.notification_icon)
+                        .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
+
+                    // Build the notification
+                    Notification notification = builder.Build();
+
+                    // Get the notification manager
+                    NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+
+                    // Publish the notification
+                    if (notificationManager != null && notification != null)
+                    {
+                        int notificationId = 0;
+                        notificationManager.Notify(notificationId, notification);
+                    }
+                }
+
+                if (_reminderDataService != null)
+                {
+                    await _reminderDataService.SetToNotified(reminders);
+                }
+                else
+                {
+                    await _reminderDaemonDataService.SetToNotified(reminders);
                 }
             }
-
-            if (_reminderDataService != null)
+            catch (Exception ex)
             {
-                await _reminderDataService.SetToNotified(reminders);
-            }
-            else
-            {
-                await _reminderDaemonDataService.SetToNotified(reminders);
+                // TODO : Need to investigate to find what is making app crashes
+                // Maybe it's SQLite who is not "ready"
+                // For now, the most important thing is to absolutely avoid crashes
             }
         }
     }
