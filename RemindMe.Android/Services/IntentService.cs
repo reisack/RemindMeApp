@@ -44,10 +44,9 @@ namespace RemindMe.Android
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
             // We want to start the timer on second 0 (callback must be executed at the beginning of each minute)
-            // We wait one minute more to avoid app crashes on android reboot
             var startTime = DateTime.UtcNow;
             var dueTimeInSeconds = (startTime.Second == 0) ? 0 : 60 - startTime.Second;
-            _timer = new Timer(HandleTimerCallBack, startTime, ((dueTimeInSeconds + 1) * 1000) + 60000, timerCallingDelay);
+            _timer = new Timer(HandleTimerCallBack, startTime, ((dueTimeInSeconds + 1) * 1000), timerCallingDelay);
 
             return StartCommandResult.Sticky;
         }
