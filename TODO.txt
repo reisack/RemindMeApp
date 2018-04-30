@@ -1,0 +1,8 @@
+TODOs :
+Important :
+- Maybe add this auth for the app : prevent device from sleeping (It should be better for notification)
+- 24h or am/pm format should depends on Android config and not language
+
+Less important :
+- Dark Theme
+- Better setting of language : depends on language classement and not just checking the current one

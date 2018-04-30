@@ -9,8 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemindMe.Core", "RemindMe.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Help", "Help", "{D2230E6D-DE20-4375-82AC-F4053B6A290A}"
 	ProjectSection(SolutionItems) = preProject
-		Database.txt = Database.txt
-		TODO_Release_Mode.txt = TODO_Release_Mode.txt
+		infos.txt = infos.txt
+		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
 Global
