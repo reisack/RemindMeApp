@@ -1,7 +1,16 @@
 TODOs :
+
+Refactoring :
+- Separate SQL queries from cs files
+- Replace string.format() with C# 6 feature
+- Handle try/catch with log file, in order to make it more serious
+
 Next update :
 - 24h or am/pm format should depends on Android config and not language
 - Better setting of language : depends on language classement and not just checking the current one
 
 After :
 - Dark Theme
+
+Not Sure :
+- two tabs : first with oncoming reminders and second with past ones

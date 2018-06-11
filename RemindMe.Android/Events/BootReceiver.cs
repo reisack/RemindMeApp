@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android
@@ -38,7 +30,7 @@ namespace RemindMe.Android
             }
             catch (Exception)
             {
-                // Sometimes, start intent service result in crashing
+                // Sometimes, start intent service results in crashing
                 // We don't do anything here, we just want to avoid app crashing
             }
         }
