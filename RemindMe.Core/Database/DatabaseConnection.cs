@@ -1,10 +1,7 @@
-﻿using RemindMe.Core.Interfaces;
-using RemindMe.Core.Models;
+﻿using RemindMe.Core.Models;
 using SQLite;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace RemindMe.Core.Database
 {

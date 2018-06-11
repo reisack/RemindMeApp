@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views;
 using RemindMe.Core.Converters;
 using RemindMe.Core.ViewModels;
 using RemindMe.Android.Extensions;
