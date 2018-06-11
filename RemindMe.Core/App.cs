@@ -1,5 +1,13 @@
 ﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Localization;
+using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
+using RemindMe.Core.Interfaces;
+using RemindMe.Core.Repositories;
+using RemindMe.Core.Services;
+using RemindMe.Core.Tools;
+using System;
+using System.Resources;
 using System.Globalization;
 
 namespace RemindMe.Core

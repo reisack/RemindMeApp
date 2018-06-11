@@ -1,4 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
 using Android.Widget;
 
 namespace RemindMe.Android.Extensions
@@ -15,7 +24,7 @@ namespace RemindMe.Android.Extensions
 
             var longVal = dt.ToUniversalTime() - javaMinDt;
             // Android 4.4 bug : We substract one second to the date, because minimum date
-            // must be before now and not strictly equal to.
+            // must be before now and not strictly equal to now.
             picker.MinDate = (long)longVal.TotalMilliseconds - 1000;
         }
 
