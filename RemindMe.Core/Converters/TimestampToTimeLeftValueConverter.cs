@@ -1,7 +1,9 @@
 ﻿using MvvmCross.Platform.Converters;
 using RemindMe.Core.Localization;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 namespace RemindMe.Core.Converters
 {
