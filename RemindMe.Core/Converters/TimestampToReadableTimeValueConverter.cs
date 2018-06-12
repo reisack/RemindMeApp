@@ -33,11 +33,11 @@ namespace RemindMe.Core.Converters
                     amOrPm = "pm";
                 }
 
-                return string.Format("{0}:{1} {2}", hours, minutes.ToString("00"), amOrPm);
+                return $"{hours}:{minutes.ToString("00")} {amOrPm}";
             }
             else
             {
-                return string.Format("{0}:{1}", hours.ToString("00"), minutes.ToString("00"));
+                return $"{hours.ToString("00")}:{minutes.ToString("00")}";
             }
         }
     }

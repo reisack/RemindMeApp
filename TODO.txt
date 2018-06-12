@@ -2,7 +2,6 @@ TODOs :
 
 Refactoring :
 - Separate SQL queries from cs files
-- Replace string.format() with C# 6 feature
 - Handle try/catch with log file, in order to make it more serious
 
 Next update :

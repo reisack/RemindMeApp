@@ -130,7 +130,7 @@ namespace RemindMe.Android.Views
 
         public void OnTimeSet(TimePicker view, int hourOfDay, int minute)
         {
-            _reminderTimePickerText.Text = string.Format("{0}:{1}", hourOfDay.ToString("00"), minute.ToString("00"));
+            _reminderTimePickerText.Text = $"{hourOfDay.ToString("00")}:{minute.ToString("00")}";
             _reminderTimePickerEditTextReadableValue.Text = ReadableTimeConverter.Convert(hourOfDay, minute);
         }
 

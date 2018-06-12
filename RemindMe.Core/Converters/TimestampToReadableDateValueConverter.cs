@@ -16,11 +16,11 @@ namespace RemindMe.Core.Converters
 
             if (culture.Name == "en-US")
             {
-                return string.Format("{0}, {1} {2}, {3}", dayOfWeek, month, date.Day, date.Year);
+                return $"{dayOfWeek}, {month} {date.Day}, {date.Year}";
             }
             else
             {
-                return string.Format("{0} {1} {2} {3}", dayOfWeek, date.Day, month, date.Year);
+                return $"{dayOfWeek} {date.Day} {month} {date.Year}";
             }
         }
     }
