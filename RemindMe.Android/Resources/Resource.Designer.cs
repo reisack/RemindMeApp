@@ -3526,6 +3526,9 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f080007
 			public const int abc_text_size_title_material_toolbar = 2131230727;
 			
+			// aapt resource value: 0x7f08008b
+			public const int default_margin = 2131230859;
+			
 			// aapt resource value: 0x7f08006d
 			public const int design_appbar_elevation = 2131230829;
 			
@@ -3646,6 +3649,12 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f080052
 			public const int disabled_alpha_material_light = 2131230802;
 			
+			// aapt resource value: 0x7f080090
+			public const int form_input_textsize = 2131230864;
+			
+			// aapt resource value: 0x7f08008f
+			public const int form_label_textsize = 2131230863;
+			
 			// aapt resource value: 0x7f080053
 			public const int highlight_alpha_material_colored = 2131230803;
 			
@@ -3675,6 +3684,15 @@ namespace RemindMe.Android
 			
 			// aapt resource value: 0x7f080002
 			public const int item_touch_helper_swipe_escape_velocity = 2131230722;
+			
+			// aapt resource value: 0x7f08008d
+			public const int list_item_comment_textsize = 2131230861;
+			
+			// aapt resource value: 0x7f08008e
+			public const int list_item_date_margin_right = 2131230862;
+			
+			// aapt resource value: 0x7f08008c
+			public const int list_item_textsize = 2131230860;
 			
 			// aapt resource value: 0x7f08005a
 			public const int notification_action_icon_size = 2131230810;

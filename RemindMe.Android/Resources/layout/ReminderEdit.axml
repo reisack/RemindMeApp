@@ -16,7 +16,7 @@
             android:id="@+id/reminderTitleInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="@dimen/form_label_textsize"
             android:text="@string/reminder_title_label_form" />
         <EditText
             android:inputType="text"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderTitleInput"
             android:id="@+id/reminderTitle"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             android:maxLength="50"
             local:MvxBind="Text SelectedReminder.Title, Mode=TwoWay; Error Errors['Title']" />
     </RelativeLayout>
@@ -37,7 +37,7 @@
             android:id="@+id/reminderCommentInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="@dimen/form_label_textsize"
             android:text="@string/reminder_comment_label_form" />
         <EditText
             android:inputType="textMultiLine"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderCommentInput"
             android:id="@+id/reminderComment"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             android:maxLength="500"
             android:maxLines="10"
             local:MvxBind="Text SelectedReminder.Comment, Mode=TwoWay" />
@@ -59,7 +59,7 @@
             android:id="@+id/reminderDateInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="@dimen/form_label_textsize"
             android:text="@string/reminder_date_label_form" />
         <EditText
             android:inputType="text"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderDateInput"
             android:id="@+id/reminderDatePickerEditText"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             android:visibility="gone"
             local:MvxBind="Text ReminderDay, Mode=TwoWay" />
         <EditText
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderDatePickerEditText"
             android:id="@+id/reminderDatePickerEditTextReadableValue"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             local:MvxBind="Error Errors['ReminderDay']"/>
     </RelativeLayout>
     <RelativeLayout
@@ -88,7 +88,7 @@
             android:id="@+id/reminderTimeInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="@dimen/form_label_textsize"
             android:text="@string/reminder_time_label_form" />
         <EditText
             android:inputType="text"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderTimeInput"
             android:id="@+id/reminderTimePickerEditText"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             android:visibility="gone"
             local:MvxBind="Text ReminderTime, Mode=TwoWay" />
         <EditText
@@ -106,7 +106,7 @@
             android:layout_below="@id/reminderTimePickerEditText"
             android:id="@+id/reminderTimePickerEditTextReadableValue"
             android:layout_marginBottom="30dp"
-            android:textSize="20dp"
+            android:textSize="@dimen/form_input_textsize"
             local:MvxBind="Error Errors['ReminderTime']"/>
     </RelativeLayout>
     <RelativeLayout
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="@dimen/form_label_textsize"
             android:textColor="@color/alert"
             local:MvxBind="Text Errors['MinimumDate']; Error Errors['MinimumDate']" />
         <Button
