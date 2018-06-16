@@ -62,7 +62,7 @@ namespace RemindMe.Android.Views
             var vm = this.ViewModel as ReminderListViewModel;
             if (vm != null)
             {
-                vm.OnDeletePastReminders += OnDeletePastReminders; ;
+                vm.OnDeletePastReminders += OnDeletePastReminders;
             }
 
             base.OnResume();

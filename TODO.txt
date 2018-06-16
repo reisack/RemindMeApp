@@ -1,7 +1,7 @@
 TODOs :
 
 Refactoring :
-- Separate SQL queries from cs files
+- verify input field values (length, etc...)
 - Better use of style.xml in xaml files
 - Handle try/catch with log file, in order to make it more serious
 
