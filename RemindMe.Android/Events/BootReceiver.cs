@@ -28,10 +28,9 @@ namespace RemindMe.Android
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Sometimes, start intent service results in crashing
-                // We don't do anything here, we just want to avoid app crashing
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
         }
     }

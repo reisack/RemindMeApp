@@ -1,9 +1,7 @@
 TODOs :
 
 Refactoring :
-- verify input field values (length, etc...)
 - Better use of style.xml in xaml files
-- Handle try/catch with log file, in order to make it more serious
 
 Next update :
 - 24h or am/pm format should depends on Android config and not language

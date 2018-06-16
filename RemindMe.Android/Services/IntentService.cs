@@ -107,9 +107,7 @@ namespace RemindMe.Android
             }
             catch (Exception ex)
             {
-                // TODO : Need to investigate to find what is making app crashes
-                // Maybe it's SQLite who is not "ready"
-                // For now, the most important thing is to absolutely avoid crashes
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
         }
     }
