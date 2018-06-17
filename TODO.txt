@@ -1,13 +1,15 @@
 TODOs :
 
 Next update :
-- 
-- Better setting of language : depends on language classement and not just checking the current one
-
-After :
-- Have two or more reminders notified in Android in the same time and not just the first of the list (maybe not possible)
+- Config file (for keeping choice of dark or light theme)
 - Better use of style.xml in xaml files
 - Dark Theme
+
+After :
+- User is able to change language => It seems that it's very difficult to change app lang in runtime.
+If it's the case, when user changes language, display a message that ask to the user to restart application
+for apply this change.
+- User language in config file
 
 Not Sure :
 - two tabs : first with oncoming reminders and second with past ones

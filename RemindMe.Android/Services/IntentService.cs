@@ -71,6 +71,8 @@ namespace RemindMe.Android
                     reminders = await _reminderDaemonDataService.GetRemindersToNotify();
                 }
 
+                int notificationId = 0;
+
                 foreach (var reminder in reminders)
                 {
                     // Instantiate the builder and set notification elements
@@ -91,8 +93,8 @@ namespace RemindMe.Android
                     // Publish the notification
                     if (notificationManager != null && notification != null)
                     {
-                        int notificationId = 0;
                         notificationManager.Notify(notificationId, notification);
+                        notificationId++;
                     }
                 }
 
