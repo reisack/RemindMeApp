@@ -15,7 +15,7 @@ namespace RemindMe.Core.Converters
 
             if (newValue.Length > MESSAGE_LENGTH)
             {
-                return newValue.Substring(0, MESSAGE_LENGTH) + "...";
+                return string.Concat(newValue.Substring(0, MESSAGE_LENGTH),"...");
             }
             else
             {

@@ -1,13 +1,12 @@
 TODOs :
 
-Refactoring :
-- Better use of style.xml in xaml files
-
 Next update :
-- 24h or am/pm format should depends on Android config and not language
+- 
 - Better setting of language : depends on language classement and not just checking the current one
 
 After :
+- Have two or more reminders notified in Android in the same time and not just the first of the list (maybe not possible)
+- Better use of style.xml in xaml files
 - Dark Theme
 
 Not Sure :

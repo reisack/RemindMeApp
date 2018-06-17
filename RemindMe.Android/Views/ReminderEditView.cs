@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Globalization;
-
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Android.Text.Format;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using RemindMe.Core.Converters;
 using RemindMe.Core.ViewModels;
+using RemindMe.Core.Converters;
 using RemindMe.Android.Extensions;
+using RemindMe.Android.Converters;
 
 namespace RemindMe.Android.Views
 {
@@ -205,9 +205,7 @@ namespace RemindMe.Android.Views
                     }
                 }
 
-                bool is24HourView = (CultureInfo.CurrentCulture.Name.Contains("fr"));
-
-                TimePickerDialog dialog = new TimePickerDialog(this, this, hours, minutes, is24HourView);
+                TimePickerDialog dialog = new TimePickerDialog(this, this, hours, minutes, DateFormat.Is24HourFormat(this));
                 dialog.SetTitle(GetString(Resource.String.time_selection));
                 dialog.Show();
             };

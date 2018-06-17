@@ -166,6 +166,8 @@
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="Converters\IntToInvertedVisibilityValueConverter.cs" />
     <Compile Include="Converters\IntToVisibilityValueConverter.cs" />
+    <Compile Include="Converters\ReadableTimeConverter.cs" />
+    <Compile Include="Converters\TimestampToReadableTimeValueConverter.cs" />
     <Compile Include="Events\BootReceiver.cs" />
     <Compile Include="Extensions\DatePickerExtensions.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
