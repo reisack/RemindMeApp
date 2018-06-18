@@ -21,12 +21,12 @@ namespace RemindMe.Core.Services
             // UI Form forces user to a limit value for reminder title and comment
             // We substring values if he has been able to overpass it (by hacking, in some way)
             int titleMaxLength = 50, commentMaxLength = 500;
-            if (reminder.Title.Length > titleMaxLength)
+            if (!string.IsNullOrEmpty(reminder.Title) && reminder.Title.Length > titleMaxLength)
             {
                 reminder.Title = reminder.Title.Substring(0, titleMaxLength);
             }
 
-            if (reminder.Comment.Length > commentMaxLength)
+            if (!string.IsNullOrEmpty(reminder.Comment) && reminder.Comment.Length > commentMaxLength)
             {
                 reminder.Comment = reminder.Comment.Substring(0, commentMaxLength);
             }
