@@ -61,50 +61,53 @@ namespace RemindMe.Android
         {
             try
             {
-                IEnumerable<Reminder> reminders;
+                IList<Reminder> reminders;
                 if (_reminderDataService != null)
                 {
-                    reminders = await _reminderDataService.GetRemindersToNotify();
+                    reminders = new List<Reminder>(await _reminderDataService.GetRemindersToNotify());
                 }
                 else
                 {
-                    reminders = await _reminderDaemonDataService.GetRemindersToNotify();
+                    reminders = new List<Reminder>(await _reminderDaemonDataService.GetRemindersToNotify());
                 }
 
-                int notificationId = 0;
-
-                foreach (var reminder in reminders)
+                if (reminders.Count > 0)
                 {
-                    // Instantiate the builder and set notification elements
-                    Notification.Builder builder = new Notification.Builder(this);
+                    int notificationId = 0;
 
-                    builder
-                        .SetContentTitle(reminder.Title)
-                        .SetContentText(reminder.Comment)
-                        .SetSmallIcon(Resource.Drawable.notification_icon)
-                        .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
-
-                    // Build the notification
-                    Notification notification = builder.Build();
-
-                    // Get the notification manager
-                    NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
-
-                    // Publish the notification
-                    if (notificationManager != null && notification != null)
+                    foreach (var reminder in reminders)
                     {
-                        notificationManager.Notify(notificationId, notification);
-                        notificationId++;
-                    }
-                }
+                        // Instantiate the builder and set notification elements
+                        Notification.Builder builder = new Notification.Builder(this);
 
-                if (_reminderDataService != null)
-                {
-                    await _reminderDataService.SetToNotified(reminders);
-                }
-                else
-                {
-                    await _reminderDaemonDataService.SetToNotified(reminders);
+                        builder
+                            .SetContentTitle(reminder.Title)
+                            .SetContentText(reminder.Comment)
+                            .SetSmallIcon(Resource.Drawable.notification_icon)
+                            .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
+
+                        // Build the notification
+                        Notification notification = builder.Build();
+
+                        // Get the notification manager
+                        NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+
+                        // Publish the notification
+                        if (notificationManager != null && notification != null)
+                        {
+                            notificationManager.Notify(notificationId, notification);
+                            notificationId++;
+                        }
+                    }
+
+                    if (_reminderDataService != null)
+                    {
+                        await _reminderDataService.SetToNotified(reminders);
+                    }
+                    else
+                    {
+                        await _reminderDaemonDataService.SetToNotified(reminders);
+                    }
                 }
             }
             catch (Exception ex)

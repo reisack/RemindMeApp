@@ -53,7 +53,15 @@ namespace RemindMe.Android.Views
             if (!ServicesHelper.IsServiceRunning(this, typeof(IntentService)))
             {
                 Intent intentService = new Intent(this, typeof(IntentService));
-                StartService(intentService);
+
+                try
+                {
+                    StartService(intentService);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
             }
         }
 
