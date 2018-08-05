@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
-using RemindMe.Android.Helpers;
+using Android.OS;
 
 namespace RemindMe.Android
 {
@@ -20,7 +20,11 @@ namespace RemindMe.Android
                     || intent.Action == "android.intent.action.QUICKBOOT_POWERON"
                     || intent.Action == "com.htc.intent.action.QUICKBOOT_POWERON")
                     {
-                        if (!ServicesHelper.IsServiceRunning(context, typeof(IntentService)))
+                        if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+                        {
+                            // TODO : Find a solution for Android 8.0 and newer
+                        }
+                        else
                         {
                             Intent intentService = new Intent(context, typeof(IntentService));
                             context.StartService(intentService);

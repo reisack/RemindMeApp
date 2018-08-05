@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Media;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using MvvmCross.Platform;
 using RemindMe.Android.Services;
 using RemindMe.Core.Interfaces;
@@ -73,24 +74,21 @@ namespace RemindMe.Android
 
                 if (reminders.Count > 0)
                 {
+                    // Get the notification manager
+                    NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+                    Notification notification;
                     int notificationId = 0;
 
                     foreach (var reminder in reminders)
                     {
-                        // Instantiate the builder and set notification elements
-                        Notification.Builder builder = new Notification.Builder(this);
-
-                        builder
-                            .SetContentTitle(reminder.Title)
-                            .SetContentText(reminder.Comment)
-                            .SetSmallIcon(Resource.Drawable.notification_icon)
-                            .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
-
-                        // Build the notification
-                        Notification notification = builder.Build();
-
-                        // Get the notification manager
-                        NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+                        if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+                        {
+                            notification = GetNotification(notificationManager, reminder);
+                        }
+                        else
+                        {
+                            notification = GetNotificationCompat(notificationManager, reminder);
+                        }
 
                         // Publish the notification
                         if (notificationManager != null && notification != null)
@@ -114,6 +112,50 @@ namespace RemindMe.Android
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+        }
+
+        private Notification GetNotification(NotificationManager notificationManager, Reminder reminder)
+        {
+            var importance = NotificationImportance.High;
+            string channel_id = GetString(Resource.String.notification_channel_id);
+            string channel_name = GetString(Resource.String.notification_channel_name);
+
+            NotificationChannel channel = new NotificationChannel(channel_id, channel_name, importance);
+            channel.EnableVibration(true);
+            channel.LockscreenVisibility = NotificationVisibility.Public;
+
+            notificationManager.CreateNotificationChannel(channel);
+
+            // Instantiate the builder and set notification elements
+            Notification.Builder builder = new Notification.Builder(this);
+
+            builder
+                .SetContentTitle(reminder.Title)
+                .SetContentText(reminder.Comment)
+                .SetSmallIcon(Resource.Drawable.notification_icon)
+                .SetChannelId(channel_id);
+
+            // Build the notification
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Android 7.1 and older compatibility
+        /// </summary>
+        /// <returns></returns>
+        private Notification GetNotificationCompat(NotificationManager notificationManager, Reminder reminder)
+        {
+            // Instantiate the builder and set notification elements
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+            builder
+                .SetContentTitle(reminder.Title)
+                .SetContentText(reminder.Comment)
+                .SetSmallIcon(Resource.Drawable.notification_icon)
+                .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
+
+            // Build the notification
+            return builder.Build();
         }
     }
 }

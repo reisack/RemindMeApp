@@ -7,7 +7,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using RemindMe.Android.Helpers;
 using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
@@ -50,18 +49,15 @@ namespace RemindMe.Android.Views
         {
             SetContentView(Resource.Layout.ReminderList);
 
-            if (!ServicesHelper.IsServiceRunning(this, typeof(IntentService)))
-            {
-                Intent intentService = new Intent(this, typeof(IntentService));
+            Intent intentService = new Intent(this, typeof(IntentService));
 
-                try
-                {
-                    StartService(intentService);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                }
+            try
+            {
+                StartService(intentService);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
         }
 

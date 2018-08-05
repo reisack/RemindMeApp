@@ -16,4 +16,6 @@
   <string name="date_selection">Sélection de la date</string>
   <string name="time_selection">Sélection de l\'heure</string>
   <string name="past_reminders_deleted_toast">Les anciens rappels ont été supprimés avec succès</string>
+  <string name="notification_channel_id">rek_remindme_channel</string>
+  <string name="notification_channel_name">RemindMe</string>
 </resources>

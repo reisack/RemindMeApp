@@ -5059,6 +5059,12 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0a002b
 			public const int delete = 2131361835;
 			
+			// aapt resource value: 0x7f0a003a
+			public const int notification_channel_id = 2131361850;
+			
+			// aapt resource value: 0x7f0a003b
+			public const int notification_channel_name = 2131361851;
+			
 			// aapt resource value: 0x7f0a0024
 			public const int password_toggle_content_description = 2131361828;
 			
