@@ -1,9 +1,8 @@
 ﻿using System;
 using Android.App;
-using Android.App.Job;
 using Android.Content;
 using Android.OS;
-using RemindMe.Android.Services;
+using RemindMe.Android.Helpers;
 
 namespace RemindMe.Android
 {
@@ -24,17 +23,7 @@ namespace RemindMe.Android
                     {
                         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
                         {
-                            var javaClass = Java.Lang.Class.FromType(typeof(ReminderJobService));
-                            var componentName = new ComponentName(context, javaClass);
-
-                            JobInfo.Builder builder = new JobInfo.Builder(0, componentName);
-                            builder.SetPeriodic(60000);
-                            builder.SetPersisted(true);
-
-                            var jobInfo = builder.Build();
-
-                            JobScheduler jobScheduler = Application.Context.GetSystemService(Context.JobSchedulerService) as JobScheduler;
-                            jobScheduler.Schedule(jobInfo);
+                            ReminderJobServiceHelper.CreateAndScheduleReminderJobService(context);
                         }
                         else
                         {
