@@ -51,8 +51,6 @@ namespace RemindMe.Android.Views
         {
             SetContentView(Resource.Layout.ReminderList);
 
-            Intent intentService = new Intent(this, typeof(IntentService));
-
             try
             {
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
@@ -61,6 +59,7 @@ namespace RemindMe.Android.Views
                 }
                 else
                 {
+                    Intent intentService = new Intent(this, typeof(Services.IntentService));
                     StartService(intentService);
                 }
                 

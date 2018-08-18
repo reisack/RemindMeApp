@@ -27,7 +27,7 @@ namespace RemindMe.Android
                         }
                         else
                         {
-                            Intent intentService = new Intent(context, typeof(IntentService));
+                            Intent intentService = new Intent(context, typeof(Services.IntentService));
                             context.StartService(intentService);
                         }
                     }
