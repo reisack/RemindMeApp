@@ -1,9 +1,8 @@
 ﻿using Android.App;
 using Android.App.Job;
-using Android.Media;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.App;
+
 using MvvmCross.Platform;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
@@ -90,11 +89,11 @@ namespace RemindMe.Android.Services
                     {
                         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
                         {
-                            notification = reminderNotificationService.GetNotification(notificationManager, reminder);
+                            notification = reminderNotificationService.GetNotification(notificationManager, reminder, this);
                         }
                         else
                         {
-                            notification = reminderNotificationService.GetNotificationCompat(notificationManager, reminder);
+                            notification = reminderNotificationService.GetNotificationCompat(notificationManager, reminder, this);
                         }
 
                         // Publish the notification

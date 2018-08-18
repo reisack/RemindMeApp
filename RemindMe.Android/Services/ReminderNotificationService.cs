@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Support.V7.App;
+using Android.Media;
+using RemindMe.Core.Models;
 
 namespace RemindMe.Android.Services
 {
@@ -19,11 +13,11 @@ namespace RemindMe.Android.Services
 
         }
 
-        public Notification GetNotification(NotificationManager notificationManager, Reminder reminder)
+        public Notification GetNotification(NotificationManager notificationManager, Reminder reminder, Context context)
         {
             var importance = NotificationImportance.High;
-            string channel_id = GetString(Resource.String.notification_channel_id);
-            string channel_name = GetString(Resource.String.notification_channel_name);
+            string channel_id = context.GetString(Resource.String.notification_channel_id);
+            string channel_name = context.GetString(Resource.String.notification_channel_name);
 
             NotificationChannel channel = new NotificationChannel(channel_id, channel_name, importance);
             channel.EnableVibration(true);
@@ -32,7 +26,7 @@ namespace RemindMe.Android.Services
             notificationManager.CreateNotificationChannel(channel);
 
             // Instantiate the builder and set notification elements
-            Notification.Builder builder = new Notification.Builder(this);
+            Notification.Builder builder = new Notification.Builder(context);
 
             builder
                 .SetContentTitle(reminder.Title)
@@ -48,10 +42,10 @@ namespace RemindMe.Android.Services
         /// Android 7.1 and older compatibility
         /// </summary>
         /// <returns></returns>
-        public Notification GetNotificationCompat(NotificationManager notificationManager, Reminder reminder)
+        public Notification GetNotificationCompat(NotificationManager notificationManager, Reminder reminder, Context context)
         {
             // Instantiate the builder and set notification elements
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
             builder
                 .SetContentTitle(reminder.Title)
