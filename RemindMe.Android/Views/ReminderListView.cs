@@ -1,12 +1,15 @@
 ﻿using System;
 
 using Android.App;
+using Android.App.Job;
 using Android.Content;
 using Android.Content.PM;
+using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using RemindMe.Android.Services;
 using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
@@ -53,7 +56,25 @@ namespace RemindMe.Android.Views
 
             try
             {
-                StartService(intentService);
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+                {
+                    var javaClass = Java.Lang.Class.FromType(typeof(ReminderJobService));
+                    var componentName = new ComponentName(BaseContext, javaClass);
+
+                    JobInfo.Builder builder = new JobInfo.Builder(0, componentName);
+                    builder.SetPeriodic(60000);
+                    builder.SetPersisted(true);
+
+                    var jobInfo = builder.Build();
+
+                    JobScheduler jobScheduler = Application.Context.GetSystemService(Context.JobSchedulerService) as JobScheduler;
+                    jobScheduler.Schedule(jobInfo);
+                }
+                else
+                {
+                    StartService(intentService);
+                }
+                
             }
             catch (Exception ex)
             {
