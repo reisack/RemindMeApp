@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using MvvmCross.Platform;
-using RemindMe.Core.Interfaces;
-using RemindMe.Core.Models;
 
 namespace RemindMe.Android.Services
 {

@@ -3,12 +3,10 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using RemindMe.Android.Helpers;
 using RemindMe.Android.Services;
 using RemindMe.Core.ViewModels;
 
