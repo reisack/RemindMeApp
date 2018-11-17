@@ -9,6 +9,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using RemindMe.Android.Helpers;
+using RemindMe.Android.Services;
 using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
@@ -53,16 +54,7 @@ namespace RemindMe.Android.Views
 
             try
             {
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-                {
-                    ReminderJobServiceHelper.CreateAndScheduleReminderJobService(BaseContext);
-                }
-                else
-                {
-                    Intent intentService = new Intent(this, typeof(Services.IntentService));
-                    StartService(intentService);
-                }
-                
+                ReminderService.Instance.StartOrWakeUpService(this);
             }
             catch (Exception ex)
             {

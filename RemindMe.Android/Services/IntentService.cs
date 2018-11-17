@@ -16,17 +16,10 @@ namespace RemindMe.Android.Services
     {
         const int timerCallingDelay = 60000;
 
-        private IReminderDataService _reminderDataService;
-        private ReminderDaemonDataService _reminderDaemonDataService;
-
         private Timer _timer { get; set; }
 
         public IntentService()
         {
-            if (!Mvx.TryResolve<IReminderDataService>(out _reminderDataService))
-            {
-                _reminderDaemonDataService = new ReminderDaemonDataService();
-            }
         }
 
         public override IBinder OnBind(Intent intent)
@@ -55,62 +48,10 @@ namespace RemindMe.Android.Services
             }
         }
 
-        private async void HandleTimerCallBack(object state)
+        private void HandleTimerCallBack(object state)
         {
-            try
-            {
-                IList<Reminder> reminders;
-                if (_reminderDataService != null)
-                {
-                    reminders = new List<Reminder>(await _reminderDataService.GetRemindersToNotify());
-                }
-                else
-                {
-                    reminders = new List<Reminder>(await _reminderDaemonDataService.GetRemindersToNotify());
-                }
-
-                if (reminders.Count > 0)
-                {
-                    ReminderNotificationService reminderNotificationService = new ReminderNotificationService();
-
-                    // Get the notification manager
-                    NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
-                    Notification notification;
-                    int notificationId = 0;
-
-                    foreach (var reminder in reminders)
-                    {
-                        if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-                        {
-                            notification = reminderNotificationService.GetNotification(notificationManager, reminder, this);
-                        }
-                        else
-                        {
-                            notification = reminderNotificationService.GetNotificationCompat(notificationManager, reminder, this);
-                        }
-
-                        // Publish the notification
-                        if (notificationManager != null && notification != null)
-                        {
-                            notificationManager.Notify(notificationId, notification);
-                            notificationId++;
-                        }
-                    }
-
-                    if (_reminderDataService != null)
-                    {
-                        await _reminderDataService.SetToNotified(reminders);
-                    }
-                    else
-                    {
-                        await _reminderDaemonDataService.SetToNotified(reminders);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
+            NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
+            ReminderService.Instance.NotifyReminders(notificationManager, this).RunSynchronously();
         }
     }
 }

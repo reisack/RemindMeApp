@@ -169,8 +169,10 @@
     <Compile Include="Converters\ReadableTimeConverter.cs" />
     <Compile Include="Converters\TimestampToReadableTimeValueConverter.cs" />
     <Compile Include="Events\BootReceiver.cs" />
+    <Compile Include="Events\ReminderAlarmReceiver.cs" />
     <Compile Include="Extensions\DatePickerExtensions.cs" />
     <Compile Include="Helpers\ReminderJobServiceHelper.cs" />
+    <Compile Include="Services\ReminderService.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IntentService.cs" />

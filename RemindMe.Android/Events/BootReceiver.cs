@@ -1,8 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using RemindMe.Android.Helpers;
+using RemindMe.Android.Services;
 
 namespace RemindMe.Android
 {
@@ -21,15 +20,7 @@ namespace RemindMe.Android
                     || intent.Action == "android.intent.action.QUICKBOOT_POWERON"
                     || intent.Action == "com.htc.intent.action.QUICKBOOT_POWERON")
                     {
-                        if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-                        {
-                            ReminderJobServiceHelper.CreateAndScheduleReminderJobService(context);
-                        }
-                        else
-                        {
-                            Intent intentService = new Intent(context, typeof(Services.IntentService));
-                            context.StartService(intentService);
-                        }
+                        ReminderService.Instance.StartOrWakeUpService(context);
                     }
                 }
             }

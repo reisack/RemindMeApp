@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.Support.V7.App;
 using Android.Media;
@@ -8,9 +9,16 @@ namespace RemindMe.Android.Services
 {
     public class ReminderNotificationService
     {
+        private static Lazy<ReminderNotificationService> _instance = new Lazy<ReminderNotificationService>(() => new ReminderNotificationService());
+
         public ReminderNotificationService()
         {
 
+        }
+
+        public static ReminderNotificationService Instance
+        {
+            get { return _instance.Value; }
         }
 
         public Notification GetNotification(NotificationManager notificationManager, Reminder reminder, Context context)
@@ -26,13 +34,12 @@ namespace RemindMe.Android.Services
             notificationManager.CreateNotificationChannel(channel);
 
             // Instantiate the builder and set notification elements
-            Notification.Builder builder = new Notification.Builder(context);
+            Notification.Builder builder = new Notification.Builder(context, channel_id);
 
             builder
                 .SetContentTitle(reminder.Title)
                 .SetContentText(reminder.Comment)
-                .SetSmallIcon(Resource.Drawable.notification_icon)
-                .SetChannelId(channel_id);
+                .SetSmallIcon(Resource.Drawable.notification_icon);
 
             // Build the notification
             return builder.Build();

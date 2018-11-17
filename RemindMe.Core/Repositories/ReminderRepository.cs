@@ -103,5 +103,16 @@ namespace RemindMe.Core.Repositories
                 db.UpdateAll(reminders);
             });
         }
+
+        public long? GetTimestampOfNextReminder()
+        {
+            var db = DatabaseConnection.Instance.GetConnection();
+            string query = @"SELECT MIN(Date) 
+                             FROM Reminder 
+                             WHERE Date > strftime('%s','now')";
+
+            long nextReminderTimestamp = db.ExecuteScalar<long>(query);
+            return (nextReminderTimestamp > 0) ? nextReminderTimestamp as long? : null;
+        }
     }
 }

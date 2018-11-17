@@ -13,5 +13,6 @@ namespace RemindMe.Core.Interfaces
         Task DeletePast();
         Task<IEnumerable<Reminder>> GetRemindersToNotify();
         Task SetToNotified(IEnumerable<Reminder> reminders);
+        long? GetTimestampOfNextReminder();
     }
 }
