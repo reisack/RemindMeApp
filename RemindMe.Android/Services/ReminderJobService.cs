@@ -1,15 +1,9 @@
-﻿using Android.App;
-using Android.App.Job;
-using Android.OS;
-using Android.Runtime;
-
-using MvvmCross.Platform;
-using RemindMe.Android.Helpers;
-using RemindMe.Core.Interfaces;
-using RemindMe.Core.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
+
+using Android.App;
+using Android.App.Job;
+using Android.Runtime;
 
 namespace RemindMe.Android.Services
 {
@@ -55,8 +49,10 @@ namespace RemindMe.Android.Services
 
         private async Task PerformBackgroundSyncAsync()
         {
-            NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
-            await ReminderService.Instance.NotifyReminders(notificationManager, this);
+            if (GetSystemService(NotificationService) is NotificationManager notificationManager)
+            {
+                await ReminderService.Instance.NotifyReminders(notificationManager, this);
+            }
         }
     }
 }

@@ -51,7 +51,10 @@ namespace RemindMe.Android.Services
         private void HandleTimerCallBack(object state)
         {
             NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
-            ReminderService.Instance.NotifyReminders(notificationManager, this).RunSynchronously();
+            if (notificationManager != null)
+            {
+                ReminderService.Instance.NotifyReminders(notificationManager, this);
+            }
         }
     }
 }

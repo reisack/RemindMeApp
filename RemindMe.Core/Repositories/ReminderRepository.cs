@@ -107,11 +107,24 @@ namespace RemindMe.Core.Repositories
         public long? GetTimestampOfNextReminder()
         {
             var db = DatabaseConnection.Instance.GetConnection();
-            string query = @"SELECT MIN(Date) 
+            string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified 
                              FROM Reminder 
-                             WHERE Date > strftime('%s','now')";
+                             WHERE Date > strftime('%s','now') 
+                             ORDER BY Date ASC
+                             LIMIT 1";
 
-            long nextReminderTimestamp = db.ExecuteScalar<long>(query);
+            long nextReminderTimestamp = 0;
+            List<Reminder> queryResult = db.Query<Reminder>(query);
+
+            if (queryResult != null && queryResult.Count > 0)
+            {
+                Reminder reminder = queryResult[0];
+                if (reminder != null && reminder.Date > 0)
+                {
+                    nextReminderTimestamp = reminder.Date;
+                }
+            }
+
             return (nextReminderTimestamp > 0) ? nextReminderTimestamp as long? : null;
         }
     }
