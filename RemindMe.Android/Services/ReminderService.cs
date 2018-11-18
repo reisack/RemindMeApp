@@ -51,16 +51,16 @@ namespace RemindMe.Android.Services
             }
         }
 
-        public long? GetMillisTimestampOfNextReminder()
+        public long? GetNextReminderMillisTimestamp()
         {
             long? timestamp;
             if (_reminderDataService != null)
             {
-                timestamp = _reminderDataService.GetTimestampOfNextReminder();
+                timestamp = _reminderDataService.GetNextReminderTimestamp();
             }
             else
             {
-                timestamp = _reminderDaemonDataService.GetTimestampOfNextReminder();
+                timestamp = _reminderDaemonDataService.GetNextReminderTimestamp();
             }
             return (timestamp.HasValue) ? timestamp * 1000 : null;
         }
@@ -121,8 +121,8 @@ namespace RemindMe.Android.Services
 
         private void SetAlarmForNextReminder(Context context)
         {
-            long? millisTimestampOfNextReminder = Instance.GetMillisTimestampOfNextReminder();
-            if (millisTimestampOfNextReminder.HasValue && millisTimestampOfNextReminder.Value > 0)
+            long? nextReminderMillisTimestamp = Instance.GetNextReminderMillisTimestamp();
+            if (nextReminderMillisTimestamp.HasValue && nextReminderMillisTimestamp.Value > 0)
             {
                 // Alarm is started 10 seconds after notification time
                 // So, we have a better guarantee that it will be notified
@@ -130,7 +130,7 @@ namespace RemindMe.Android.Services
 
                 Intent reminderAlarmReceiver = new Intent(context, Java.Lang.Class.FromType(typeof(ReminderAlarmReceiver)));
                 PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, reminderAlarmReceiver, PendingIntentFlags.UpdateCurrent);
-                long triggerAtMillis = millisTimestampOfNextReminder.Value + delay;
+                long triggerAtMillis = nextReminderMillisTimestamp.Value + delay;
 
                 AlarmManager alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
 

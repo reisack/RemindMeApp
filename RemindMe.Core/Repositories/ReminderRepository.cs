@@ -104,7 +104,7 @@ namespace RemindMe.Core.Repositories
             });
         }
 
-        public long? GetTimestampOfNextReminder()
+        public long? GetNextReminderTimestamp()
         {
             var db = DatabaseConnection.Instance.GetConnection();
             string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified 

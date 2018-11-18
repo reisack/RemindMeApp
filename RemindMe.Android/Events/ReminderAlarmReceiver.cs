@@ -16,6 +16,7 @@ namespace RemindMe.Android
             if (context.GetSystemService(Context.NotificationService) is NotificationManager notificationManager)
             {
                 ReminderService.Instance.NotifyReminders(notificationManager, context);
+                ReminderService.Instance.StartOrWakeUpService(context);
             }
         }
     }

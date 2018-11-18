@@ -64,9 +64,9 @@ namespace RemindMe.Core.Services
             await _reminderRepository.SetToNotified(reminders);
         }
 
-        public long? GetTimestampOfNextReminder()
+        public long? GetNextReminderTimestamp()
         {
-            return _reminderRepository.GetTimestampOfNextReminder();
+            return _reminderRepository.GetNextReminderTimestamp();
         }
     }
 }
