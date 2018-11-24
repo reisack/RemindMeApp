@@ -13,9 +13,12 @@ namespace RemindMe.Android
 
         public override void OnReceive(Context context, Intent intent)
         {
-            if (context.GetSystemService(Context.NotificationService) is NotificationManager notificationManager)
+            if (context != null)
             {
-                ReminderService.Instance.NotifyReminders(notificationManager, context);
+                if (context.GetSystemService(Context.NotificationService) is NotificationManager notificationManager)
+                {
+                    ReminderService.Instance.NotifyReminders(notificationManager, context);
+                }
                 ReminderService.Instance.StartOrWakeUpService(context);
             }
         }
