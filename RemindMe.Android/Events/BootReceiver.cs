@@ -20,14 +20,11 @@ namespace RemindMe.Android
                     || intent.Action == "android.intent.action.QUICKBOOT_POWERON"
                     || intent.Action == "com.htc.intent.action.QUICKBOOT_POWERON")
                     {
-                        if (context != null)
+                        if (context.GetSystemService(Context.NotificationService) is NotificationManager notificationManager)
                         {
-                            if (context.GetSystemService(Context.NotificationService) is NotificationManager notificationManager)
-                            {
-                                ReminderService.Instance.NotifyReminders(notificationManager, context);
-                            }
-                            ReminderService.Instance.StartOrWakeUpService(context);
+                            ReminderService.Instance.NotifyReminders(notificationManager, context);
                         }
+                        ReminderService.Instance.StartOrWakeUpService(context);
                     }
                 }
             }
