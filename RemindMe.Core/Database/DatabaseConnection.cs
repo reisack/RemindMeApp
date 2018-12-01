@@ -1,11 +1,12 @@
-﻿using RemindMe.Core.Models;
+﻿using RemindMe.Core.Interfaces;
+using RemindMe.Core.Models;
 using SQLite;
 using System;
 using System.IO;
 
 namespace RemindMe.Core.Database
 {
-    public class DatabaseConnection
+    public class DatabaseConnection : IConnectionService
     {
         private static Lazy<DatabaseConnection> _instance = new Lazy<DatabaseConnection>(() => new DatabaseConnection());
         private SQLiteConnection _connection;

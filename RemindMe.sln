@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Help", "Help", "{D2230E6D-D
 		infos.txt = infos.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Test", "RemindMe.Test\RemindMe.Test.csproj", "{2DB46946-E853-4335-9037-CC52708249F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB2B685-954D-44EF-AE81-1673276C7E14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB46946-E853-4335-9037-CC52708249F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB46946-E853-4335-9037-CC52708249F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB46946-E853-4335-9037-CC52708249F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB46946-E853-4335-9037-CC52708249F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

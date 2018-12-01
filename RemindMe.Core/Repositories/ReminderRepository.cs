@@ -1,5 +1,4 @@
-﻿using RemindMe.Core.Database;
-using RemindMe.Core.Interfaces;
+﻿using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,15 +7,18 @@ namespace RemindMe.Core.Repositories
 {
     public class ReminderRepository : BaseRepository, IReminderRepository
     {
-        public ReminderRepository()
+        private readonly IConnectionService _connectionService;
+
+        public ReminderRepository(IConnectionService connectionService)
         {
+            _connectionService = connectionService;
         }
 
         public async Task AddOrUpdate(Reminder reminder)
         {
             await Task.Run(() =>
             {
-                var db = DatabaseConnection.Instance.GetConnection();
+                var db = _connectionService.GetConnection();
                 var existingReminder = db.Find<Reminder>(reminder.Id);
                 if (existingReminder != null)
                 {
@@ -33,7 +35,7 @@ namespace RemindMe.Core.Repositories
         {
             await Task.Run(() =>
             {
-                var db = DatabaseConnection.Instance.GetConnection();
+                var db = _connectionService.GetConnection();
                 db.Delete<Reminder>(id);
             });
         }
@@ -42,7 +44,7 @@ namespace RemindMe.Core.Repositories
         {
             await Task.Run(() =>
             {
-                var db = DatabaseConnection.Instance.GetConnection();
+                var db = _connectionService.GetConnection();
                 string query = @"DELETE FROM Reminder WHERE Date < strftime('%s','now')";
                 db.Execute(query);
             });
@@ -50,14 +52,14 @@ namespace RemindMe.Core.Repositories
 
         public async Task<Reminder> Get(long id)
         {
-            var db = DatabaseConnection.Instance.GetConnection();
+            var db = _connectionService.GetConnection();
 
             return await Task.FromResult<Reminder>(db.Find<Reminder>(id));
         }
 
         public async Task<IEnumerable<Reminder>> GetAll()
         {
-            var db = DatabaseConnection.Instance.GetConnection();
+            var db = _connectionService.GetConnection();
 
             string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified FROM
                              (
@@ -80,7 +82,7 @@ namespace RemindMe.Core.Repositories
 
         public async Task<IEnumerable<Reminder>> GetRemindersToNotify()
         {
-            var db = DatabaseConnection.Instance.GetConnection();
+            var db = _connectionService.GetConnection();
 
             string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified 
                              FROM Reminder 
@@ -99,14 +101,14 @@ namespace RemindMe.Core.Repositories
                     reminder.AlreadyNotified = 1;
                 }
 
-                var db = DatabaseConnection.Instance.GetConnection();
+                var db = _connectionService.GetConnection();
                 db.UpdateAll(reminders);
             });
         }
 
         public long? GetNextReminderTimestamp()
         {
-            var db = DatabaseConnection.Instance.GetConnection();
+            var db = _connectionService.GetConnection();
             string query = @"SELECT Id, Title, Comment, Date, AlreadyNotified 
                              FROM Reminder 
                              WHERE Date > strftime('%s','now') 
