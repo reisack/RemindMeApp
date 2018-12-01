@@ -13,7 +13,6 @@ namespace RemindMe.Test.MockServices
         public DatabaseConnectionMock()
         {
             _connection = new SQLiteConnection("remindme_empty_mock.db");
-            _connection.DropTable<Reminder>();
             _connection.CreateTable<Reminder>();
         }
 
