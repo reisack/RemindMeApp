@@ -11,6 +11,39 @@ namespace RemindMe.Test
     [TestClass]
     public class ReminderSaveTests
     {
+        #region Consts
+        const string LONG_MESSAGE = @"Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Suspendisse et augue elementum, 
+gravida justo non, lobortis orci. Nullam blandit id eros vitae pretium. 
+Praesent eget erat molestie, tempor lorem at, posuere turpis. 
+Pellentesque malesuada molestie mi et rutrum. Mauris ac diam purus. 
+Phasellus a pharetra justo. Pellentesque egestas tincidunt dui, 
+eu ultrices orci vestibulum sed.
+Nullam fringilla id est quis eleifend. 
+Sed at neque nec lacus rutrum luctus. 
+Phasellus nec nunc in est porttitor aliquam vitae in lorem. 
+Nunc pellentesque mauris ut vulputate rutrum. Fusce diam nisi, 
+viverra in velit sit amet, rhoncus mollis risus. 
+Pellentesque nec diam eget lectus egestas tempor ac id tellus. 
+Quisque a nulla nisi. Nam ut tellus et mauris pulvinar ullamcorper. 
+Sed tempor elit eu lacinia volutpat. Donec posuere vulputate felis, 
+quis tincidunt lectus.";
+
+        const string EXPECTED_TITLE = @"Lorem ipsum dolor sit amet, 
+consectetur adipisci";
+
+        const string EXPECTED_COMMENT = @"Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Suspendisse et augue elementum, 
+gravida justo non, lobortis orci. Nullam blandit id eros vitae pretium. 
+Praesent eget erat molestie, tempor lorem at, posuere turpis. 
+Pellentesque malesuada molestie mi et rutrum. Mauris ac diam purus. 
+Phasellus a pharetra justo. Pellentesque egestas tincidunt dui, 
+eu ultrices orci vestibulum sed.
+Nullam fringilla id est quis eleifend. 
+Sed at neque nec lacus rutrum luctus. 
+Phasellus nec nunc";
+        #endregion
+
         private ReminderDataService _reminderDataService;
 
         [TestInitialize]
@@ -31,7 +64,6 @@ namespace RemindMe.Test
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -58,7 +90,6 @@ namespace RemindMe.Test
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Comment = "Comment test",
                 Date = timestamp
@@ -86,7 +117,6 @@ namespace RemindMe.Test
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Comment = "Comment test",
                 Date = timestamp
@@ -124,7 +154,6 @@ namespace RemindMe.Test
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -159,42 +188,10 @@ namespace RemindMe.Test
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
-            string longMessage = @"Lorem ipsum dolor sit amet, 
-consectetur adipiscing elit. Suspendisse et augue elementum, 
-gravida justo non, lobortis orci. Nullam blandit id eros vitae pretium. 
-Praesent eget erat molestie, tempor lorem at, posuere turpis. 
-Pellentesque malesuada molestie mi et rutrum. Mauris ac diam purus. 
-Phasellus a pharetra justo. Pellentesque egestas tincidunt dui, 
-eu ultrices orci vestibulum sed.
-Nullam fringilla id est quis eleifend. 
-Sed at neque nec lacus rutrum luctus. 
-Phasellus nec nunc in est porttitor aliquam vitae in lorem. 
-Nunc pellentesque mauris ut vulputate rutrum. Fusce diam nisi, 
-viverra in velit sit amet, rhoncus mollis risus. 
-Pellentesque nec diam eget lectus egestas tempor ac id tellus. 
-Quisque a nulla nisi. Nam ut tellus et mauris pulvinar ullamcorper. 
-Sed tempor elit eu lacinia volutpat. Donec posuere vulputate felis, 
-quis tincidunt lectus.";
-
-            string assertedTitle = @"Lorem ipsum dolor sit amet, 
-consectetur adipisci";
-
-            string assertedComment = @"Lorem ipsum dolor sit amet, 
-consectetur adipiscing elit. Suspendisse et augue elementum, 
-gravida justo non, lobortis orci. Nullam blandit id eros vitae pretium. 
-Praesent eget erat molestie, tempor lorem at, posuere turpis. 
-Pellentesque malesuada molestie mi et rutrum. Mauris ac diam purus. 
-Phasellus a pharetra justo. Pellentesque egestas tincidunt dui, 
-eu ultrices orci vestibulum sed.
-Nullam fringilla id est quis eleifend. 
-Sed at neque nec lacus rutrum luctus. 
-Phasellus nec nunc";
-
             Reminder reminder = new Reminder
             {
-                Id = 0,
-                Title = longMessage,
-                Comment = longMessage,
+                Title = LONG_MESSAGE,
+                Comment = LONG_MESSAGE,
                 Date = timestamp
             };
 
@@ -206,8 +203,39 @@ Phasellus nec nunc";
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             Assert.IsNotNull(insertedReminder);
-            Assert.AreEqual(assertedTitle, insertedReminder.Title);
-            Assert.AreEqual(assertedComment, insertedReminder.Comment);
+            Assert.AreEqual(EXPECTED_TITLE, insertedReminder.Title);
+            Assert.AreEqual(EXPECTED_COMMENT, insertedReminder.Comment);
+        }
+
+        [TestMethod]
+        public async Task UpdateReminderWithBothTooLongTitleAndComment()
+        {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
+            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
+
+            Reminder reminder = new Reminder
+            {
+                Title = "Title test",
+                Comment = "Comment test",
+                Date = timestamp
+            };
+
+            var db = DatabaseConnectionMock.Instance.GetConnection();
+            int insertedNbLines = db.Insert(reminder, typeof(Reminder));
+            Assert.AreEqual(1, insertedNbLines);
+
+            Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
+            Assert.IsNotNull(insertedReminder);
+
+            insertedReminder.Title = LONG_MESSAGE;
+            insertedReminder.Comment = LONG_MESSAGE;
+
+            await _reminderDataService.AddOrUpdate(insertedReminder);
+
+            Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
+            Assert.IsNotNull(updatedReminder);
+            Assert.AreEqual(EXPECTED_TITLE, updatedReminder.Title);
+            Assert.AreEqual(EXPECTED_COMMENT, updatedReminder.Comment);
         }
 
         [TestMethod]
@@ -219,7 +247,6 @@ Phasellus nec nunc";
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Comment = "Comment test",
                 Date = timestamp
