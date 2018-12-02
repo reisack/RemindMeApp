@@ -70,8 +70,6 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            Assert.AreNotEqual(0, reminder.Id);
-
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
@@ -96,8 +94,6 @@ Phasellus nec nunc";
             };
 
             await _reminderDataService.AddOrUpdate(reminder);
-
-            Assert.AreNotEqual(0, reminder.Id);
 
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
@@ -124,18 +120,11 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            Assert.AreNotEqual(0, reminder.Id);
-
-            long insertedId = reminder.Id;
-
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = null;
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
-            // Id didn't change, reminder has been updated
-            Assert.AreEqual(insertedId, insertedReminder.Id);
 
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 
@@ -160,18 +149,11 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            Assert.AreNotEqual(0, reminder.Id);
-
-            long insertedId = reminder.Id;
-
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = "Comment test";
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
-            // Id didn't change, reminder has been updated
-            Assert.AreEqual(insertedId, insertedReminder.Id);
 
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 
@@ -197,8 +179,6 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            Assert.AreNotEqual(0, reminder.Id);
-
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
@@ -221,11 +201,9 @@ Phasellus nec nunc";
             };
 
             var db = DatabaseConnectionMock.Instance.GetConnection();
-            int insertedNbLines = db.Insert(reminder, typeof(Reminder));
-            Assert.AreEqual(1, insertedNbLines);
+            db.Insert(reminder, typeof(Reminder));
 
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
-            Assert.IsNotNull(insertedReminder);
 
             insertedReminder.Title = LONG_MESSAGE;
             insertedReminder.Comment = LONG_MESSAGE;
@@ -254,10 +232,6 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            Assert.AreNotEqual(0, reminder.Id);
-
-            long insertedId = reminder.Id;
-
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
@@ -267,9 +241,6 @@ Phasellus nec nunc";
             insertedReminder.AlreadyNotified = 1;
 
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
-            // Id didn't change, reminder has been updated
-            Assert.AreEqual(insertedId, insertedReminder.Id);
 
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 

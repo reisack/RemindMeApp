@@ -38,8 +38,7 @@ namespace RemindMe.Test
             };
 
             var db = DatabaseConnectionMock.Instance.GetConnection();
-            int insertedNbLines = db.Insert(reminder, typeof(Reminder));
-            Assert.AreEqual(1, insertedNbLines);
+            db.Insert(reminder, typeof(Reminder));
 
             await _reminderDataService.Delete(reminder.Id);
 
@@ -94,15 +93,14 @@ namespace RemindMe.Test
             };
 
             var db = DatabaseConnectionMock.Instance.GetConnection();
-            int insertedNbLines = db.InsertAll(reminders, typeof(Reminder));
-            Assert.AreEqual(4, insertedNbLines);
+            db.InsertAll(reminders, typeof(Reminder));
 
             await _reminderDataService.DeletePast();
             var reminderTable = db.Table<Reminder>();
-            Assert.AreEqual(2, reminderTable.Count());
-
             Reminder reminder1 = reminderTable.FirstOrDefault((x) => x.Title == "Title test 1");
             Reminder reminder4 = reminderTable.FirstOrDefault((x) => x.Title == "Title test 4");
+
+            Assert.AreEqual(2, reminderTable.Count());
             Assert.IsNotNull(reminder1);
             Assert.IsNotNull(reminder4);
 
