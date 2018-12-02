@@ -92,9 +92,7 @@ namespace RemindMe.Core.ViewModels
             if (_reminderId.HasValue && _reminderId.Value > 0)
             {
                 SelectedReminder = await _reminderDataService.Get(_reminderId.Value);
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(SelectedReminder.Date);
-                ReminderDay = dateTimeOffset.LocalDateTime;
-                ReminderTime = ReminderDay.Value.ToString("HH:mm");
+                SetReminderDayAndTime();
             }
             else
             {
@@ -149,6 +147,16 @@ namespace RemindMe.Core.ViewModels
                         Close(this);
                     }
                 });
+            }
+        }
+
+        private void SetReminderDayAndTime()
+        {
+            if (SelectedReminder != null)
+            {
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(SelectedReminder.Date);
+                ReminderDay = dateTimeOffset.LocalDateTime;
+                ReminderTime = ReminderDay.Value.ToString("HH:mm");
             }
         }
 

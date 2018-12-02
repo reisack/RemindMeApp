@@ -12,14 +12,13 @@ namespace RemindMe.Test
     public class ReminderValidationTests
     {
         [TestMethod]
-        public void WantToCreateAReminderAlreadyPastSinceTenMinutes()
+        public void ValidateAReminderAlreadyPastSinceTenMinutes()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -28,14 +27,13 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void WantToCreateAReminderAlreadyPastSinceTwoDays()
+        public void ValidateAReminderAlreadyPastSinceTwoDays()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1).AddDays(-2);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -44,14 +42,13 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void WantToCreateAReminderThatNotifyInOneHour()
+        public void ValidateAReminderThatNotifyInOneHour()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -60,14 +57,13 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void WantToCreateAReminderWithoutTitle()
+        public void ValidateAReminderWithoutTitle()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Comment = "Comment test",
                 Date = timestamp
             };
@@ -76,14 +72,13 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void WantToCreateAReminderWithoutComment()
+        public void ValidateAReminderWithoutComment()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Title = "Title test",
                 Date = timestamp
             };
@@ -92,14 +87,13 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void WantToCreateAReminderWithoutDate()
+        public void ValidateAReminderWithoutDate()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
 
             Reminder reminder = new Reminder
             {
-                Id = 0,
                 Comment = "Comment test",
                 Date = timestamp
             };
@@ -126,13 +120,8 @@ namespace RemindMe.Test
             ReminderEditViewModel viewModel = GetReminderViewModelWithMocks();
             viewModel.SelectedReminder = reminder;
 
-            if (reminder.Date > 0)
-            {
-                viewModel.ReminderDay = dateTimeOffset.LocalDateTime;
-                viewModel.ReminderTime = viewModel.ReminderDay.Value.ToString("HH:mm");
-            }
-
             PrivateObject reminderViewModelMock = new PrivateObject(viewModel);
+            reminderViewModelMock.Invoke("SetReminderDayAndTime");
             return (bool)reminderViewModelMock.Invoke("Validate");
         }
     }

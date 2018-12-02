@@ -47,7 +47,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task DeleteAnAlreadyDeletedReminderShouldNotThrowAnException()
+        public async Task DeleteAReminderThatNotExistsInDatabaseShouldNotThrowAnException()
         {
             await _reminderDataService.Delete(123);
         }

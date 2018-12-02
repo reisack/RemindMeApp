@@ -217,7 +217,7 @@ Phasellus nec nunc";
         }
 
         [TestMethod]
-        public async Task ReminderDataCanBeUpdated()
+        public async Task UpdateReminderData()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
