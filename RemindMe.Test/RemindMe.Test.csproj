@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Mocks\DatabaseConnectionMock.cs" />
     <Compile Include="Mocks\DialogMockService.cs" />
+    <Compile Include="ReminderDeleteTests.cs" />
     <Compile Include="ReminderSaveTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReminderValidationTests.cs" />
