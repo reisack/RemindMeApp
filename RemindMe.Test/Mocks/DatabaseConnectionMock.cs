@@ -3,7 +3,7 @@ using SQLite;
 using RemindMe.Core.Models;
 using RemindMe.Core.Interfaces;
 
-namespace RemindMe.Test.MockServices
+namespace RemindMe.Test.Mocks
 {
     public class DatabaseConnectionMock : IConnectionService
     {

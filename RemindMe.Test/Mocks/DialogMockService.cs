@@ -1,7 +1,7 @@
 ﻿using RemindMe.Core.Interfaces;
 using System.Threading.Tasks;
 
-namespace RemindMe.Test.MockServices
+namespace RemindMe.Test.Mocks
 {
     public class DialogMockService : IDialogService
     {

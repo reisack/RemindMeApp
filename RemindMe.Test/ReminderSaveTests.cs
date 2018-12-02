@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
-using RemindMe.Test.MockServices;
+using RemindMe.Test.Mocks;
 
 namespace RemindMe.Test
 {
