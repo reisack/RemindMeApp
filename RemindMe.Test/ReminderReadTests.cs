@@ -219,6 +219,58 @@ namespace RemindMe.Test
             Assert.AreEqual(timestamp2, nextReminderTimestamp);
         }
 
+        [TestMethod]
+        public async Task GetAllRemindersInExpectedOrder()
+        {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
+            long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(30);
+            long timestamp2 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddHours(-3);
+            long timestamp3 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddHours(5);
+            long timestamp4 = dateTimeOffset.ToUnixTimeSeconds();
+
+            List<Reminder> reminders = new List<Reminder>
+            {
+                new Reminder
+                {
+                    Title = "Title test 1",
+                    Comment = "Comment test 1",
+                    Date = timestamp1
+                },
+                new Reminder
+                {
+                    Title = "Title test 2",
+                    Comment = "Comment test 2",
+                    Date = timestamp2
+                },
+                new Reminder
+                {
+                    Title = "Title test 3",
+                    Comment = "Comment test 3",
+                    Date = timestamp3
+                },
+                new Reminder
+                {
+                    Title = "Title test 4",
+                    Comment = "Comment test 4",
+                    Date = timestamp4
+                }
+            };
+
+            var db = DatabaseConnectionMock.Instance.GetConnection();
+            db.InsertAll(reminders, typeof(Reminder));
+
+            var allReminders = await _reminderDataService.GetAll();
+            IList<Reminder> allRemindersList = new List<Reminder>(allReminders);
+
+            Assert.AreEqual("Title test 2", allRemindersList[0].Title);
+            Assert.AreEqual("Title test 4", allRemindersList[1].Title);
+            Assert.AreEqual("Title test 1", allRemindersList[2].Title);
+            Assert.AreEqual("Title test 3", allRemindersList[3].Title);
+        }
+
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
             DatabaseConnectionMock connectionService = new DatabaseConnectionMock();
