@@ -68,16 +68,9 @@ Phasellus nec nunc";
                 Date = timestamp
             };
 
-            await _reminderDataService.AddOrUpdate(reminder);
+            int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
-            Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
-
-            Assert.IsNotNull(insertedReminder);
-            Assert.AreEqual("Title test", insertedReminder.Title);
-            Assert.IsNull(insertedReminder.Comment);
-            Assert.AreEqual(timestamp, insertedReminder.Date);
-            Assert.AreEqual(0, insertedReminder.AlreadyNotified);
+            Assert.AreEqual(1, numberOfCreatedReminders);
         }
 
         [TestMethod]
@@ -93,16 +86,9 @@ Phasellus nec nunc";
                 Date = timestamp
             };
 
-            await _reminderDataService.AddOrUpdate(reminder);
+            int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
-            Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
-
-            Assert.IsNotNull(insertedReminder);
-            Assert.AreEqual("Title test", insertedReminder.Title);
-            Assert.AreEqual("Comment test", insertedReminder.Comment);
-            Assert.AreEqual(timestamp, insertedReminder.Date);
-            Assert.AreEqual(0, insertedReminder.AlreadyNotified);
+            Assert.AreEqual(1, numberOfCreatedReminders);
         }
 
         [TestMethod]
@@ -125,14 +111,9 @@ Phasellus nec nunc";
 
             insertedReminder.Comment = null;
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 
-            Assert.IsNotNull(updatedReminder);
-            Assert.AreEqual("Title test", updatedReminder.Title);
             Assert.IsNull(updatedReminder.Comment);
-            Assert.AreEqual(timestamp, updatedReminder.Date);
-            Assert.AreEqual(0, updatedReminder.AlreadyNotified);
         }
 
         [TestMethod]
@@ -154,14 +135,9 @@ Phasellus nec nunc";
 
             insertedReminder.Comment = "Comment test";
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 
-            Assert.IsNotNull(updatedReminder);
-            Assert.AreEqual("Title test", updatedReminder.Title);
             Assert.AreEqual("Comment test", updatedReminder.Comment);
-            Assert.AreEqual(timestamp, updatedReminder.Date);
-            Assert.AreEqual(0, updatedReminder.AlreadyNotified);
         }
 
         [TestMethod]
@@ -182,7 +158,6 @@ Phasellus nec nunc";
             var db = DatabaseConnectionMock.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
-            Assert.IsNotNull(insertedReminder);
             Assert.AreEqual(EXPECTED_TITLE, insertedReminder.Title);
             Assert.AreEqual(EXPECTED_COMMENT, insertedReminder.Comment);
         }
@@ -209,9 +184,8 @@ Phasellus nec nunc";
             insertedReminder.Comment = LONG_MESSAGE;
 
             await _reminderDataService.AddOrUpdate(insertedReminder);
-
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
-            Assert.IsNotNull(updatedReminder);
+
             Assert.AreEqual(EXPECTED_TITLE, updatedReminder.Title);
             Assert.AreEqual(EXPECTED_COMMENT, updatedReminder.Comment);
         }
@@ -244,7 +218,6 @@ Phasellus nec nunc";
 
             Reminder updatedReminder = db.Find<Reminder>(insertedReminder.Id);
 
-            Assert.IsNotNull(updatedReminder);
             Assert.AreEqual("Title test updated", updatedReminder.Title);
             Assert.AreEqual("Comment test updated", updatedReminder.Comment);
             Assert.AreEqual(updatedTimestamp, updatedReminder.Date);
@@ -256,7 +229,7 @@ Phasellus nec nunc";
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionMock connectionService = new DatabaseConnectionMock();
+            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

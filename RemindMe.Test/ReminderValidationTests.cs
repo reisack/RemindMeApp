@@ -12,7 +12,7 @@ namespace RemindMe.Test
     public class ReminderValidationTests
     {
         [TestMethod]
-        public void ValidateAReminderAlreadyPastSinceTenMinutes()
+        public void AReminderAlreadyPastSinceTenMinutesMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -23,11 +23,13 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsFalse(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsFalse(isReminderValid);
         }
 
         [TestMethod]
-        public void ValidateAReminderAlreadyPastSinceTwoDays()
+        public void AReminderAlreadyPastSinceFortySevenHoursMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1).AddDays(-2);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -38,11 +40,13 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsFalse(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsFalse(isReminderValid);
         }
 
         [TestMethod]
-        public void ValidateAReminderThatNotifyInOneHour()
+        public void AReminderThatNotifyInOneHourMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -53,11 +57,13 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsTrue(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsTrue(isReminderValid);
         }
 
         [TestMethod]
-        public void ValidateAReminderWithoutTitle()
+        public void AReminderWithoutTitleMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -68,11 +74,13 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsFalse(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsFalse(isReminderValid);
         }
 
         [TestMethod]
-        public void ValidateAReminderWithoutComment()
+        public void AReminderWithoutCommentMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -83,11 +91,13 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsTrue(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsTrue(isReminderValid);
         }
 
         [TestMethod]
-        public void ValidateAReminderWithoutDate()
+        public void AReminderWithoutDateMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -98,13 +108,15 @@ namespace RemindMe.Test
                 Date = timestamp
             };
 
-            Assert.IsFalse(IsReminderValid(reminder));
+            bool isReminderValid = IsReminderValid(reminder);
+
+            Assert.IsFalse(isReminderValid);
         }
 
         private ReminderEditViewModel GetReminderViewModelWithMocks()
         {
             DialogMockService dialogService = new DialogMockService();
-            DatabaseConnectionMock connectionService = new DatabaseConnectionMock();
+            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
 
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);

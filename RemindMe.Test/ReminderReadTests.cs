@@ -6,7 +6,6 @@ using RemindMe.Test.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RemindMe.Test
@@ -273,7 +272,7 @@ namespace RemindMe.Test
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionMock connectionService = new DatabaseConnectionMock();
+            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

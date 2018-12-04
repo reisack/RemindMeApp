@@ -102,7 +102,6 @@
     <Compile Include="ReminderValidationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mocks\remindme_empty_mock.db" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

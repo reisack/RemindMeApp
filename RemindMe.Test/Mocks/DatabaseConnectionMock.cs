@@ -1,6 +1,5 @@
 ﻿using System;
 using SQLite;
-using RemindMe.Core.Models;
 using RemindMe.Core.Interfaces;
 
 namespace RemindMe.Test.Mocks
@@ -12,8 +11,8 @@ namespace RemindMe.Test.Mocks
 
         public DatabaseConnectionMock()
         {
-            _connection = new SQLiteConnection("remindme_empty_mock.db");
-            _connection.CreateTable<Reminder>();
+            // In-memory database : extremely fast
+            _connection = new SQLiteConnection(":memory:");
         }
 
         public SQLiteConnection GetConnection()

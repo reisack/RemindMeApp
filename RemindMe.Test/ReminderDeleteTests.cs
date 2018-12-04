@@ -25,7 +25,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task DeleteAReminder()
+        public async Task DeleteAReminderThatAlreadyExistsInDatabaseMustWork()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -40,16 +40,17 @@ namespace RemindMe.Test
             var db = DatabaseConnectionMock.Instance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
 
-            await _reminderDataService.Delete(reminder.Id);
+            int numberOfDeletedReminders = await _reminderDataService.Delete(reminder.Id);
 
-            Reminder reminderObjectShouldBeNull = db.Find<Reminder>(reminder.Id);
-            Assert.IsNull(reminderObjectShouldBeNull);
+            Assert.AreEqual(1, numberOfDeletedReminders);
         }
 
         [TestMethod]
-        public async Task DeleteAReminderThatNotExistsInDatabaseShouldNotThrowAnException()
+        public async Task DeleteAReminderThatNotExistsInDatabaseMustNotThrowAnException()
         {
-            await _reminderDataService.Delete(123);
+            int numberOfDeletedReminders = await _reminderDataService.Delete(123);
+
+            Assert.AreEqual(0, numberOfDeletedReminders);
         }
 
         [TestMethod]
@@ -95,20 +96,17 @@ namespace RemindMe.Test
             var db = DatabaseConnectionMock.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
-            await _reminderDataService.DeletePast();
-            var reminderTable = db.Table<Reminder>();
-            Reminder reminder1 = reminderTable.FirstOrDefault((x) => x.Title == "Title test 1");
-            Reminder reminder4 = reminderTable.FirstOrDefault((x) => x.Title == "Title test 4");
+            int numberOfDeletedReminders = await _reminderDataService.DeletePast();
+            int numberOfRemindersLeft = db.Table<Reminder>().Count();
 
-            Assert.AreEqual(2, reminderTable.Count());
-            Assert.IsNotNull(reminder1);
-            Assert.IsNotNull(reminder4);
+            Assert.AreEqual(2, numberOfDeletedReminders);
+            Assert.AreEqual(2, numberOfRemindersLeft);
 
         }
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionMock connectionService = new DatabaseConnectionMock();
+            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

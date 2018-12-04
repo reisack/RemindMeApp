@@ -8,9 +8,9 @@ namespace RemindMe.Core.Interfaces
     {
         Task<Reminder> Get(long id);
         Task<IEnumerable<Reminder>> GetAll();
-        Task AddOrUpdate(Reminder reminder);
-        Task Delete(long id);
-        Task DeletePast();
+        Task<int> AddOrUpdate(Reminder reminder);
+        Task<int> Delete(long id);
+        Task<int> DeletePast();
         Task<IEnumerable<Reminder>> GetRemindersToNotify();
         Task SetToNotified(IEnumerable<Reminder> reminders);
         long? GetNextReminderTimestamp();

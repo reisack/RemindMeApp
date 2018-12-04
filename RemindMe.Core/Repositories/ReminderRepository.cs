@@ -14,39 +14,39 @@ namespace RemindMe.Core.Repositories
             _connectionService = connectionService;
         }
 
-        public async Task AddOrUpdate(Reminder reminder)
+        public async Task<int> AddOrUpdate(Reminder reminder)
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 var db = _connectionService.GetConnection();
                 var existingReminder = db.Find<Reminder>(reminder.Id);
                 if (existingReminder != null)
                 {
-                    db.Update(reminder, typeof(Reminder));
+                    return db.Update(reminder, typeof(Reminder));
                 }
                 else
                 {
-                    db.Insert(reminder, typeof(Reminder));
+                    return db.Insert(reminder, typeof(Reminder));
                 }
             });
         }
 
-        public async Task Delete(long id)
+        public async Task<int> Delete(long id)
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 var db = _connectionService.GetConnection();
-                db.Delete<Reminder>(id);
+                return db.Delete<Reminder>(id);
             });
         }
 
-        public async Task DeletePast()
+        public async Task<int> DeletePast()
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 var db = _connectionService.GetConnection();
                 string query = @"DELETE FROM Reminder WHERE Date < strftime('%s','now')";
-                db.Execute(query);
+                return db.Execute(query);
             });
         }
 

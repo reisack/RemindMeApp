@@ -14,7 +14,7 @@ namespace RemindMe.Core.Services
             _reminderRepository = reminderRepository;
         }
 
-        public async Task AddOrUpdate(Reminder reminder)
+        public async Task<int> AddOrUpdate(Reminder reminder)
         {
             reminder.AlreadyNotified = 0;
 
@@ -31,17 +31,17 @@ namespace RemindMe.Core.Services
                 reminder.Comment = reminder.Comment.Substring(0, commentMaxLength);
             }
 
-            await _reminderRepository.AddOrUpdate(reminder);
+            return await _reminderRepository.AddOrUpdate(reminder);
         }
 
-        public async Task Delete(long id)
+        public async Task<int> Delete(long id)
         {
-            await _reminderRepository.Delete(id);
+            return await _reminderRepository.Delete(id);
         }
 
-        public async Task DeletePast()
+        public async Task<int> DeletePast()
         {
-            await _reminderRepository.DeletePast();
+            return await _reminderRepository.DeletePast();
         }
 
         public async Task<Reminder> Get(long id)
