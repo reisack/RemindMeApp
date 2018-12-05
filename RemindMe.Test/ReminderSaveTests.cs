@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
-using RemindMe.Test.Mocks;
+using RemindMe.Test.Fakes;
 
 namespace RemindMe.Test
 {
@@ -49,7 +49,7 @@ Phasellus nec nunc";
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
@@ -106,7 +106,7 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = null;
@@ -130,7 +130,7 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = "Comment test";
@@ -155,7 +155,7 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             Assert.AreEqual(EXPECTED_TITLE, insertedReminder.Title);
@@ -175,7 +175,7 @@ Phasellus nec nunc";
                 Date = timestamp
             };
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
 
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
@@ -206,7 +206,7 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Title = "Title test updated";
@@ -229,7 +229,7 @@ Phasellus nec nunc";
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

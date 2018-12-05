@@ -1,9 +1,9 @@
 ﻿using RemindMe.Core.Interfaces;
 using System.Threading.Tasks;
 
-namespace RemindMe.Test.Mocks
+namespace RemindMe.Test.Fakes
 {
-    public class DialogMockService : IDialogService
+    public class DialogDummyService : IDialogService
     {
         public Task ShowAlertAsync(string message, string title, string buttonText)
         {

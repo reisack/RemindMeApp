@@ -93,8 +93,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mocks\DatabaseConnectionMock.cs" />
-    <Compile Include="Mocks\DialogMockService.cs" />
+    <Compile Include="Fakes\DatabaseConnectionFake.cs" />
+    <Compile Include="Fakes\DialogDummyService.cs" />
     <Compile Include="ReminderDeleteTests.cs" />
     <Compile Include="ReminderReadTests.cs" />
     <Compile Include="ReminderSaveTests.cs" />

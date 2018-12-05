@@ -3,7 +3,7 @@ using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Core.ViewModels;
-using RemindMe.Test.Mocks;
+using RemindMe.Test.Fakes;
 using System;
 
 namespace RemindMe.Test
@@ -115,8 +115,8 @@ namespace RemindMe.Test
 
         private ReminderEditViewModel GetReminderViewModelWithMocks()
         {
-            DialogMockService dialogService = new DialogMockService();
-            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
+            DialogDummyService dialogService = new DialogDummyService();
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
 
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);

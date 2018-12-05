@@ -2,14 +2,14 @@
 using SQLite;
 using RemindMe.Core.Interfaces;
 
-namespace RemindMe.Test.Mocks
+namespace RemindMe.Test.Fakes
 {
-    public class DatabaseConnectionMock : IConnectionService
+    public class DatabaseConnectionFake : IConnectionService
     {
-        private static Lazy<DatabaseConnectionMock> _instance = new Lazy<DatabaseConnectionMock>(() => new DatabaseConnectionMock());
+        private static Lazy<DatabaseConnectionFake> _instance = new Lazy<DatabaseConnectionFake>(() => new DatabaseConnectionFake());
         private SQLiteConnection _connection;
 
-        public DatabaseConnectionMock()
+        public DatabaseConnectionFake()
         {
             // In-memory database : extremely fast
             _connection = new SQLiteConnection(":memory:");
@@ -20,7 +20,7 @@ namespace RemindMe.Test.Mocks
             return _connection;
         }
 
-        public static DatabaseConnectionMock Instance
+        public static DatabaseConnectionFake Instance
         {
             get { return _instance.Value; }
         }

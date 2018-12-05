@@ -2,7 +2,7 @@
 using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
-using RemindMe.Test.Mocks;
+using RemindMe.Test.Fakes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace RemindMe.Test
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
@@ -65,7 +65,7 @@ namespace RemindMe.Test
                 }
             };
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
@@ -117,12 +117,13 @@ namespace RemindMe.Test
                 }
             };
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
+            var numberOfRemindersToNotify = remindersToNotify.Count();
 
-            Assert.AreEqual(0, remindersToNotify.Count());
+            Assert.AreEqual(0, numberOfRemindersToNotify);
         }
 
         [TestMethod]
@@ -165,9 +166,9 @@ namespace RemindMe.Test
                 }
             };
 
-            long? timestampShouldBeNull = _reminderDataService.GetNextReminderTimestamp();
+            long? timestampMustBeNull = _reminderDataService.GetNextReminderTimestamp();
 
-            Assert.IsNull(timestampShouldBeNull);
+            Assert.IsNull(timestampMustBeNull);
         }
 
         [TestMethod]
@@ -210,7 +211,7 @@ namespace RemindMe.Test
                 }
             };
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             long? nextReminderTimestamp = _reminderDataService.GetNextReminderTimestamp();
@@ -258,7 +259,7 @@ namespace RemindMe.Test
                 }
             };
 
-            var db = DatabaseConnectionMock.Instance.GetConnection();
+            var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var allReminders = await _reminderDataService.GetAll();
@@ -272,7 +273,7 @@ namespace RemindMe.Test
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionMock connectionService = DatabaseConnectionMock.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 
