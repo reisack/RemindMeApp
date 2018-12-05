@@ -26,7 +26,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task SomeRemindersToNotify()
+        public async Task ReturnTwoRemindersToNotifyInFour()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
@@ -78,7 +78,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task NoReminderToNotify()
+        public async Task ReturnNoReminderToNotify()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
@@ -127,7 +127,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void GetNextReminderTimestampIsNull()
+        public void ReturnANullNextReminderTimestamp()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
@@ -172,7 +172,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public void GetNextReminderTimestamp()
+        public void ReturnTheNextReminderTimestamp()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
@@ -220,7 +220,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task GetAllRemindersInExpectedOrder()
+        public async Task ReturnAllRemindersInExpectedOrder()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();

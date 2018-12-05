@@ -25,7 +25,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task DeleteAReminderThatAlreadyExistsInDatabaseMustWork()
+        public async Task DeleteAReminderThatAlreadyExistsInDatabase()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
@@ -54,7 +54,7 @@ namespace RemindMe.Test
         }
 
         [TestMethod]
-        public async Task DeleteTwoPastRemindersOfFour()
+        public async Task DeleteTwoPastRemindersInFour()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
@@ -105,6 +105,53 @@ namespace RemindMe.Test
             Assert.IsNotNull(reminder1);
             Assert.IsNotNull(reminder4);
 
+        }
+
+        [TestMethod]
+        public async Task NoPastRemindersToDelete()
+        {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
+            long timestamp1 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(30);
+            long timestamp2 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddHours(3);
+            long timestamp3 = dateTimeOffset.ToUnixTimeSeconds();
+            dateTimeOffset = DateTimeOffset.UtcNow.AddHours(5);
+            long timestamp4 = dateTimeOffset.ToUnixTimeSeconds();
+
+            List<Reminder> reminders = new List<Reminder>
+            {
+                new Reminder
+                {
+                    Title = "Title test 1",
+                    Comment = "Comment test 1",
+                    Date = timestamp1
+                },
+                new Reminder
+                {
+                    Title = "Title test 2",
+                    Comment = "Comment test 2",
+                    Date = timestamp2
+                },
+                new Reminder
+                {
+                    Title = "Title test 3",
+                    Comment = "Comment test 3",
+                    Date = timestamp3
+                },
+                new Reminder
+                {
+                    Title = "Title test 4",
+                    Comment = "Comment test 4",
+                    Date = timestamp4
+                }
+            };
+
+            var db = DatabaseConnectionFake.Instance.GetConnection();
+            db.InsertAll(reminders, typeof(Reminder));
+
+            int numberOfDeletedReminders = await _reminderDataService.DeletePast();
+            Assert.AreEqual(0, numberOfDeletedReminders);
         }
 
         private ReminderDataService GetReminderDataServiceWithMocks()
