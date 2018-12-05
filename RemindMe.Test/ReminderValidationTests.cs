@@ -115,7 +115,7 @@ namespace RemindMe.Test
 
         private ReminderEditViewModel GetReminderViewModelWithMocks()
         {
-            DialogDummyService dialogService = new DialogDummyService();
+            DialogServiceDummy dialogService = new DialogServiceDummy();
             DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
 
             ReminderRepository repository = new ReminderRepository(connectionService);

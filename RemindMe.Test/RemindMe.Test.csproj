@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fakes\DatabaseConnectionFake.cs" />
-    <Compile Include="Fakes\DialogDummyService.cs" />
+    <Compile Include="Fakes\DialogServiceDummy.cs" />
     <Compile Include="ReminderDeleteTests.cs" />
     <Compile Include="ReminderReadTests.cs" />
     <Compile Include="ReminderSaveTests.cs" />

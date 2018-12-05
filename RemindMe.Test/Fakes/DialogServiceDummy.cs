@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace RemindMe.Test.Fakes
 {
-    public class DialogDummyService : IDialogService
+    public class DialogServiceDummy : IDialogService
     {
         public Task ShowAlertAsync(string message, string title, string buttonText)
         {
