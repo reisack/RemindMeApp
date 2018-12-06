@@ -70,8 +70,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void AReminderWithoutDateMustBeInvalid()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutDateByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutDateByDefiningTimestamp();
 
             bool isReminderValid = IsReminderValid(reminder);
 

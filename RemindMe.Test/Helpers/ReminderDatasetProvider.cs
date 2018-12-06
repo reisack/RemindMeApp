@@ -8,70 +8,48 @@ namespace RemindMe.Test.Helpers
     {
         public static Reminder GetTestReminderWithComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
+            return new Reminder
             {
                 Title = "Title test",
                 Comment = "Comment test",
-                Date = timestamp
+                Date = DateTimeOffset.UtcNow.AddMinutes(10).ToUnixTimeSeconds()
             };
-
-            return reminder;
         }
 
         public static Reminder GetTestReminderWithoutComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
+            return new Reminder
             {
                 Title = "Title test",
-                Date = timestamp
+                Date = DateTimeOffset.UtcNow.AddMinutes(10).ToUnixTimeSeconds()
             };
-
-            return reminder;
         }
 
         public static Reminder GetReminderWithoutCommentByDefiningTimestamp(DateTimeOffset timestampOffset)
         {
-            long timestamp = timestampOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
+            return new Reminder
             {
                 Title = "Title test",
-                Date = timestamp
+                Date = timestampOffset.ToUnixTimeSeconds()
             };
-
-            return reminder;
         }
 
         public static Reminder GetReminderWithoutTitleByDefiningTimestamp(DateTimeOffset timestampOffset)
         {
-            long timestamp = timestampOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
+            return new Reminder
             {
                 Comment = "Comment test",
-                Date = timestamp
+                Date = timestampOffset.ToUnixTimeSeconds()
             };
-
-            return reminder;
         }
 
-        public static Reminder GetReminderWithoutDateByDefiningTimestamp(DateTimeOffset timestampOffset)
+        public static Reminder GetReminderWithoutDateByDefiningTimestamp()
         {
-            long timestamp = timestampOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
+            return new Reminder
             {
                 Title = "Title test",
                 Comment = "Comment test"
             };
-
-            return reminder;
         }
 
         public static List<Reminder> GetListWithPastAndUpcomingReminders()

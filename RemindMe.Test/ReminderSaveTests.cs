@@ -114,14 +114,11 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithBothTooLongTitleAndComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
             Reminder reminder = new Reminder
             {
                 Title = LONG_MESSAGE,
                 Comment = LONG_MESSAGE,
-                Date = timestamp
+                Date = DateTimeOffset.UtcNow.AddMinutes(10).ToUnixTimeSeconds()
             };
 
             await _reminderDataService.AddOrUpdate(reminder);
@@ -158,9 +155,8 @@ Phasellus nec nunc";
         {
             Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
 
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-            long updatedTimestamp = timestamp + (60 * 5);
+            long reminderTimestamp = reminder.Date;
+            long updatedTimestamp = reminderTimestamp + (60 * 5);
 
             await _reminderDataService.AddOrUpdate(reminder);
 

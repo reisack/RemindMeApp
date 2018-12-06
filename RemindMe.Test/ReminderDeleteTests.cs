@@ -4,8 +4,6 @@ using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Test.Fakes;
 using RemindMe.Test.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RemindMe.Test
