@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Fakes\DatabaseConnectionFake.cs" />
     <Compile Include="Fakes\DialogServiceDummy.cs" />
+    <Compile Include="Helpers\ReminderDatasetProvider.cs" />
     <Compile Include="ReminderDeleteTests.cs" />
     <Compile Include="ReminderReadTests.cs" />
     <Compile Include="ReminderSaveTests.cs" />

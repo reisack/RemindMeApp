@@ -4,6 +4,7 @@ using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Core.ViewModels;
 using RemindMe.Test.Fakes;
+using RemindMe.Test.Helpers;
 using System;
 
 namespace RemindMe.Test
@@ -15,13 +16,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceTenMinutesMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -32,13 +27,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceFortySevenHoursMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1).AddDays(-2);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -49,13 +38,7 @@ namespace RemindMe.Test
         public void AReminderThatNotifyInOneHourMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -66,13 +49,7 @@ namespace RemindMe.Test
         public void AReminderWithoutTitleMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Comment = "Comment test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutTitleByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -83,13 +60,7 @@ namespace RemindMe.Test
         public void AReminderWithoutCommentMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -100,13 +71,7 @@ namespace RemindMe.Test
         public void AReminderWithoutDateMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Comment = "Comment test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutDateByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -127,8 +92,6 @@ namespace RemindMe.Test
 
         private bool IsReminderValid(Reminder reminder)
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(reminder.Date);
-
             ReminderEditViewModel viewModel = GetReminderViewModelWithMocks();
             viewModel.SelectedReminder = reminder;
 

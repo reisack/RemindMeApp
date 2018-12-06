@@ -5,6 +5,7 @@ using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Test.Fakes;
+using RemindMe.Test.Helpers;
 
 namespace RemindMe.Test
 {
@@ -59,14 +60,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithoutComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -76,15 +70,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Comment = "Comment test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -94,15 +80,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithCommentAndUpdateWithoutIt()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Comment = "Comment test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
@@ -119,14 +97,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutCommentAndUpdateWithIt()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithoutComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
@@ -165,15 +136,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderWithBothTooLongTitleAndComment()
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
-            long timestamp = dateTimeOffset.ToUnixTimeSeconds();
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Comment = "Comment test",
-                Date = timestamp
-            };
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
@@ -193,16 +156,11 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderData()
         {
+            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(10);
             long timestamp = dateTimeOffset.ToUnixTimeSeconds();
             long updatedTimestamp = timestamp + (60 * 5);
-
-            Reminder reminder = new Reminder
-            {
-                Title = "Title test",
-                Comment = "Comment test",
-                Date = timestamp
-            };
 
             await _reminderDataService.AddOrUpdate(reminder);
 
