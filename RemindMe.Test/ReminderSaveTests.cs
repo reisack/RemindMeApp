@@ -60,7 +60,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutComment()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithoutComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithoutComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -70,7 +70,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithComment()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -80,7 +80,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithCommentAndUpdateWithoutIt()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
@@ -97,7 +97,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutCommentAndUpdateWithIt()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithoutComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithoutComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
@@ -133,7 +133,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderWithBothTooLongTitleAndComment()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
@@ -153,7 +153,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderData()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
 
             long reminderTimestamp = reminder.Date;
             long updatedTimestamp = reminderTimestamp + (60 * 5);

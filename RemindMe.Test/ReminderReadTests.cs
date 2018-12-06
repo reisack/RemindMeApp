@@ -29,7 +29,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnTwoRemindersToNotifyInFour()
         {
-            var reminders = ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
@@ -46,7 +46,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnNoReminderToNotify()
         {
-            var reminders = ReminderDatasetProvider.GetListWithOnlyUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
@@ -60,7 +60,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnANullNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.GetListWithOnlyPastReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyPastReminders();
 
             long? timestampMustBeNull = _reminderDataService.GetNextReminderTimestamp();
 
@@ -70,7 +70,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnTheNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
@@ -84,7 +84,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnAllRemindersInExpectedOrder()
         {
-            var reminders = ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));

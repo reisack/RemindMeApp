@@ -26,7 +26,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task DeleteAReminderThatAlreadyExistsInDatabase()
         {
-            Reminder reminder = ReminderDatasetProvider.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
@@ -47,7 +47,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task DeleteTwoPastRemindersInFour()
         {
-            var reminders = ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
@@ -66,7 +66,7 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task NoPastRemindersToDelete()
         {
-            var reminders = ReminderDatasetProvider.GetListWithOnlyUpcomingReminders();
+            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyUpcomingReminders();
 
             var db = DatabaseConnectionFake.Instance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));

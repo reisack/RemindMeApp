@@ -16,7 +16,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceTenMinutesMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -27,7 +27,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceFortySevenHoursMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1).AddDays(-2);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -38,7 +38,7 @@ namespace RemindMe.Test
         public void AReminderThatNotifyInOneHourMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -49,7 +49,7 @@ namespace RemindMe.Test
         public void AReminderWithoutTitleMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutTitleByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutTitleByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -60,7 +60,7 @@ namespace RemindMe.Test
         public void AReminderWithoutCommentMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -70,7 +70,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void AReminderWithoutDateMustBeInvalid()
         {
-            Reminder reminder = ReminderDatasetProvider.GetReminderWithoutDateByDefiningTimestamp();
+            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutDateByDefiningTimestamp();
 
             bool isReminderValid = IsReminderValid(reminder);
 

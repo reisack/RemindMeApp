@@ -4,9 +4,16 @@ using System.Collections.Generic;
 
 namespace RemindMe.Test.Helpers
 {
-    public static class ReminderDatasetProvider
+    public class ReminderDatasetProvider
     {
-        public static Reminder GetTestReminderWithComment()
+        private static Lazy<ReminderDatasetProvider> _instance = new Lazy<ReminderDatasetProvider>(() => new ReminderDatasetProvider());
+
+        public static ReminderDatasetProvider Instance
+        {
+            get { return _instance.Value; }
+        }
+
+        public Reminder GetTestReminderWithComment()
         {
             return new Reminder
             {
@@ -16,7 +23,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static Reminder GetTestReminderWithoutComment()
+        public Reminder GetTestReminderWithoutComment()
         {
             return new Reminder
             {
@@ -25,7 +32,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static Reminder GetReminderWithoutCommentByDefiningTimestamp(DateTimeOffset timestampOffset)
+        public Reminder GetReminderWithoutCommentByDefiningTimestamp(DateTimeOffset timestampOffset)
         {
             return new Reminder
             {
@@ -34,7 +41,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static Reminder GetReminderWithoutTitleByDefiningTimestamp(DateTimeOffset timestampOffset)
+        public Reminder GetReminderWithoutTitleByDefiningTimestamp(DateTimeOffset timestampOffset)
         {
             return new Reminder
             {
@@ -43,7 +50,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static Reminder GetReminderWithoutDateByDefiningTimestamp()
+        public Reminder GetReminderWithoutDateByDefiningTimestamp()
         {
             return new Reminder
             {
@@ -52,7 +59,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static List<Reminder> GetListWithPastAndUpcomingReminders()
+        public List<Reminder> GetListWithPastAndUpcomingReminders()
         {
             return new List<Reminder>
             {
@@ -83,7 +90,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static List<Reminder> GetListWithOnlyUpcomingReminders()
+        public List<Reminder> GetListWithOnlyUpcomingReminders()
         {
             return new List<Reminder>
             {
@@ -114,7 +121,7 @@ namespace RemindMe.Test.Helpers
             };
         }
 
-        public static List<Reminder> GetListWithOnlyPastReminders()
+        public List<Reminder> GetListWithOnlyPastReminders()
         {
             return new List<Reminder>
             {
