@@ -51,7 +51,7 @@ namespace RemindMe.Android.Services
         {
             if (GetSystemService(NotificationService) is NotificationManager notificationManager)
             {
-                await ReminderService.Instance.NotifyReminders(notificationManager, this);
+                await ReminderService.SingletonInstance.NotifyReminders(notificationManager, this);
             }
         }
     }

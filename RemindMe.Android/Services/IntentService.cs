@@ -49,7 +49,7 @@ namespace RemindMe.Android.Services
             NotificationManager notificationManager = GetSystemService(NotificationService) as NotificationManager;
             if (notificationManager != null)
             {
-                ReminderService.Instance.NotifyReminders(notificationManager, this);
+                ReminderService.SingletonInstance.NotifyReminders(notificationManager, this);
             }
         }
     }

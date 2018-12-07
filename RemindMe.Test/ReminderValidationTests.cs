@@ -16,7 +16,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceTenMinutesMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(-10);
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -27,7 +27,7 @@ namespace RemindMe.Test
         public void AReminderAlreadyPastSinceFortySevenHoursMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1).AddDays(-2);
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -38,7 +38,7 @@ namespace RemindMe.Test
         public void AReminderThatNotifyInOneHourMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddHours(1);
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -49,7 +49,7 @@ namespace RemindMe.Test
         public void AReminderWithoutTitleMustBeInvalid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutTitleByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutTitleByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -60,7 +60,7 @@ namespace RemindMe.Test
         public void AReminderWithoutCommentMustBeValid()
         {
             DateTimeOffset dateTimeOffset = DateTimeOffset.UtcNow.AddMinutes(5);
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutCommentByDefiningTimestamp(dateTimeOffset);
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -70,7 +70,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void AReminderWithoutDateMustBeInvalid()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetReminderWithoutDateByDefiningTimestamp();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetReminderWithoutDateByDefiningTimestamp();
 
             bool isReminderValid = IsReminderValid(reminder);
 
@@ -80,7 +80,7 @@ namespace RemindMe.Test
         private ReminderEditViewModel GetReminderViewModelWithMocks()
         {
             DialogServiceDummy dialogService = new DialogServiceDummy();
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
 
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
@@ -91,12 +91,12 @@ namespace RemindMe.Test
 
         private bool IsReminderValid(Reminder reminder)
         {
-            ReminderEditViewModel viewModel = GetReminderViewModelWithMocks();
-            viewModel.SelectedReminder = reminder;
+            ReminderEditViewModel fakedReminderViewModel = GetReminderViewModelWithMocks();
+            fakedReminderViewModel.SelectedReminder = reminder;
 
-            PrivateObject reminderViewModelMock = new PrivateObject(viewModel);
-            reminderViewModelMock.Invoke("SetReminderDayAndTime");
-            return (bool)reminderViewModelMock.Invoke("Validate");
+            PrivateObject privateFakedReminderViewModel = new PrivateObject(fakedReminderViewModel);
+            privateFakedReminderViewModel.Invoke("SetReminderDayAndTime");
+            return (bool)privateFakedReminderViewModel.Invoke("Validate");
         }
     }
 }

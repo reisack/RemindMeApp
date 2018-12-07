@@ -8,7 +8,7 @@ namespace RemindMe.Core.Database
 {
     public class DatabaseConnection : IConnectionService
     {
-        private static Lazy<DatabaseConnection> _instance = new Lazy<DatabaseConnection>(() => new DatabaseConnection());
+        private static Lazy<DatabaseConnection> _singletonInstance = new Lazy<DatabaseConnection>(() => new DatabaseConnection());
         private SQLiteConnection _connection;
 
         public DatabaseConnection()
@@ -24,9 +24,9 @@ namespace RemindMe.Core.Database
             return _connection;
         }
 
-        public static DatabaseConnection Instance
+        public static DatabaseConnection SingletonInstance
         {
-            get { return _instance.Value; }
+            get { return _singletonInstance.Value; }
         }
     }
 }

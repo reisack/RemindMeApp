@@ -6,11 +6,11 @@ namespace RemindMe.Test.Helpers
 {
     public class ReminderDatasetProvider
     {
-        private static Lazy<ReminderDatasetProvider> _instance = new Lazy<ReminderDatasetProvider>(() => new ReminderDatasetProvider());
+        private static Lazy<ReminderDatasetProvider> _singletonInstance = new Lazy<ReminderDatasetProvider>(() => new ReminderDatasetProvider());
 
-        public static ReminderDatasetProvider Instance
+        public static ReminderDatasetProvider SingletonInstance
         {
-            get { return _instance.Value; }
+            get { return _singletonInstance.Value; }
         }
 
         public Reminder GetTestReminderWithComment()

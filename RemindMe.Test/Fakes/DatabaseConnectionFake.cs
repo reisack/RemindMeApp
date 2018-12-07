@@ -6,7 +6,7 @@ namespace RemindMe.Test.Fakes
 {
     public class DatabaseConnectionFake : IConnectionService
     {
-        private static Lazy<DatabaseConnectionFake> _instance = new Lazy<DatabaseConnectionFake>(() => new DatabaseConnectionFake());
+        private static Lazy<DatabaseConnectionFake> _singletonInstance = new Lazy<DatabaseConnectionFake>(() => new DatabaseConnectionFake());
         private SQLiteConnection _connection;
 
         public DatabaseConnectionFake()
@@ -20,9 +20,9 @@ namespace RemindMe.Test.Fakes
             return _connection;
         }
 
-        public static DatabaseConnectionFake Instance
+        public static DatabaseConnectionFake SingletonInstance
         {
-            get { return _instance.Value; }
+            get { return _singletonInstance.Value; }
         }
     }
 }

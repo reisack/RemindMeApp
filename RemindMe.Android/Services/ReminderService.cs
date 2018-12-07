@@ -13,7 +13,7 @@ namespace RemindMe.Android.Services
 {
     public class ReminderService
     {
-        private static Lazy<ReminderService> _instance = new Lazy<ReminderService>(() => new ReminderService());
+        private static Lazy<ReminderService> _singletonInstance = new Lazy<ReminderService>(() => new ReminderService());
 
         public IReminderDataService _reminderDataService;
         public ReminderDaemonDataService _reminderDaemonDataService;
@@ -26,9 +26,9 @@ namespace RemindMe.Android.Services
             }
         }
 
-        public static ReminderService Instance
+        public static ReminderService SingletonInstance
         {
-            get { return _instance.Value; }
+            get { return _singletonInstance.Value; }
         }
 
         public void WakeUpService(Context context)
@@ -88,11 +88,11 @@ namespace RemindMe.Android.Services
                     {
                         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
                         {
-                            notification = ReminderNotificationService.Instance.GetNotification(notificationManager, reminder, context);
+                            notification = ReminderNotificationService.SingletonInstance.GetNotification(notificationManager, reminder, context);
                         }
                         else
                         {
-                            notification = ReminderNotificationService.Instance.GetNotificationCompat(notificationManager, reminder, context);
+                            notification = ReminderNotificationService.SingletonInstance.GetNotificationCompat(notificationManager, reminder, context);
                         }
 
                         // Publish the notification
@@ -121,7 +121,7 @@ namespace RemindMe.Android.Services
 
         private void SetAlarmForNextReminder(Context context)
         {
-            long? nextReminderMillisTimestamp = Instance.GetNextReminderMillisTimestamp();
+            long? nextReminderMillisTimestamp = SingletonInstance.GetNextReminderMillisTimestamp();
             if (nextReminderMillisTimestamp.HasValue && nextReminderMillisTimestamp.Value > 0)
             {
                 // Alarm is started 10 seconds after notification time

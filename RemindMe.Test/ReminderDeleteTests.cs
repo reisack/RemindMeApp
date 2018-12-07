@@ -16,7 +16,7 @@ namespace RemindMe.Test
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
@@ -26,9 +26,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task DeleteAReminderThatAlreadyExistsInDatabase()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithComment();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
 
             int numberOfDeletedReminders = await _reminderDataService.Delete(reminder.Id);
@@ -47,9 +47,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task DeleteTwoPastRemindersInFour()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             int numberOfDeletedReminders = await _reminderDataService.DeletePast();
@@ -66,9 +66,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task NoPastRemindersToDelete()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithOnlyUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             int numberOfDeletedReminders = await _reminderDataService.DeletePast();
@@ -77,7 +77,7 @@ namespace RemindMe.Test
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

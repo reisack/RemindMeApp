@@ -50,7 +50,7 @@ Phasellus nec nunc";
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
@@ -60,7 +60,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutComment()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithoutComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithoutComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -70,7 +70,7 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithComment()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithComment();
 
             int numberOfCreatedReminders = await _reminderDataService.AddOrUpdate(reminder);
 
@@ -80,11 +80,11 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithCommentAndUpdateWithoutIt()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = null;
@@ -97,11 +97,11 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task CreateReminderWithoutCommentAndUpdateWithIt()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithoutComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithoutComment();
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Comment = "Comment test";
@@ -123,7 +123,7 @@ Phasellus nec nunc";
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             Assert.AreEqual(EXPECTED_TITLE, insertedReminder.Title);
@@ -133,9 +133,9 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderWithBothTooLongTitleAndComment()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithComment();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.Insert(reminder, typeof(Reminder));
 
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
@@ -153,14 +153,14 @@ Phasellus nec nunc";
         [TestMethod]
         public async Task UpdateReminderData()
         {
-            Reminder reminder = ReminderDatasetProvider.Instance.GetTestReminderWithComment();
+            Reminder reminder = ReminderDatasetProvider.SingletonInstance.GetTestReminderWithComment();
 
             long reminderTimestamp = reminder.Date;
             long updatedTimestamp = reminderTimestamp + (60 * 5);
 
             await _reminderDataService.AddOrUpdate(reminder);
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             Reminder insertedReminder = db.Find<Reminder>(reminder.Id);
 
             insertedReminder.Title = "Title test updated";
@@ -183,7 +183,7 @@ Phasellus nec nunc";
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 

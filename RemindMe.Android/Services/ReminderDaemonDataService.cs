@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using RemindMe.Core.Database;
-using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
 using RemindMe.Core.Repositories;
 
@@ -13,8 +12,7 @@ namespace RemindMe.Android.Services
 
         public ReminderDaemonDataService()
         {
-            DatabaseConnection connectionService = new DatabaseConnection();
-            _reminderRepository = new ReminderRepository(connectionService);
+            _reminderRepository = new ReminderRepository(DatabaseConnection.SingletonInstance);
         }
 
         public async Task<IEnumerable<Reminder>> GetRemindersToNotify()

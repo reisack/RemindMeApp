@@ -9,16 +9,16 @@ namespace RemindMe.Android.Services
 {
     public class ReminderNotificationService
     {
-        private static Lazy<ReminderNotificationService> _instance = new Lazy<ReminderNotificationService>(() => new ReminderNotificationService());
+        private static Lazy<ReminderNotificationService> _singletonInstance = new Lazy<ReminderNotificationService>(() => new ReminderNotificationService());
 
         public ReminderNotificationService()
         {
 
         }
 
-        public static ReminderNotificationService Instance
+        public static ReminderNotificationService SingletonInstance
         {
-            get { return _instance.Value; }
+            get { return _singletonInstance.Value; }
         }
 
         public Notification GetNotification(NotificationManager notificationManager, Reminder reminder, Context context)

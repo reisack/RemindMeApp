@@ -4,7 +4,6 @@ using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Test.Fakes;
 using RemindMe.Test.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ namespace RemindMe.Test
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
@@ -29,9 +28,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnTwoRemindersToNotifyInFour()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
@@ -46,9 +45,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnNoReminderToNotify()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithOnlyUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
@@ -60,7 +59,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnANullNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithOnlyPastReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithOnlyPastReminders();
 
             long? timestampMustBeNull = _reminderDataService.GetNextReminderTimestamp();
 
@@ -70,9 +69,9 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnTheNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             long? nextReminderTimestamp = _reminderDataService.GetNextReminderTimestamp();
@@ -84,9 +83,9 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnAllRemindersInExpectedOrder()
         {
-            var reminders = ReminderDatasetProvider.Instance.GetListWithPastAndUpcomingReminders();
+            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
 
-            var db = DatabaseConnectionFake.Instance.GetConnection();
+            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
             db.InsertAll(reminders, typeof(Reminder));
 
             var allReminders = await _reminderDataService.GetAll();
@@ -100,7 +99,7 @@ namespace RemindMe.Test
 
         private ReminderDataService GetReminderDataServiceWithMocks()
         {
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.Instance;
+            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);
 
