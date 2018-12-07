@@ -77,7 +77,7 @@ namespace RemindMe.Test
             Assert.IsFalse(isReminderValid);
         }
 
-        private ReminderEditViewModel GetReminderViewModelWithMocks()
+        private ReminderEditViewModel GetReminderViewModelWithFakes()
         {
             DialogServiceDummy dialogService = new DialogServiceDummy();
             DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
@@ -91,7 +91,7 @@ namespace RemindMe.Test
 
         private bool IsReminderValid(Reminder reminder)
         {
-            ReminderEditViewModel fakedReminderViewModel = GetReminderViewModelWithMocks();
+            ReminderEditViewModel fakedReminderViewModel = GetReminderViewModelWithFakes();
             fakedReminderViewModel.SelectedReminder = reminder;
 
             PrivateObject privateFakedReminderViewModel = new PrivateObject(fakedReminderViewModel);

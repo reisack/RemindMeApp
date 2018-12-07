@@ -22,7 +22,7 @@ namespace RemindMe.Test
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
-            _reminderDataService = GetReminderDataServiceWithMocks();
+            _reminderDataService = GetReminderDataServiceWithFakes();
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace RemindMe.Test
             Assert.AreEqual("Title test 3", allRemindersList[3].Title);
         }
 
-        private ReminderDataService GetReminderDataServiceWithMocks()
+        private ReminderDataService GetReminderDataServiceWithFakes()
         {
             DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
             ReminderRepository repository = new ReminderRepository(connectionService);

@@ -54,7 +54,7 @@ Phasellus nec nunc";
             db.DropTable<Reminder>();
             db.CreateTable<Reminder>();
 
-            _reminderDataService = GetReminderDataServiceWithMocks();
+            _reminderDataService = GetReminderDataServiceWithFakes();
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ Phasellus nec nunc";
             Assert.AreEqual(0, updatedReminder.AlreadyNotified);
         }
 
-        private ReminderDataService GetReminderDataServiceWithMocks()
+        private ReminderDataService GetReminderDataServiceWithFakes()
         {
             DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
             ReminderRepository repository = new ReminderRepository(connectionService);
