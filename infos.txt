@@ -1,5 +1,0 @@
-SQLite client :
-https://github.com/praeclarum/sqlite-net
-
-Wiki :
-https://github.com/praeclarum/sqlite-net/wiki
