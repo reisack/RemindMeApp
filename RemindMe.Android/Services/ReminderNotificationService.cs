@@ -22,6 +22,7 @@ namespace RemindMe.Android.Services
 
             NotificationChannel channel = new NotificationChannel(channel_id, channel_name, importance);
             channel.EnableVibration(true);
+            channel.EnableLights(true);
             channel.LockscreenVisibility = NotificationVisibility.Public;
 
             notificationManager.CreateNotificationChannel(channel);
