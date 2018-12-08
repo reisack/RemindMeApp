@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 namespace RemindMe.Core.Extensions
 {
@@ -25,6 +26,16 @@ namespace RemindMe.Core.Extensions
                 }
                 return stringBuilder.ToString();
             }
+        }
+
+        public static string UpperFirstCharIfPossible(this string input)
+        {
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                return input.First().ToString().ToUpper() + input.Substring(1);
+            }
+
+            return input;
         }
     }
 }

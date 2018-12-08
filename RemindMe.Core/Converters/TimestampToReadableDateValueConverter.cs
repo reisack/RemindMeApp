@@ -1,6 +1,7 @@
 ﻿using MvvmCross.Platform.Converters;
 using System;
 using System.Globalization;
+using RemindMe.Core.Extensions;
 
 namespace RemindMe.Core.Converters
 {
@@ -11,7 +12,9 @@ namespace RemindMe.Core.Converters
             DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(value);
             DateTime date = dateTimeOffset.LocalDateTime;
 
-            string dayOfWeek = date.ToString("dddd");
+            string dayOfWeek = date.ToString("dddd")
+                .UpperFirstCharIfPossible();
+
             string month = date.ToString("MMM");
 
             if (culture.Name == "en-US")

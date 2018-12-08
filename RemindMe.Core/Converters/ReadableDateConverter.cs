@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RemindMe.Core.Extensions;
+using System;
 using System.Globalization;
 
 namespace RemindMe.Core.Converters
@@ -7,7 +8,9 @@ namespace RemindMe.Core.Converters
     {
         public static string Convert(DateTime date)
         {
-            string dayOfWeek = date.ToString("dddd");
+            string dayOfWeek = date.ToString("dddd")
+                .UpperFirstCharIfPossible();
+
             string month = date.ToString("MMMM");
 
             if (CultureInfo.CurrentCulture.Name == "en-US")
