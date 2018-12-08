@@ -4,6 +4,7 @@ using RemindMe.Core.Repositories;
 using RemindMe.Core.Services;
 using RemindMe.Test.Fakes;
 using RemindMe.Test.Helpers;
+using SQLite;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,27 +14,33 @@ namespace RemindMe.Test
     [TestClass]
     public class ReminderReadTests
     {
+        private SQLiteConnection _databaseConnection;
         private ReminderDataService _reminderDataService;
+        private ReminderDatasetProvider _ReminderDatasetProvider;
 
         [TestInitialize]
         public void Init()
         {
-            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
-            db.DropTable<Reminder>();
-            db.CreateTable<Reminder>();
-
+            _databaseConnection = DatabaseConnectionFake.SingletonInstance.GetConnection();
+            _ReminderDatasetProvider = ReminderDatasetProvider.SingletonInstance;
             _reminderDataService = GetReminderDataServiceWithFakes();
+
+            _databaseConnection.CreateTable<Reminder>();
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            _databaseConnection.DropTable<Reminder>();
         }
 
         [TestMethod]
         public async Task ReturnTwoRemindersToNotifyInFour()
         {
-            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
+            List<Reminder> reminders = _ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            _databaseConnection.InsertAll(reminders, typeof(Reminder));
 
-            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
-            db.InsertAll(reminders, typeof(Reminder));
-
-            var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
+            IEnumerable<Reminder> remindersToNotify = await _reminderDataService.GetRemindersToNotify();
             Reminder reminder1 = remindersToNotify.FirstOrDefault((x) => x.Title == "Title test 1");
             Reminder reminder3 = remindersToNotify.FirstOrDefault((x) => x.Title == "Title test 3");
 
@@ -45,13 +52,11 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnNoReminderToNotify()
         {
-            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithOnlyUpcomingReminders();
+            List<Reminder> reminders = _ReminderDatasetProvider.GetListWithOnlyUpcomingReminders();
+            _databaseConnection.InsertAll(reminders, typeof(Reminder));
 
-            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
-            db.InsertAll(reminders, typeof(Reminder));
-
-            var remindersToNotify = await _reminderDataService.GetRemindersToNotify();
-            var numberOfRemindersToNotify = remindersToNotify.Count();
+            IEnumerable<Reminder> remindersToNotify = await _reminderDataService.GetRemindersToNotify();
+            int numberOfRemindersToNotify = remindersToNotify.Count();
 
             Assert.AreEqual(0, numberOfRemindersToNotify);
         }
@@ -59,7 +64,7 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnANullNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithOnlyPastReminders();
+            List<Reminder> reminders = _ReminderDatasetProvider.GetListWithOnlyPastReminders();
 
             long? timestampMustBeNull = _reminderDataService.GetNextReminderTimestamp();
 
@@ -69,10 +74,8 @@ namespace RemindMe.Test
         [TestMethod]
         public void ReturnTheNextReminderTimestamp()
         {
-            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
-
-            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
-            db.InsertAll(reminders, typeof(Reminder));
+            List<Reminder> reminders = _ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            _databaseConnection.InsertAll(reminders, typeof(Reminder));
 
             long? nextReminderTimestamp = _reminderDataService.GetNextReminderTimestamp();
             Reminder reminder2 = reminders.FirstOrDefault((x) => x.Title == "Title test 2");
@@ -83,13 +86,11 @@ namespace RemindMe.Test
         [TestMethod]
         public async Task ReturnAllRemindersInExpectedOrder()
         {
-            var reminders = ReminderDatasetProvider.SingletonInstance.GetListWithPastAndUpcomingReminders();
+            List<Reminder> reminders = _ReminderDatasetProvider.GetListWithPastAndUpcomingReminders();
+            _databaseConnection.InsertAll(reminders, typeof(Reminder));
 
-            var db = DatabaseConnectionFake.SingletonInstance.GetConnection();
-            db.InsertAll(reminders, typeof(Reminder));
-
-            var allReminders = await _reminderDataService.GetAll();
-            IList<Reminder> allRemindersList = new List<Reminder>(allReminders);
+            IEnumerable<Reminder> allReminders = await _reminderDataService.GetAll();
+            List<Reminder> allRemindersList = new List<Reminder>(allReminders);
 
             Assert.AreEqual("Title test 2", allRemindersList[0].Title);
             Assert.AreEqual("Title test 4", allRemindersList[1].Title);

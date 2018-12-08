@@ -12,6 +12,14 @@ namespace RemindMe.Test
     [TestClass]
     public class ReminderValidationTests
     {
+        private ReminderEditViewModel _fakedReminderViewModel;
+
+        [TestInitialize]
+        public void Init()
+        {
+            _fakedReminderViewModel = GetReminderViewModelWithFakes();
+        }
+
         [TestMethod]
         public void AReminderAlreadyPastSinceTenMinutesMustBeInvalid()
         {
@@ -91,10 +99,9 @@ namespace RemindMe.Test
 
         private bool IsReminderValid(Reminder reminder)
         {
-            ReminderEditViewModel fakedReminderViewModel = GetReminderViewModelWithFakes();
-            fakedReminderViewModel.SelectedReminder = reminder;
+            _fakedReminderViewModel.SelectedReminder = reminder;
 
-            PrivateObject privateFakedReminderViewModel = new PrivateObject(fakedReminderViewModel);
+            PrivateObject privateFakedReminderViewModel = new PrivateObject(_fakedReminderViewModel);
             privateFakedReminderViewModel.Invoke("SetReminderDayAndTime");
             return (bool)privateFakedReminderViewModel.Invoke("Validate");
         }
