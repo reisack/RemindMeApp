@@ -13,6 +13,7 @@ namespace RemindMe.Android.Services
     public class ReminderService
     {
         private static Lazy<ReminderService> _singletonInstance = new Lazy<ReminderService>(() => new ReminderService());
+        private ReminderNotificationService _reminderNotificationService;
 
         public IReminderDataService _reminderDataService;
         public ReminderDaemonDataService _reminderDaemonDataService;
@@ -23,6 +24,8 @@ namespace RemindMe.Android.Services
             {
                 _reminderDaemonDataService = new ReminderDaemonDataService();
             }
+
+            _reminderNotificationService = new ReminderNotificationService();
         }
 
         public static ReminderService SingletonInstance
@@ -67,11 +70,11 @@ namespace RemindMe.Android.Services
                     {
                         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
                         {
-                            notification = ReminderNotificationService.SingletonInstance.GetNotification(notificationManager, reminder, context);
+                            notification = _reminderNotificationService.GetNotification(notificationManager, reminder, context);
                         }
                         else
                         {
-                            notification = ReminderNotificationService.SingletonInstance.GetNotificationCompat(notificationManager, reminder, context);
+                            notification = _reminderNotificationService.GetNotificationCompat(notificationManager, reminder, context);
                         }
 
                         // Publish the notification
@@ -111,16 +114,19 @@ namespace RemindMe.Android.Services
                 PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, reminderAlarmReceiver, PendingIntentFlags.UpdateCurrent);
                 long triggerAtMillis = nextReminderMillisTimestamp.Value + delay;
 
-                AlarmManager alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
+                AlarmManager alarmManager = context.GetSystemService(Context.AlarmService) as AlarmManager;
 
-                // Method SetExactAndAllowWhileIdle() is for Doze mode, introduced in Android 6.0
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                if (alarmManager != null)
                 {
-                    alarmManager.SetExactAndAllowWhileIdle(AlarmType.RtcWakeup, triggerAtMillis, pendingIntent);
-                }
-                else
-                {
-                    alarmManager.SetExact(AlarmType.RtcWakeup, triggerAtMillis, pendingIntent);
+                    // Method SetExactAndAllowWhileIdle() is for Doze mode, introduced in Android 6.0
+                    if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                    {
+                        alarmManager.SetExactAndAllowWhileIdle(AlarmType.RtcWakeup, triggerAtMillis, pendingIntent);
+                    }
+                    else
+                    {
+                        alarmManager.SetExact(AlarmType.RtcWakeup, triggerAtMillis, pendingIntent);
+                    }
                 }
             }
         }
