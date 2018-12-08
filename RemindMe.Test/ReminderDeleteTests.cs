@@ -20,9 +20,11 @@ namespace RemindMe.Test
         [TestInitialize]
         public void Init()
         {
-            _databaseConnection = DatabaseConnectionFake.SingletonInstance.GetConnection();
+            DatabaseConnectionFake databaseConnectionFake = new DatabaseConnectionFake();
+
+            _databaseConnection = databaseConnectionFake.GetConnection();
             _ReminderDatasetProvider = ReminderDatasetProvider.SingletonInstance;
-            _reminderDataService = GetReminderDataServiceWithFakes();
+            _reminderDataService = GetReminderDataServiceWithFakes(databaseConnectionFake);
 
             _databaseConnection.CreateTable<Reminder>();
         }
@@ -80,10 +82,9 @@ namespace RemindMe.Test
             Assert.AreEqual(0, numberOfDeletedReminders);
         }
 
-        private ReminderDataService GetReminderDataServiceWithFakes()
+        private ReminderDataService GetReminderDataServiceWithFakes(DatabaseConnectionFake databaseConnectionFake)
         {
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
-            ReminderRepository repository = new ReminderRepository(connectionService);
+            ReminderRepository repository = new ReminderRepository(databaseConnectionFake);
             ReminderDataService dataService = new ReminderDataService(repository);
 
             return dataService;

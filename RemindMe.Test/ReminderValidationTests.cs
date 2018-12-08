@@ -90,7 +90,7 @@ namespace RemindMe.Test
         private ReminderEditViewModel GetReminderViewModelWithFakes()
         {
             DialogServiceDummy dialogService = new DialogServiceDummy();
-            DatabaseConnectionFake connectionService = DatabaseConnectionFake.SingletonInstance;
+            DatabaseConnectionFake connectionService = new DatabaseConnectionFake();
 
             ReminderRepository repository = new ReminderRepository(connectionService);
             ReminderDataService dataService = new ReminderDataService(repository);

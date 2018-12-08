@@ -1,12 +1,10 @@
-﻿using System;
-using SQLite;
+﻿using SQLite;
 using RemindMe.Core.Interfaces;
 
 namespace RemindMe.Test.Fakes
 {
     public class DatabaseConnectionFake : IConnectionService
     {
-        private static Lazy<DatabaseConnectionFake> _singletonInstance = new Lazy<DatabaseConnectionFake>(() => new DatabaseConnectionFake());
         private SQLiteConnection _connection;
 
         public DatabaseConnectionFake()
@@ -18,11 +16,6 @@ namespace RemindMe.Test.Fakes
         public SQLiteConnection GetConnection()
         {
             return _connection;
-        }
-
-        public static DatabaseConnectionFake SingletonInstance
-        {
-            get { return _singletonInstance.Value; }
         }
     }
 }

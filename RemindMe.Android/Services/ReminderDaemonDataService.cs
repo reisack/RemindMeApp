@@ -12,7 +12,7 @@ namespace RemindMe.Android.Services
 
         public ReminderDaemonDataService()
         {
-            _reminderRepository = new ReminderRepository(DatabaseConnection.SingletonInstance);
+            _reminderRepository = new ReminderRepository(new DatabaseConnection());
         }
 
         public async Task<IEnumerable<Reminder>> GetRemindersToNotify()
