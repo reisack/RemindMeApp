@@ -108,21 +108,21 @@ namespace RemindMe.Android.Views
         {
             var toast = Toast.MakeText(this, GetString(Resource.String.reminder_created_toast), ToastLength.Short);
             toast.Show();
-            ReminderService.SingletonInstance.WakeUpService(this);
+            ReminderService.SingletonInstance.SetAlarmForNextReminder(this);
         }
 
         private void OnReminderUpdated(object sender, Core.Events.ReminderEventArgs e)
         {
             var toast = Toast.MakeText(this, GetString(Resource.String.reminder_updated_toast), ToastLength.Short);
             toast.Show();
-            ReminderService.SingletonInstance.WakeUpService(this);
+            ReminderService.SingletonInstance.SetAlarmForNextReminder(this);
         }
 
         private void OnReminderDeleted(object sender, Core.Events.ReminderEventArgs e)
         {
             var toast = Toast.MakeText(this, GetString(Resource.String.reminder_deleted_toast), ToastLength.Short);
             toast.Show();
-            ReminderService.SingletonInstance.WakeUpService(this);
+            ReminderService.SingletonInstance.SetAlarmForNextReminder(this);
         }
 
         public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)

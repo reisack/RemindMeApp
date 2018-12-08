@@ -5,7 +5,6 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using MvvmCross.Platform;
-using RemindMe.Android.Helpers;
 using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
 
@@ -29,26 +28,6 @@ namespace RemindMe.Android.Services
         public static ReminderService SingletonInstance
         {
             get { return _singletonInstance.Value; }
-        }
-
-        public void WakeUpService(Context context)
-        {
-            SetAlarmForNextReminder(context);
-        }
-
-        public void StartOrWakeUpService(Context context)
-        {
-            SetAlarmForNextReminder(context);
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-            {
-                ReminderJobServiceHelper.CreateAndScheduleReminderJobService(context);
-            }
-            else
-            {
-                Intent intentService = new Intent(context, typeof(Services.IntentService));
-                context.StartService(intentService);
-            }
         }
 
         public long? GetNextReminderMillisTimestamp()
@@ -119,14 +98,14 @@ namespace RemindMe.Android.Services
             }
         }
 
-        private void SetAlarmForNextReminder(Context context)
+        public void SetAlarmForNextReminder(Context context)
         {
-            long? nextReminderMillisTimestamp = SingletonInstance.GetNextReminderMillisTimestamp();
+            long? nextReminderMillisTimestamp = GetNextReminderMillisTimestamp();
             if (nextReminderMillisTimestamp.HasValue && nextReminderMillisTimestamp.Value > 0)
             {
-                // Alarm is started 10 seconds after notification time
+                // Alarm is started 5 seconds after notification time
                 // So, we have a better guarantee that it will be notified
-                long delay = 1000 * 10;
+                long delay = 1000 * 5;
 
                 Intent reminderAlarmReceiver = new Intent(context, Java.Lang.Class.FromType(typeof(ReminderAlarmReceiver)));
                 PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, reminderAlarmReceiver, PendingIntentFlags.UpdateCurrent);

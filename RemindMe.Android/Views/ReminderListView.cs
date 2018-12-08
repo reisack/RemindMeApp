@@ -52,7 +52,7 @@ namespace RemindMe.Android.Views
 
             try
             {
-                ReminderService.SingletonInstance.StartOrWakeUpService(this);
+                ReminderService.SingletonInstance.SetAlarmForNextReminder(this);
             }
             catch (Exception ex)
             {

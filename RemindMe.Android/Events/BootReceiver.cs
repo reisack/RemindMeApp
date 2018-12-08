@@ -24,7 +24,7 @@ namespace RemindMe.Android
                         {
                             ReminderService.SingletonInstance.NotifyReminders(notificationManager, context);
                         }
-                        ReminderService.SingletonInstance.StartOrWakeUpService(context);
+                        ReminderService.SingletonInstance.SetAlarmForNextReminder(context);
                     }
                 }
             }
