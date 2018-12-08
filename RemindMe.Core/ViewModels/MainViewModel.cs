@@ -1,11 +1,10 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using RemindMe.Core.Interfaces;
 using System;
 
 namespace RemindMe.Core.ViewModels
 {
-    public class MainViewModel : MvxViewModel, IMainViewModel
+    public class MainViewModel : MvxViewModel
     {
         private readonly Lazy<ReminderListViewModel> _remindersListVm;
 

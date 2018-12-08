@@ -1,5 +1,10 @@
 ﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Platform;
+using RemindMe.Core.Database;
+using RemindMe.Core.Interfaces;
+using RemindMe.Core.Repositories;
+using RemindMe.Core.Services;
+using RemindMe.Core.ViewModels;
 using System.Globalization;
 
 namespace RemindMe.Core
@@ -12,16 +17,22 @@ namespace RemindMe.Core
 
             InitCultureInfo();
 
-            CreatableTypes()
-                .EndingWith("Repository")
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
+            Mvx.RegisterType<IConnectionService, DatabaseConnection>();
+            Mvx.RegisterType<IReminderRepository, ReminderRepository>();
+            Mvx.RegisterType<IReminderDataService, ReminderDataService>();
+            Mvx.RegisterType<IReminderListViewModel, ReminderListViewModel>();
+            Mvx.RegisterType<IReminderEditViewModel, ReminderEditViewModel>();
 
-            CreatableTypes()
-                .EndingWith("Service")
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
-            
+            //CreatableTypes()
+            //    .EndingWith("Repository")
+            //    .AsInterfaces()
+            //    .RegisterAsLazySingleton();
+
+            //CreatableTypes()
+            //    .EndingWith("Service")
+            //    .AsInterfaces()
+            //    .RegisterAsLazySingleton();
+
             RegisterAppStart(new AppStart());
         }
 

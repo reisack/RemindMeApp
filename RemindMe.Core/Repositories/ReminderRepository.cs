@@ -9,11 +9,6 @@ namespace RemindMe.Core.Repositories
     {
         private readonly IConnectionService _connectionService;
 
-        public ReminderRepository()
-        {
-            _connectionService = new Database.DatabaseConnection();
-        }
-
         public ReminderRepository(IConnectionService connectionService)
         {
             _connectionService = connectionService;

@@ -27,7 +27,7 @@ namespace RemindMe.Android
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.RegisterSingleton<IDialogService>(() => new DialogService());
+            Mvx.RegisterType<IDialogService, DialogService>();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
