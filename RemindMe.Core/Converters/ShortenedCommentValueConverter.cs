@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Platform.Converters;
+using RemindMe.Core.Extensions;
 using System;
 using System.Globalization;
 
@@ -12,6 +13,7 @@ namespace RemindMe.Core.Converters
         {
             // Removing line breaks
             string newValue = value.Replace(System.Environment.NewLine, " ");
+            newValue = newValue.MergeWhiteSpaces();
 
             if (newValue.Length > MESSAGE_LENGTH)
             {
