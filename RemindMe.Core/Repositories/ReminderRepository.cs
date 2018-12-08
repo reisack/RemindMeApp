@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RemindMe.Core.Repositories
 {
-    public class ReminderRepository : BaseRepository, IReminderRepository
+    public class ReminderRepository : IReminderRepository
     {
         private readonly IConnectionService _connectionService;
 
