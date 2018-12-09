@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">RemindMe</string>
+  <string name="app_name">Easy Reminder</string>
   <string name="create_reminder">Create reminder</string>
   <string name="delete">Delete</string>
   <string name="reminders_list">Reminders list</string>

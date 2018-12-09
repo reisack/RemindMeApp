@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">RemindMe</string>
+  <string name="app_name">Rappel facile</string>
   <string name="create_reminder">Ajouter un rappel</string>
   <string name="delete">Supprimer</string>
   <string name="reminders_list">Liste des rappels</string>
