@@ -5044,6 +5044,9 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0a0021
 			public const int appbar_scrolling_view_behavior = 2131361825;
 			
+			// aapt resource value: 0x7f0a003c
+			public const int back_button = 2131361852;
+			
 			// aapt resource value: 0x7f0a0022
 			public const int bottom_sheet_behavior = 2131361826;
 			
