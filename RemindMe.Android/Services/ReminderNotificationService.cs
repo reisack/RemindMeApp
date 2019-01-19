@@ -1,9 +1,9 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Support.V7.App;
 using Android.Media;
 using RemindMe.Core.Models;
+using RemindMe.Android.Views;
 
 namespace RemindMe.Android.Services
 {
@@ -33,6 +33,8 @@ namespace RemindMe.Android.Services
             builder
                 .SetContentTitle(reminder.Title)
                 .SetContentText(reminder.Comment)
+                .SetContentIntent(GetRemindersListPendingIntent(context))
+                .SetAutoCancel(true)
                 .SetSmallIcon(Resource.Drawable.notification_icon);
 
             // Build the notification
@@ -51,11 +53,20 @@ namespace RemindMe.Android.Services
             builder
                 .SetContentTitle(reminder.Title)
                 .SetContentText(reminder.Comment)
+                .SetContentIntent(GetRemindersListPendingIntent(context))
+                .SetAutoCancel(true)
                 .SetSmallIcon(Resource.Drawable.notification_icon)
                 .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
 
             // Build the notification
             return builder.Build();
+        }
+
+        private PendingIntent GetRemindersListPendingIntent(Context context)
+        {
+            Intent notificationIntent = new Intent(context, typeof(ReminderListView));
+            PendingIntent notificationPendingIntent = PendingIntent.GetActivity(context, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            return notificationPendingIntent;
         }
     }
 }
