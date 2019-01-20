@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using MvvmCross.Platform;
-using RemindMe.Core.Interfaces;
 using RemindMe.Core.Models;
 
 namespace RemindMe.Android.Services
@@ -14,16 +12,17 @@ namespace RemindMe.Android.Services
     {
         private static Lazy<ReminderService> _singletonInstance = new Lazy<ReminderService>(() => new ReminderService());
         private ReminderNotificationService _reminderNotificationService;
-
-        public IReminderDataService _reminderDataService;
         public ReminderDaemonDataService _reminderDaemonDataService;
 
         public ReminderService()
         {
-            if (!Mvx.TryResolve<IReminderDataService>(out _reminderDataService))
-            {
-                _reminderDaemonDataService = new ReminderDaemonDataService();
-            }
+            // Data service needs to be instanciated, instead of being injected in the constructor with IReminderDataService dependency.
+            // The reason is : if ReminderService class is instanciated by Android BroadcastReceivers
+            // and the app process doesn't exist or has been killed, dependency injection won't work
+            // and it will throw an Android system error on the device.
+            // Also, as we don't need to implement the whole IReminderDataService contract,
+            // we use a simpler data service with only implemented methods used in this class
+            _reminderDaemonDataService = new ReminderDaemonDataService();
 
             _reminderNotificationService = new ReminderNotificationService();
         }
@@ -36,14 +35,7 @@ namespace RemindMe.Android.Services
         public long? GetNextReminderMillisTimestamp()
         {
             long? timestamp;
-            if (_reminderDataService != null)
-            {
-                timestamp = _reminderDataService.GetNextReminderTimestamp();
-            }
-            else
-            {
-                timestamp = _reminderDaemonDataService.GetNextReminderTimestamp();
-            }
+            timestamp = _reminderDaemonDataService.GetNextReminderTimestamp();
             return (timestamp.HasValue) ? timestamp * 1000 : null;
         }
 
@@ -52,14 +44,7 @@ namespace RemindMe.Android.Services
             try
             {
                 IList<Reminder> reminders;
-                if (_reminderDataService != null)
-                {
-                    reminders = new List<Reminder>(await _reminderDataService.GetRemindersToNotify());
-                }
-                else
-                {
-                    reminders = new List<Reminder>(await _reminderDaemonDataService.GetRemindersToNotify());
-                }
+                reminders = new List<Reminder>(await _reminderDaemonDataService.GetRemindersToNotify());
 
                 if (reminders.Count > 0)
                 {
@@ -85,14 +70,7 @@ namespace RemindMe.Android.Services
                         }
                     }
 
-                    if (_reminderDataService != null)
-                    {
-                        await _reminderDataService.SetToNotified(reminders);
-                    }
-                    else
-                    {
-                        await _reminderDaemonDataService.SetToNotified(reminders);
-                    }
+                    await _reminderDaemonDataService.SetToNotified(reminders);
                 }
             }
             catch (Exception ex)
