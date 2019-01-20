@@ -22,6 +22,7 @@
         <EditText
 			android:id="@+id/reminderTitle"
             android:inputType="text"
+			android:contentDescription="@string/reminder_title_label_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderTitleInput"
@@ -44,6 +45,7 @@
         <EditText
 			android:id="@+id/reminderComment"
             android:inputType="textMultiLine"
+			android:contentDescription="@string/reminder_comment_label_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderCommentInput"
@@ -59,7 +61,7 @@
         android:layout_below="@id/reminderCommentLinearLayout">
         <TextView
             android:id="@+id/reminderDateInput"
-			android:labelFor="@+id/reminderDatePickerEditText"
+			android:labelFor="@+id/reminderDatePickerEditTextReadableValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/form_label_textsize"
@@ -74,11 +76,12 @@
             android:visibility="gone"
             local:MvxBind="Text ReminderDay, Mode=TwoWay" />
         <EditText
+			android:id="@+id/reminderDatePickerEditTextReadableValue"
             android:inputType="text"
+			android:contentDescription="@string/reminder_date_label_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderDatePickerEditText"
-            android:id="@+id/reminderDatePickerEditTextReadableValue"
             android:textSize="@dimen/form_input_textsize"
             local:MvxBind="Error Errors['ReminderDay']"/>
     </RelativeLayout>
@@ -89,7 +92,7 @@
         android:layout_below="@id/reminderDateLinearLayout">
         <TextView
             android:id="@+id/reminderTimeInput"
-			android:labelFor="@+id/reminderTimePickerEditText"
+			android:labelFor="@+id/reminderTimePickerEditTextReadableValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/form_label_textsize"
@@ -104,11 +107,12 @@
             android:visibility="gone"
             local:MvxBind="Text ReminderTime, Mode=TwoWay" />
         <EditText
+			android:id="@+id/reminderTimePickerEditTextReadableValue"
             android:inputType="text"
+			android:contentDescription="@string/reminder_time_label_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderTimePickerEditText"
-            android:id="@+id/reminderTimePickerEditTextReadableValue"
             android:layout_marginBottom="30dp"
             android:textSize="@dimen/form_input_textsize"
             local:MvxBind="Error Errors['ReminderTime']"/>

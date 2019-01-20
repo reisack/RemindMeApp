@@ -35,6 +35,7 @@ namespace RemindMe.Android.Services
                 .SetContentText(reminder.Comment)
                 .SetContentIntent(GetRemindersListPendingIntent(context))
                 .SetAutoCancel(true)
+                .SetTicker($"{reminder.Title} {reminder.Comment}")
                 .SetSmallIcon(Resource.Drawable.notification_icon);
 
             // Build the notification
@@ -55,6 +56,7 @@ namespace RemindMe.Android.Services
                 .SetContentText(reminder.Comment)
                 .SetContentIntent(GetRemindersListPendingIntent(context))
                 .SetAutoCancel(true)
+                .SetTicker($"{reminder.Title} {reminder.Comment}")
                 .SetSmallIcon(Resource.Drawable.notification_icon)
                 .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
 

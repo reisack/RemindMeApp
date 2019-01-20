@@ -4446,11 +4446,11 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0900a8
 			public const int reminderDateLinearLayout = 2131296424;
 			
-			// aapt resource value: 0x7f0900aa
-			public const int reminderDatePickerEditText = 2131296426;
-			
 			// aapt resource value: 0x7f0900ab
-			public const int reminderDatePickerEditTextReadableValue = 2131296427;
+			public const int reminderDatePickerEditText = 2131296427;
+			
+			// aapt resource value: 0x7f0900aa
+			public const int reminderDatePickerEditTextReadableValue = 2131296426;
 			
 			// aapt resource value: 0x7f0900ad
 			public const int reminderTimeInput = 2131296429;
@@ -4458,11 +4458,11 @@ namespace RemindMe.Android
 			// aapt resource value: 0x7f0900ac
 			public const int reminderTimeLinearLayout = 2131296428;
 			
-			// aapt resource value: 0x7f0900ae
-			public const int reminderTimePickerEditText = 2131296430;
-			
 			// aapt resource value: 0x7f0900af
-			public const int reminderTimePickerEditTextReadableValue = 2131296431;
+			public const int reminderTimePickerEditText = 2131296431;
+			
+			// aapt resource value: 0x7f0900ae
+			public const int reminderTimePickerEditTextReadableValue = 2131296430;
 			
 			// aapt resource value: 0x7f0900a4
 			public const int reminderTitle = 2131296420;
