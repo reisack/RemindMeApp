@@ -23,16 +23,6 @@ namespace RemindMe.Core
             Mvx.RegisterType<IReminderListViewModel, ReminderListViewModel>();
             Mvx.RegisterType<IReminderEditViewModel, ReminderEditViewModel>();
 
-            //CreatableTypes()
-            //    .EndingWith("Repository")
-            //    .AsInterfaces()
-            //    .RegisterAsLazySingleton();
-
-            //CreatableTypes()
-            //    .EndingWith("Service")
-            //    .AsInterfaces()
-            //    .RegisterAsLazySingleton();
-
             RegisterAppStart(new AppStart());
         }
 
