@@ -91,7 +91,7 @@ consectetur adipiscing elit";
 
             string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
 
-            Assert.AreEqual("30 days left", readableTimeLeft);
+            Assert.AreEqual("1 month left", readableTimeLeft);
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ consectetur adipiscing elit";
 
             string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
 
-            Assert.AreEqual("11 months left", readableTimeLeft);
+            Assert.AreEqual("1 year left", readableTimeLeft);
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ consectetur adipiscing elit";
 
             string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
 
-            Assert.AreEqual("5 months left", readableTimeLeft);
+            Assert.AreEqual("6 months left", readableTimeLeft);
         }
 
         [TestMethod]
@@ -157,7 +157,7 @@ consectetur adipiscing elit";
 
             string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
 
-            Assert.AreEqual("3 days left", readableTimeLeft);
+            Assert.AreEqual("4 days left", readableTimeLeft);
         }
 
         [TestMethod]
@@ -179,7 +179,7 @@ consectetur adipiscing elit";
 
             string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
 
-            Assert.AreEqual("59 minutes left", readableTimeLeft);
+            Assert.AreEqual("1 hour left", readableTimeLeft);
         }
 
         [TestMethod]

@@ -30,26 +30,84 @@ namespace RemindMe.Core.Converters
             {
                 timeNumber = (int)(absDays / NB_DAYS_IN_YEAR);
                 timeUnit = LocalizationManager.GetString("year");
+
+                // Nearer to next year
+                if (absDays % NB_DAYS_IN_YEAR >= 182)
+                {
+                    timeNumber++;
+                }
             }
             else if (absDays > 30)
             {
                 timeNumber = (int)(absDays / NB_DAYS_IN_MONTH);
                 timeUnit = LocalizationManager.GetString("month");
+
+                // Nearer to next month
+                if (absDays % NB_DAYS_IN_MONTH >= 15)
+                {
+                    timeNumber++;
+
+                    // 12 months => 1 year
+                    if (timeNumber >= 12)
+                    {
+                        timeNumber = 1;
+                        timeUnit = LocalizationManager.GetString("year");
+                    }
+                }
             }
             else if (absDays >= 1)
             {
                 timeNumber = absDays;
                 timeUnit = LocalizationManager.GetString("day");
+
+                // Nearer to next day
+                if (absHours >= 12)
+                {
+                    timeNumber++;
+
+                    // 30 days => 1 month
+                    if (timeNumber > 30)
+                    {
+                        timeNumber = 1;
+                        timeUnit = LocalizationManager.GetString("month");
+                    }
+                }
             }
             else if (absHours >= 1)
             {
                 timeNumber = absHours;
                 timeUnit = LocalizationManager.GetString("hour");
+
+                // Nearer to next hour
+                if (absMinutes >= 30)
+                {
+                    timeNumber++;
+
+                    // 24 hours => 1 day
+                    if (timeNumber >= 24)
+                    {
+                        timeNumber = 1;
+                        timeUnit = LocalizationManager.GetString("day");
+                    }
+                }
             }
             else if (absMinutes >= 1)
             {
                 timeNumber = absMinutes;
                 timeUnit = LocalizationManager.GetString("minute");
+
+                // Nearer to next minute
+                if (absSeconds >= 30)
+                {
+                    timeNumber++;
+
+                    //60 minutes => 1 hour
+                    if (timeNumber >= 60)
+                    {
+                        timeNumber = 1;
+                        timeUnit = LocalizationManager.GetString("hour");
+                    }
+                }
             }
             else
             {
