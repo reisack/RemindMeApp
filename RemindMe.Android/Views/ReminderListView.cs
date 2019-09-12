@@ -12,7 +12,7 @@ using RemindMe.Core.ViewModels;
 
 namespace RemindMe.Android.Views
 {
-    [Activity(Label = "Reminders list", MainLauncher = false, Theme = "@style/AppTheme",
+    [Activity(Label = "@string/app_name", MainLauncher = false, Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class ReminderListView : MvxAppCompatActivity
