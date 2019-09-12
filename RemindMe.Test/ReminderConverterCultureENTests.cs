@@ -85,16 +85,6 @@ consectetur adipiscing elit";
         }
 
         [TestMethod]
-        public void ConvertCurrentTimestampWithOneMonthAddedToTimeleft()
-        {
-            long timestamp = DateTimeOffset.UtcNow.AddMonths(1).ToUnixTimeSeconds();
-
-            string readableTimeLeft = _timestampToTimeLeftConverter.Convert(timestamp, typeof(long), null, _cultureInfo) as string;
-
-            Assert.AreEqual("1 month left", readableTimeLeft);
-        }
-
-        [TestMethod]
         public void ConvertCurrentTimestampWithOneMonthAndOneDayAddedToTimeleft()
         {
             long timestamp = DateTimeOffset.UtcNow.AddMonths(1)
